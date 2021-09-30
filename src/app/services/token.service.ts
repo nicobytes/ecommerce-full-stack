@@ -8,14 +8,14 @@ export class TokenService {
   constructor() { }
 
   saveToken(token: string) {
-    // your token
+    localStorage.setItem('token', token);
   }
 
-  getToken(token: string) {
-    // your token
+  getToken() {
+    return localStorage.getItem('token');
   }
 
   clearToken() {
-    // your token
+    localStorage.removeItem('token');
   }
 }
