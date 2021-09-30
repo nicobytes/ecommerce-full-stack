@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from './../../environments/environment';
+import { LoginRta } from './../models/auth.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +15,8 @@ export class AuthService {
 
 
   login(email: string, password: string) {
-    // your code
+    const url = `${environment.API_URL}/auth/login`;
+    return this.http.post<LoginRta>(url, {email, password});
   }
 
   logout() {
