@@ -26,14 +26,8 @@ export class AuthService {
   }
 
   getProfile() {
-    // remove token
     const url = `${environment.API_URL}/auth/profile`;
-    const token = this.tokenService.getToken();
-    return this.http.get<User>(url, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
+    return this.http.get<User>(url);
   }
 
 
