@@ -13,7 +13,7 @@ import { User } from './../../models/auth.model';
 })
 export class LayoutComponent {
 
-  user:User | undefined;
+  user: User | null = null;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -28,10 +28,17 @@ export class LayoutComponent {
   ) {}
 
   ngOnInit() {
-    this.authService.getProfile()
+    this.authService.authState$
     .subscribe(user => {
       this.user = user;
     })
+  }
+
+  change() {
+    this.authService.setAuthState({
+      ...this.user as User,
+      name: 'NICO'
+    });
   }
 
   logout() {
