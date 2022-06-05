@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
@@ -10,7 +10,7 @@ import { User } from './../../models/auth.model';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit {
   user: User | null = null;
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -45,9 +45,5 @@ export class DashboardComponent implements OnDestroy {
       console.log('change');
       this.user = user;
     });
-  }
-
-  ngOnDestroy() {
-
   }
 }
