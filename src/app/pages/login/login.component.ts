@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
+// import { Title } from '@angular/platform-browser';
 
 import { AuthService } from './../../services/auth.service';
 
@@ -10,20 +11,24 @@ import { AuthService } from './../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  form = this.fb.group({
-    email: [null, [Validators.required, Validators.email]],
-    password: [null, Validators.required],
+  form = this.fb.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
-  ) {}
+    // private title: Title
+  ) {
+    // this.form.controls.email.setValue(12);
+    // title.setTitle('Login Page');
+  }
 
   onSubmit(): void {
     if (this.form.valid) {
-      const { email, password } = this.form.value;
+      const { email, password } = this.form.getRawValue();
       this.auth.login(email, password)
       .subscribe(() => {
         this.router.navigate(['/admin']);
