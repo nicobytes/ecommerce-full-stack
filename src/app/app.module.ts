@@ -11,7 +11,6 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormComponent } from './pages/form/form.component';
-import { TableComponent } from './pages/table/table.component';
 
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
@@ -23,7 +22,6 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     DashboardComponent,
     LoginComponent,
     FormComponent,
-    TableComponent
   ],
   imports: [
     BrowserModule,
