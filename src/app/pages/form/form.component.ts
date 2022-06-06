@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -85,7 +85,7 @@ export class FormComponent {
     {name: 'Wyoming', abbreviation: 'WY'}
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   onSubmit(): void {
     alert('Thanks!');

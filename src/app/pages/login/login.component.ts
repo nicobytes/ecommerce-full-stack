@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from './../../services/auth.service';
 
@@ -16,7 +16,7 @@ export class LoginComponent {
   });
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private auth: AuthService,
     private router: Router,
   ) {}
