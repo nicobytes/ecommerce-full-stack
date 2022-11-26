@@ -23,13 +23,16 @@
       </a>
       <a mat-list-item routerLink="/admin/about">
         <mat-icon mat-list-icon>dns</mat-icon>
-        About
+        Standalone Comp
       </a>
+      <button mat-list-item  (click)="change()">
+        <mat-icon mat-list-icon>change_circle</mat-icon>
+        Change
+      </button>
       <a mat-list-item (click)="logout()">
         <mat-icon mat-list-icon>logout</mat-icon>
         Logout
       </a>
-      <button (click)="change()">change</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -42,7 +45,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>angular-auth</span>
+      <span>Angular Auth</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
