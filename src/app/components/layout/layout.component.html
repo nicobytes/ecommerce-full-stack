@@ -14,23 +14,27 @@
     <mat-nav-list>
       <h3 mat-subheader>Menu</h3>
       <a mat-list-item routerLink="/admin/dashboard">
-        <mat-icon mat-list-icon>dashboard</mat-icon>
+        <mat-icon matListItemIcon>dashboard</mat-icon>
         Dashboard
       </a>
       <a mat-list-item routerLink="/admin/form">
-        <mat-icon mat-list-icon>dns</mat-icon>
+        <mat-icon matListItemIcon>dns</mat-icon>
         Form
       </a>
       <a mat-list-item routerLink="/admin/about">
-        <mat-icon mat-list-icon>dns</mat-icon>
+        <mat-icon matListItemIcon>dns</mat-icon>
         Standalone Comp
       </a>
       <a mat-list-item  (click)="change()">
-        <mat-icon mat-list-icon>change_circle</mat-icon>
+        <mat-icon matListItemIcon>change_circle</mat-icon>
         Change
       </a>
+      <a mat-list-item  routerLink="/admin/gallery">
+        <mat-icon matListItemIcon>image</mat-icon>
+        Gallery
+      </a>
       <a mat-list-item (click)="logout()">
-        <mat-icon mat-list-icon>logout</mat-icon>
+        <mat-icon matListItemIcon>logout</mat-icon>
         Logout
       </a>
     </mat-nav-list>

@@ -39,6 +39,10 @@ const routes: Routes = [
         path: 'about',
         component: AboutComponent,
         title: 'App - About'
+      },
+      {
+        path: 'gallery',
+        loadComponent: () => import('./pages/gallery/gallery.component')
       }
     ]
   },
