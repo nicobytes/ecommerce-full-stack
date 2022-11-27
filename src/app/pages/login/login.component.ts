@@ -12,8 +12,8 @@ import { AuthService } from './../../services/auth.service';
 })
 export class LoginComponent {
   form = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    email: ['john@mail.com', [Validators.required, Validators.email]],
+    password: ['changeme', Validators.required],
   });
 
   constructor(
