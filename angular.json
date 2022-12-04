@@ -21,7 +21,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist/angular-auth",
             "index": "src/index.html",
@@ -117,14 +117,6 @@
           }
         }
       }
-    }
-  },
-  "schematics": {
-    "@angular-eslint/schematics:application": {
-      "setParserOptionsProject": true
-    },
-    "@angular-eslint/schematics:library": {
-      "setParserOptionsProject": true
     }
   }
 }

@@ -5,38 +5,31 @@
       [opened]="(isHandset$ | async) === false">
     <mat-list *ngIf="user">
       <mat-list-item>
-         <mat-icon matListItemIcon>account_circle</mat-icon>
-         <h4 matListItemTitle>{{ user.name }}</h4>
-         <p matListItemLine class="demo-2"> {{ user.email }} </p>
+         <mat-icon mat-list-icon>account_circle</mat-icon>
+         <h4 mat-line>{{ user.name }}</h4>
+         <p mat-line class="demo-2"> {{ user.email }} </p>
       </mat-list-item>
       <mat-divider></mat-divider>
    </mat-list>
     <mat-nav-list>
       <h3 mat-subheader>Menu</h3>
       <a mat-list-item routerLink="/admin/dashboard">
-        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <mat-icon mat-list-icon>dashboard</mat-icon>
         Dashboard
       </a>
       <a mat-list-item routerLink="/admin/form">
-        <mat-icon matListItemIcon>dns</mat-icon>
+        <mat-icon mat-list-icon>dns</mat-icon>
         Form
       </a>
       <a mat-list-item routerLink="/admin/about">
-        <mat-icon matListItemIcon>dns</mat-icon>
-        Standalone Comp
-      </a>
-      <a mat-list-item  (click)="change()">
-        <mat-icon matListItemIcon>change_circle</mat-icon>
-        Change
-      </a>
-      <a mat-list-item  routerLink="/admin/gallery">
-        <mat-icon matListItemIcon>image</mat-icon>
-        Gallery
+        <mat-icon mat-list-icon>dns</mat-icon>
+        About
       </a>
       <a mat-list-item (click)="logout()">
-        <mat-icon matListItemIcon>logout</mat-icon>
+        <mat-icon mat-list-icon>logout</mat-icon>
         Logout
       </a>
+      <button (click)="change()">change</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -49,7 +42,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Angular Auth</span>
+      <span>angular-auth</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

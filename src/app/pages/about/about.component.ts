@@ -17,6 +17,7 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('init');
     this.name = '';
   }
 
