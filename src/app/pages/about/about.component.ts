@@ -21,4 +21,8 @@ export class AboutComponent implements OnInit {
     this.name = '';
   }
 
+  generateError() {
+    throw new Error('Error generating by user');
+  }
+
 }

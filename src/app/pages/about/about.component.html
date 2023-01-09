@@ -1,3 +1,8 @@
 <p>{{ name }}</p>
 <input type="text" [(ngModel)]="name" />
-<button mat-raised-button color="primary" type="submit">Submit</button>
+<p>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</p>
+<p>
+  <button mat-raised-button (click)="generateError()">Click</button>
+</p>
