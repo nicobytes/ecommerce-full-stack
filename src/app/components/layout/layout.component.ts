@@ -37,13 +37,19 @@ export class LayoutComponent implements OnInit {
   change() {
     this.authService.setAuthState({
       ...this.user as User,
-      name: 'NICO'
+      name: `Nico ${this.getRandomInt(10, 90)}`
     });
   }
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  getRandomInt(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
   }
 
 }
