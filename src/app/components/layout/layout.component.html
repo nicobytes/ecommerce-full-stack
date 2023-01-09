@@ -5,32 +5,31 @@
       [opened]="(isHandset$ | async) === false">
     <mat-list *ngIf="user">
       <mat-list-item>
-         <mat-icon mat-list-icon>account_circle</mat-icon>
-         <h4 mat-line>{{ user.name }}</h4>
-         <p mat-line class="demo-2"> {{ user.email }} </p>
+         <mat-icon matListItemIcon>account_circle</mat-icon>
+         <h4 matListItemTitle>{{ user.name }}</h4>
+         <p matListItemLine class="demo-2"> {{ user.email }} </p>
       </mat-list-item>
       <mat-divider></mat-divider>
    </mat-list>
     <mat-nav-list dense>
-      <h3 mat-subheader>Angular V14</h3>
       <a mat-list-item routerLink="/admin/dashboard">
-        <mat-icon mat-list-icon>dashboard</mat-icon>
+        <mat-icon matListItemIcon>dashboard</mat-icon>
         Dashboard
       </a>
       <a mat-list-item routerLink="/admin/form">
-        <mat-icon mat-list-icon>dns</mat-icon>
+        <mat-icon matListItemIcon>dns</mat-icon>
         Form
       </a>
       <a mat-list-item routerLink="/admin/about">
-        <mat-icon mat-list-icon>dns</mat-icon>
+        <mat-icon matListItemIcon>dns</mat-icon>
         About
       </a>
-      <button  mat-list-item (click)="change()">
-        <mat-icon mat-list-icon>published_with_changes</mat-icon>
+      <a mat-list-item (click)="change()">
+        <mat-icon matListItemIcon>published_with_changes</mat-icon>
         change
-      </button>
+      </a>
       <a mat-list-item (click)="logout()">
-        <mat-icon mat-list-icon>logout</mat-icon>
+        <mat-icon matListItemIcon>logout</mat-icon>
         Logout
       </a>
     </mat-nav-list>
