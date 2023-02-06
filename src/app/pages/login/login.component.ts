@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
-// import { Title } from '@angular/platform-browser';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from './../../services/auth.service';
 
@@ -11,20 +10,15 @@ import { AuthService } from './../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+  private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
+  private router = inject(Router);
+
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
-
-  constructor(
-    private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router,
-    // private title: Title
-  ) {
-    // this.form.controls.email.setValue(12);
-    // title.setTitle('Login Page');
-  }
 
   onSubmit(): void {
     if (this.form.valid) {

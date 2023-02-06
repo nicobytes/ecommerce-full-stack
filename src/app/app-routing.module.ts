@@ -8,7 +8,6 @@ import { FormComponent } from './pages/form/form.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PicturesComponent } from './pages/pictures/pictures.component';
 
-import { AuthGuard } from './guards/auth.guard';
 import { authGuardFn } from './guards/auth-fn.guard';
 
 const routes: Routes = [
@@ -51,6 +50,11 @@ const routes: Routes = [
         path: 'about',
         component: AboutComponent,
         title: 'App - About'
+      },
+      {
+        path: 'product/:id',
+        loadComponent: () => import('./pages/detail/detail.component'),
+        title: 'product'
       }
     ]
   },

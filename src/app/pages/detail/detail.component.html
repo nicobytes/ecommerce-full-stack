@@ -1,0 +1,4 @@
+<div *ngIf="(product$ | async) as product">
+  <h1>{{ product.title }}</h1>
+  <h4>{{ product.price }}</h4>
+</div>

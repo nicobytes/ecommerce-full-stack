@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -14,6 +14,9 @@ import { User } from './../../models/auth.model';
 export class LayoutComponent implements OnInit {
 
   user: User | null = null;
+  private breakpointObserver = inject(BreakpointObserver);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -21,17 +24,16 @@ export class LayoutComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private authService: AuthService,
-    private router: Router
-  ) {}
-
   ngOnInit() {
+    this.authService.getProfile()
+    .subscribe(user => {
+      this.authService.setAuthState(user);
+    });
+
     this.authService.authState$
     .subscribe(user => {
       this.user = user;
-    })
+    });
   }
 
   change() {
