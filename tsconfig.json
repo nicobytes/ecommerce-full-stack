@@ -20,6 +20,23 @@
       "es2018",
       "dom"
     ],
+    "paths": {
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@guards/*": [
+        "src/app/guards/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@material/*": [
+        "src/app/material/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ]
+    },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

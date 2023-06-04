@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from './../../services/auth.service';
-import { User } from './../../models/auth.model';
+import { AuthService } from '@services/auth.service';
+import { User } from '@models/auth.model';
 
 @Component({
   selector: 'app-layout',
@@ -45,7 +45,7 @@ export class LayoutComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   getRandomInt(min: number, max: number) {

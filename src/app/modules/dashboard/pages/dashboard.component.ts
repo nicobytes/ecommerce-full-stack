@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
-import { AuthService } from './../../services/auth.service';
-import { User } from './../../models/auth.model';
+import { AuthService } from '@services/auth.service';
+import { User } from '@models/auth.model';
 
 @Component({
   selector: 'app-dashboard',
