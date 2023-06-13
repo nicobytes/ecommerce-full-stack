@@ -1,40 +1,33 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+<mat-sidenav-container class="h-full">
+  <mat-sidenav #drawer class="w-60" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-list *ngIf="user">
       <mat-list-item>
-         <mat-icon matListItemIcon>account_circle</mat-icon>
-         <h4 matListItemTitle>{{ user.name }}</h4>
-         <p matListItemLine class="demo-2"> {{ user.email }} </p>
+        <mat-icon matListItemIcon>account_circle</mat-icon>
+        <h4 matListItemTitle>{{ user.name }}</h4>
+        <p matListItemLine class="demo-2"> {{ user.email }} </p>
       </mat-list-item>
       <mat-divider></mat-divider>
-   </mat-list>
-    <mat-nav-list dense>
+    </mat-list>
+    <mat-nav-list>
+      <div mat-subheader>Content</div>
       <a mat-list-item routerLink="/admin/dashboard">
         <mat-icon matListItemIcon>dashboard</mat-icon>
         Dashboard
       </a>
-      <a mat-list-item routerLink="/admin/form">
+      <a mat-list-item routerLink="/admin/products">
         <mat-icon matListItemIcon>dns</mat-icon>
-        Form
+        Products
       </a>
       <a mat-list-item routerLink="/admin/about">
         <mat-icon matListItemIcon>dns</mat-icon>
-        About
+        Categories
       </a>
+      <mat-divider></mat-divider>
+      <div div mat-subheader>Notes</div>
       <a mat-list-item routerLink="/admin/gallery">
         <mat-icon matListItemIcon>photo_library</mat-icon>
-        Gallery
-      </a>
-      <a mat-list-item routerLink="/admin/pictures">
-        <mat-icon matListItemIcon>photo_library</mat-icon>
-        Pictures
-      </a>
-      <a mat-list-item (click)="change()">
-        <mat-icon matListItemIcon>published_with_changes</mat-icon>
-        change
+        Users
       </a>
       <a mat-list-item (click)="logout()">
         <mat-icon matListItemIcon>logout</mat-icon>
@@ -43,17 +36,6 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>E-commerce Admin</span>
-    </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

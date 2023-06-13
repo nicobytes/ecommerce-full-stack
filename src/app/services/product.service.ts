@@ -1,12 +1,19 @@
-import { HttpClient } from "@angular/common/http";
-import { inject } from "@angular/core"
-import { ActivatedRoute } from "@angular/router";
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { environment } from './../../environments/environment';
+import { environment } from '@env/environment';
+import { Product } from '@models/product.model';
 
-export const getProductWithParam = () => {
-  const http = inject(HttpClient);
-  const route = inject(ActivatedRoute);
-  const { id } = route.snapshot.params;
-  return http.get<any>(`${environment.API_URL}/products/${id}`);
+@Injectable({
+  providedIn: 'root'
+})
+export class ProductService {
+  private http = inject(HttpClient);
+
+  constructor() { }
+
+  getAllProducts() {
+    const url = `${environment.API_URL}/v1/products`;
+    return this.http.get<Product[]>(url);
+  }
 }

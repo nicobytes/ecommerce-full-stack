@@ -1,32 +1,43 @@
-<div class="container">
-
-    <mat-card appearance="outlined" class="login-card">
+<div class="bg-[#3f51b5] w-screen h-screen flex items-center justify-center">
+  <div class="w-96 flex flex-col">
+    <mat-card appearance="outlined" class="p-5">
       <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
-        <mat-card-header>
-          <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
         <mat-card-content>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Email" formControlName="email">
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="full-width">
-                <input matInput placeholder="Password" formControlName="password">
-              </mat-form-field>
-            </div>
+          <h1>Login</h1>
+          <mat-form-field class="w-full">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" autocomplete="off" formControlName="email">
+            <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.hasError('email')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password"
+              formControlName="password">
+            <button type="button" matSuffix mat-icon-button (click)="showPassword = !showPassword">
+              <mat-icon *ngIf="showPassword">visibility</mat-icon>
+              <mat-icon *ngIf="!showPassword">visibility_off</mat-icon>
+            </button>
+            <mat-error *ngIf="form.get('password')?.touched && form.get('password')?.hasError('minlength')">
+              The password must be at least 6 characters long
+            </mat-error>
+            <mat-error *ngIf="form.get('password')?.touched && form.get('password')?.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <div class="flex w-full justify-center">
+            <button *ngIf="!showSpinner" mat-raised-button class="w-full" color="primary" type="submit">Log In</button>
+            <mat-spinner *ngIf="showSpinner" />
           </div>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
-        </mat-card-actions>
       </form>
     </mat-card>
+  </div>
+
+
 
 </div>
-
-

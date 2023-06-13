@@ -15,6 +15,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -33,6 +36,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTableModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
   ],
   exports: [
     LayoutModule,
@@ -50,6 +56,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTableModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
   ]
 })
 export class MaterialModule { }

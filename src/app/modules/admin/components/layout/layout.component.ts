@@ -1,15 +1,16 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@services/auth.service';
+import { UIService } from '@services/ui.service';
 import { User } from '@models/auth.model';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  templateUrl: './layout.component.html'
 })
 export class LayoutComponent implements OnInit {
 
@@ -17,6 +18,8 @@ export class LayoutComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private uiService = inject(UIService);
+  @ViewChild('drawer') drawer!: MatDrawer;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -34,24 +37,15 @@ export class LayoutComponent implements OnInit {
     .subscribe(user => {
       this.user = user;
     });
-  }
 
-  change() {
-    this.authService.setAuthState({
-      ...this.user as User,
-      name: `Nico ${this.getRandomInt(10, 90)}`
-    });
+    this.uiService.drawerState$.subscribe(state => {
+      this.drawer.toggle(state);
+    })
   }
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/auth/login']);
-  }
-
-  getRandomInt(min: number, max: number) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
   }
 
 }
