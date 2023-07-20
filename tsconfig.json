@@ -33,6 +33,9 @@
       "@material/*": [
         "src/app/material/*"
       ],
+      "@utils/*": [
+        "src/app/utils/*"
+      ],
       "@env/*": [
         "src/environments/*"
       ]

@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductFormComponent } from './pages/product-form/product-form.component';
-import { ProductTableComponent } from './pages/product-table/product-table.component';
+import { TableComponent } from './pages/table/table.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProductTableComponent,
+    component: TableComponent,
   },
-  {
+  /* {
     path: 'new',
     component: ProductFormComponent,
   },
   {
     path: 'edit/:id',
     component: ProductFormComponent,
-  }
+  }*/
 ];
 
 @NgModule({

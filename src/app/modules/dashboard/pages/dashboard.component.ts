@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 import { AuthService } from '@services/auth.service';
-import { User } from '@models/auth.model';
+import { User } from '@models/user.model';
 
 @Component({
   selector: 'app-dashboard',

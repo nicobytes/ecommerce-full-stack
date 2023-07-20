@@ -1,27 +1,28 @@
 import { Component, inject, OnInit } from '@angular/core';
 
-import { DataSourceProduct } from './data-source';
+import { TableDataSource } from '@utils/data-source';
 import { ProductService } from '@services/product.service';
 import { UIService } from '@services/ui.service';
+import { Product } from '@models/product.model';
 
 @Component({
-  selector: 'app-product-table',
-  templateUrl: './product-table.component.html'
+  selector: 'app-table',
+  templateUrl: './table.component.html'
 })
-export class ProductTableComponent implements OnInit {
+export class TableComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'price', 'images', 'category', 'actions'];
-  dataSource = new DataSourceProduct();
+  dataSource = new TableDataSource<Product>();
   private productService = inject(ProductService);
   private uiService = inject(UIService);
 
-  counterProducts: null | number = null;
+  counter: null | number = null;
   showProgress = false;
 
   ngOnInit(): void {
     this.showProgress = true;
-    this.productService.getAllProducts().subscribe((data) => {
+    this.productService.getAll().subscribe((data) => {
       this.dataSource.init(data);
-      this.counterProducts = this.dataSource.getTotal();
+      this.counter = this.dataSource.getTotal();
       this.showProgress = false;
     });
   }

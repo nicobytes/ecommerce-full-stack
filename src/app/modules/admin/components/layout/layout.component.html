@@ -10,23 +10,23 @@
       <mat-divider></mat-divider>
     </mat-list>
     <mat-nav-list>
-      <div mat-subheader>Content</div>
+      <div mat-subheader>Admin</div>
       <a mat-list-item routerLink="/admin/dashboard">
         <mat-icon matListItemIcon>dashboard</mat-icon>
         Dashboard
       </a>
       <a mat-list-item routerLink="/admin/products">
-        <mat-icon matListItemIcon>dns</mat-icon>
+        <mat-icon matListItemIcon>dataset</mat-icon>
         Products
       </a>
-      <a mat-list-item routerLink="/admin/about">
+      <a mat-list-item routerLink="/admin/categories">
         <mat-icon matListItemIcon>dns</mat-icon>
         Categories
       </a>
       <mat-divider></mat-divider>
-      <div div mat-subheader>Notes</div>
-      <a mat-list-item routerLink="/admin/gallery">
-        <mat-icon matListItemIcon>photo_library</mat-icon>
+      <div div mat-subheader>Users</div>
+      <a mat-list-item routerLink="/admin/users">
+        <mat-icon matListItemIcon>group</mat-icon>
         Users
       </a>
       <a mat-list-item (click)="logout()">

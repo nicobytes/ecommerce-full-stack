@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@services/auth.service';
 import { UIService } from '@services/ui.service';
-import { User } from '@models/auth.model';
+import { User } from '@models/user.model';
 import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
