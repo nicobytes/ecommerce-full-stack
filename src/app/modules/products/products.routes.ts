@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { Routes } from '@angular/router';
 import { TableComponent } from './pages/table/table.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: TableComponent,
@@ -17,9 +15,3 @@ const routes: Routes = [
     component: ProductFormComponent,
   }*/
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class ProductsRoutingModule { }

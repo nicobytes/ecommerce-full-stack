@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ export class UIService {
 
   toggleDrawer() {
     const state = this.drawerState.getValue();
-    this.drawerState.next(!state);
+    if (state !== null) {
+      this.drawerState.next(!state);
+    }
   }
 }
