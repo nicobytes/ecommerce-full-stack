@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgOptimizedImage } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from './material/material.module';
+
 import { AppComponent } from './app.component';
 
 import { TokenInterceptor } from './interceptors/token.interceptor';
@@ -20,11 +20,10 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    MaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgOptimizedImage
-  ],
+],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
