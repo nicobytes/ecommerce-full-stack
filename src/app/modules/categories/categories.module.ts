@@ -8,14 +8,12 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { TableComponent } from './pages/table/table.component';
 
 @NgModule({
-  declarations: [
-    TableComponent
-  ],
-  imports: [
-    CommonModule,
-    CategoriesRoutingModule,
-    MaterialModule,
-    NgOptimizedImage
-  ]
+    imports: [
+        CommonModule,
+        CategoriesRoutingModule,
+        MaterialModule,
+        NgOptimizedImage,
+        TableComponent
+    ]
 })
 export class CategoriesModule { }

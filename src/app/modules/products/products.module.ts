@@ -8,14 +8,12 @@ import { TableComponent } from './pages/table/table.component';
 
 
 @NgModule({
-  declarations: [
-    TableComponent
-  ],
-  imports: [
-    CommonModule,
-    ProductsRoutingModule,
-    MaterialModule,
-    NgOptimizedImage
-  ]
+    imports: [
+        CommonModule,
+        ProductsRoutingModule,
+        MaterialModule,
+        NgOptimizedImage,
+        TableComponent
+    ]
 })
 export class ProductsModule { }

@@ -4,11 +4,19 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
 import { AuthService } from '@services/auth.service';
 import { User } from '@models/user.model';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css'],
+    standalone: true,
+    imports: [MatGridListModule, NgFor, MatCardModule, MatButtonModule, MatMenuModule, MatIconModule, AsyncPipe]
 })
 export class DashboardComponent implements OnInit {
   user: User | null = null;

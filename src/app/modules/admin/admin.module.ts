@@ -7,13 +7,11 @@ import { LayoutComponent } from './components/layout/layout.component';
 
 
 @NgModule({
-  declarations: [
-    LayoutComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    MaterialModule
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        MaterialModule,
+        LayoutComponent
+    ]
 })
 export class AdminModule { }

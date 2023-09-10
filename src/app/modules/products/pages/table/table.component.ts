@@ -4,10 +4,19 @@ import { TableDataSource } from '@utils/data-source';
 import { ProductService } from '@services/product.service';
 import { UIService } from '@services/ui.service';
 import { Product } from '@models/product.model';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgIf, NgFor, NgOptimizedImage, CurrencyPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html'
+    selector: 'app-table',
+    templateUrl: './table.component.html',
+    standalone: true,
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, NgIf, MatProgressBarModule, MatCardModule, MatTableModule, NgFor, NgOptimizedImage, CurrencyPipe]
 })
 export class TableComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'price', 'images', 'category', 'actions'];

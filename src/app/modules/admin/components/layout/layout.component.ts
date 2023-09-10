@@ -1,16 +1,22 @@
 import { Component, OnInit, inject, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@services/auth.service';
 import { UIService } from '@services/ui.service';
 import { User } from '@models/user.model';
-import { MatDrawer } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html'
+    selector: 'app-layout',
+    templateUrl: './layout.component.html',
+    standalone: true,
+    imports: [MatSidenavModule, NgIf, MatListModule, MatIconModule, MatDividerModule, RouterLink, RouterOutlet, AsyncPipe]
 })
 export class LayoutComponent implements OnInit {
 
