@@ -3,14 +3,17 @@
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span>Products <span *ngIf="counter">({{counter}})</span></span>
-  <span class="flex-auto"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
 </mat-toolbar>
 <mat-progress-bar *ngIf="showProgress" mode="query"></mat-progress-bar>
 <mat-card>
   <mat-card-content>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select [formControl]="categorySelected">
+        <mat-option value="all">All</mat-option>
+        <mat-option *ngFor="let category of categories()" [value]="category.id">{{category.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Id</th>
@@ -36,7 +39,9 @@
       </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element"> </td>
+        <td mat-cell *matCellDef="let element">
+          <a color="primary" mat-raised-button [routerLink]="[element.id]">Editar</a>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

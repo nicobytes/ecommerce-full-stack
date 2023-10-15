@@ -2,7 +2,7 @@ import { Component, OnInit, inject, ViewChild, AfterContentInit, AfterViewInit }
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { AuthService } from '@services/auth.service';
 import { UIService } from '@services/ui.service';
 import { User } from '@models/user.model';
@@ -30,7 +30,8 @@ export class LayoutComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
-      shareReplay()
+      shareReplay(),
+      tap((result) => this.uiService.setDrawerState(result === false) )
     );
 
   ngOnInit() {

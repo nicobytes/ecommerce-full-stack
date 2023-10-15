@@ -11,8 +11,10 @@ export class UIService {
 
   toggleDrawer() {
     const state = this.drawerState.getValue();
-    if (state !== null) {
-      this.drawerState.next(!state);
-    }
+    this.drawerState.next(!state);
+  }
+
+  setDrawerState(state: boolean) {
+    this.drawerState.next(state);
   }
 }
