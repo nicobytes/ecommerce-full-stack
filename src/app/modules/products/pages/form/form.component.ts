@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
@@ -22,7 +22,6 @@ import { Product } from '@models/product.model';
 })
 export class FormComponent implements OnInit {
   private productService = inject(ProductService);
-  private activatedRoute = inject(ActivatedRoute);
   private location = inject(Location);
   private fb = inject(FormBuilder);
   showProgress = signal(false);
@@ -32,13 +31,12 @@ export class FormComponent implements OnInit {
     description: [''],
     price: [0],
   });
+  @Input() id?: string;
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params.id) {
-        this.getProduct(params.id);
-      }
-    });
+    if (this.id) {
+      this.getProduct(this.id);
+    }
   }
 
   goToBack() {

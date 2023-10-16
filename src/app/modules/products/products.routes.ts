@@ -11,12 +11,4 @@ export const routes: Routes = [
     path: ':id',
     component: FormComponent,
   }
-  /* {
-    path: 'new',
-    component: ProductFormComponent,
-  },
-  {
-    path: 'edit/:id',
-    component: ProductFormComponent,
-  }*/
 ];

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, signal, OnChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLinkWithHref, ActivatedRoute, Router, Params } from '@angular/router';
 
@@ -23,19 +23,19 @@ import { CategoryService } from '@services/category.service';
   standalone: true,
   imports: [ReactiveFormsModule, MatToolbarModule, MatButtonModule, MatIconModule, NgIf, MatProgressBarModule, MatCardModule, MatTableModule, NgFor, NgOptimizedImage, CurrencyPipe, MatSelectModule, RouterLinkWithHref]
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['id', 'title', 'price', 'images', 'category', 'actions'];
   dataSource = new TableDataSource<Product>();
   private productService = inject(ProductService);
   private categoriesService = inject(CategoryService);
   private uiService = inject(UIService);
-  private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   categorySelected = new FormControl();
   categories = signal<Category[]>([]);
 
   counter: null | number = null;
   showProgress = false;
+  @Input() categoryId?: string;
 
 
   constructor() {
@@ -49,10 +49,16 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.getProducts(params);
-    });
     this.getCategories();
+  }
+
+  ngOnChanges() {
+    const params: Params = {};
+    if (this.categoryId) {
+      params.categoryId = this.categoryId;
+    }
+    console.log(params);
+    this.getProducts(params);
   }
 
   toggleDrawer() {
