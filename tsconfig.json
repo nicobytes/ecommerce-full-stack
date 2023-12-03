@@ -30,8 +30,8 @@
       "@models/*": [
         "src/app/models/*"
       ],
-      "@material/*": [
-        "src/app/material/*"
+      "@modules/*": [
+        "src/app/modules/*"
       ],
       "@utils/*": [
         "src/app/utils/*"
