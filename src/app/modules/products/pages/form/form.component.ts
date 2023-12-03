@@ -1,9 +1,9 @@
 import { Component, inject, signal, OnInit, Input } from '@angular/core';
-import { Location } from '@angular/common';
+import { NgIf, NgFor, Location } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { NgIf, NgFor, NgOptimizedImage, CurrencyPipe } from '@angular/common';
+import { NgOptimizedImage, CurrencyPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,14 +11,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from '@services/product.service';
-import { ActivatedRoute } from '@angular/router';
 import { Product } from '@models/product.model';
 
 @Component({
   selector: 'app-form',
   standalone: true,
   templateUrl: './form.component.html',
-  imports: [ReactiveFormsModule, MatToolbarModule, MatButtonModule, MatIconModule, NgIf, MatProgressBarModule, MatCardModule, MatTableModule, NgFor, NgOptimizedImage, CurrencyPipe, MatSelectModule, MatInputModule]
+  imports: [ReactiveFormsModule, MatToolbarModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatTableModule, NgOptimizedImage, CurrencyPipe, MatSelectModule, MatInputModule, NgIf, NgFor]
 })
 export class FormComponent implements OnInit {
   private productService = inject(ProductService);

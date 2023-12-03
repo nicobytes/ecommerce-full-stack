@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <button (click)="toggleDrawer()" type="button" aria-label="Toggle sidenav" mat-icon-button>
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <span>Products <span *ngIf="counter()">({{ counter() }})</span> </span>
+</mat-toolbar>
+<mat-progress-bar mode="query" *ngIf="showProgress()"></mat-progress-bar>
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select [formControl]="categorySelected">
+        <mat-option value="all">All</mat-option>
+        <mat-option [value]="category.id" *ngFor="let category of categories()">{{category.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-list [products]="products()" *ngIf="isMobile() else elseBlock" />
+    <ng-template #elseBlock>
+      <app-table [products]="products()" />
+    </ng-template>
+  </mat-card-content>
+</mat-card>
