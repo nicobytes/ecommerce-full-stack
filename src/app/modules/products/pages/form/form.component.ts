@@ -19,7 +19,7 @@ import { Product } from '@models/product.model';
   templateUrl: './form.component.html',
   imports: [ReactiveFormsModule, MatToolbarModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatTableModule, NgOptimizedImage, CurrencyPipe, MatSelectModule, MatInputModule, NgIf, NgFor]
 })
-export class FormComponent implements OnInit {
+export default class FormComponent implements OnInit {
   private productService = inject(ProductService);
   private location = inject(Location);
   private fb = inject(FormBuilder);

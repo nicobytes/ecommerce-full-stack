@@ -22,7 +22,7 @@ import { ListComponent } from '@modules/products/components/list/list.component'
   standalone: true,
   imports: [ReactiveFormsModule, MatToolbarModule, MatIconModule, MatProgressBarModule, MatCardModule, MatSelectModule, RouterLinkWithHref, TableComponent, MatButtonModule, ListComponent, NgIf, NgFor]
 })
-export class ProductsComponent implements OnInit, OnChanges {
+export default class ProductsComponent implements OnInit, OnChanges {
   private productService = inject(ProductService);
   private categoriesService = inject(CategoryService);
   private uiService = inject(UIService);
