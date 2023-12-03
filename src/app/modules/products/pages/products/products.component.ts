@@ -1,6 +1,5 @@
 import { Component, inject, Input, OnInit, signal, OnChanges, computed } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLinkWithHref, Router, Params } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,8 +15,6 @@ import { Category } from '@models/category.model';
 import { CategoryService } from '@services/category.service';
 import { TableComponent } from '@modules/products/components/table/table.component';
 import { ListComponent } from '@modules/products/components/list/list.component';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -30,18 +27,12 @@ export class ProductsComponent implements OnInit, OnChanges {
   private categoriesService = inject(CategoryService);
   private uiService = inject(UIService);
   private router = inject(Router);
-  private breakpointObserver = inject(BreakpointObserver);
   categorySelected = new FormControl();
   categories = signal<Category[]>([]);
   products = signal<Product[]>([]);
   counter = computed(() => this.products().length);
   showProgress = signal(false);
   @Input() categoryId?: string;
-  isMobile = toSignal(
-    this.breakpointObserver.observe(Breakpoints.Handset)
-      .pipe(map((result) => result.matches),
-      ), { initialValue: true });
-
 
   constructor() {
     this.categorySelected.valueChanges.subscribe((value) => {

@@ -14,9 +14,6 @@
         <mat-option [value]="category.id" *ngFor="let category of categories()">{{category.name}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <app-list [products]="products()" *ngIf="isMobile() else elseBlock" />
-    <ng-template #elseBlock>
-      <app-table [products]="products()" />
-    </ng-template>
+    <app-table [products]="products()" />
   </mat-card-content>
 </mat-card>
