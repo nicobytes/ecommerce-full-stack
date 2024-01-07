@@ -2,10 +2,14 @@
   <button (click)="toggleDrawer()" type="button" aria-label="Toggle sidenav" mat-icon-button>
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span>Categories <span *ngIf="counter">({{counter}})</span></span>
+  <span>Categories @if (counter) {
+    <span>({{counter}})</span>
+  }</span>
   <span class="flex-auto"></span>
 </mat-toolbar>
-<mat-progress-bar *ngIf="showProgress" mode="query"></mat-progress-bar>
+@if (showProgress) {
+  <mat-progress-bar mode="query"></mat-progress-bar>
+}
 <mat-card>
   <mat-card-content>
     <table mat-table [dataSource]="dataSource">

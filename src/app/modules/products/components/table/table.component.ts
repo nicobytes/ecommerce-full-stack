@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { NgFor } from '@angular/common';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { NgOptimizedImage, CurrencyPipe } from '@angular/common';
@@ -10,7 +10,7 @@ import { TableDataSource } from '@utils/data-source';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [ MatTableModule, NgOptimizedImage, CurrencyPipe, MatButtonModule, RouterLink, NgFor ],
+  imports: [MatTableModule, NgOptimizedImage, CurrencyPipe, MatButtonModule, RouterLink],
   templateUrl: './table.component.html'
 })
 export class TableComponent implements OnChanges {
