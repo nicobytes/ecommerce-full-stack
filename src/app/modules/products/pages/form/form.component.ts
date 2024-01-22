@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit, Input } from '@angular/core';
-import { Location } from '@angular/common';
+import { NgIf, NgFor, Location } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -17,7 +17,7 @@ import { Product } from '@models/product.model';
   selector: 'app-form',
   standalone: true,
   templateUrl: './form.component.html',
-  imports: [ReactiveFormsModule, MatToolbarModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatTableModule, NgOptimizedImage, CurrencyPipe, MatSelectModule, MatInputModule]
+  imports: [ReactiveFormsModule, MatToolbarModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatTableModule, NgOptimizedImage, CurrencyPipe, MatSelectModule, MatInputModule, NgIf, NgFor]
 })
 export default class FormComponent implements OnInit {
   private productService = inject(ProductService);

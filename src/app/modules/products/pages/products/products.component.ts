@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit, signal, OnChanges, computed } from '@angular/core';
-
+import { NgIf, NgFor } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLinkWithHref, Router, Params } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,7 @@ import { ListComponent } from '@modules/products/components/list/list.component'
   selector: 'app-products',
   templateUrl: './products.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, MatToolbarModule, MatIconModule, MatProgressBarModule, MatCardModule, MatSelectModule, RouterLinkWithHref, TableComponent, MatButtonModule, ListComponent]
+  imports: [ReactiveFormsModule, MatToolbarModule, MatIconModule, MatProgressBarModule, MatCardModule, MatSelectModule, RouterLinkWithHref, TableComponent, MatButtonModule, ListComponent, NgIf, NgFor]
 })
 export default class ProductsComponent implements OnInit, OnChanges {
   private productService = inject(ProductService);

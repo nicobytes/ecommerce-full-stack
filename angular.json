@@ -21,12 +21,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/cms",
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": ["src/polyfills.ts"],
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -61,7 +61,9 @@
               "outputHashing": "all"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -73,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-auth:build:production"
+              "browserTarget": "angular-auth:build:production"
             },
             "development": {
-              "buildTarget": "angular-auth:build:development"
+              "browserTarget": "angular-auth:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-auth:build"
+            "browserTarget": "angular-auth:build"
           }
         },
         "test": {

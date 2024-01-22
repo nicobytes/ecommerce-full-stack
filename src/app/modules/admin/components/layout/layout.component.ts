@@ -10,13 +10,13 @@ import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { AsyncPipe } from '@angular/common';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-layout',
     templateUrl: './layout.component.html',
     standalone: true,
-    imports: [MatSidenavModule, MatListModule, MatIconModule, MatDividerModule, RouterLink, RouterOutlet, AsyncPipe]
+    imports: [MatSidenavModule, NgIf, MatListModule, MatIconModule, MatDividerModule, RouterLink, RouterOutlet, AsyncPipe]
 })
 export class LayoutComponent implements OnInit {
 

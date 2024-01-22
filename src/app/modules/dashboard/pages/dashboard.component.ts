@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { AsyncPipe } from '@angular/common';
+import { NgFor, AsyncPipe } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
@@ -16,7 +16,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
     standalone: true,
-    imports: [MatGridListModule, MatCardModule, MatButtonModule, MatMenuModule, MatIconModule, AsyncPipe]
+    imports: [MatGridListModule, NgFor, MatCardModule, MatButtonModule, MatMenuModule, MatIconModule, AsyncPipe]
 })
 export class DashboardComponent implements OnInit {
   user: User | null = null;
