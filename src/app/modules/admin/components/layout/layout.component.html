@@ -1,14 +1,16 @@
 <mat-sidenav-container class="h-full">
   <mat-sidenav #drawer class="w-60" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-list *ngIf="user">
-      <mat-list-item>
-        <mat-icon matListItemIcon>account_circle</mat-icon>
-        <h4 matListItemTitle>{{ user.name }}</h4>
-        <p matListItemLine class="demo-2"> {{ user.email }} </p>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
+    @if (user) {
+      <mat-list>
+        <mat-list-item>
+          <mat-icon matListItemIcon>account_circle</mat-icon>
+          <h4 matListItemTitle>{{ user.name }}</h4>
+          <p matListItemLine class="demo-2"> {{ user.email }} </p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    }
     <mat-nav-list>
       <div mat-subheader>Admin</div>
       <a mat-list-item routerLink="/admin/dashboard">

@@ -14,7 +14,9 @@
   <ng-container matColumnDef="images">
     <th mat-header-cell *matHeaderCellDef> Images </th>
     <td mat-cell *matCellDef="let element">
-      <img [ngSrc]="image" [alt]="element.title" width="40" height="40" *ngFor="let image of element.images.slice(0,3)">
+      @for (image of element.images.slice(0,3); track image) {
+        <img [ngSrc]="image" [alt]="element.title" width="40" height="40">
+      }
     </td>
   </ng-container>
   <ng-container matColumnDef="category">

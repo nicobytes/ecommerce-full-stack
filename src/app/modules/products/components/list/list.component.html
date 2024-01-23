@@ -1,21 +1,24 @@
-<mat-card class="mb-2" *ngFor="let product of products">
-  <mat-card-header>
-    <mat-card-title>{{ product.title }}</mat-card-title>
-    <mat-card-subtitle>{{ product.category.name }}</mat-card-subtitle>
-  </mat-card-header>
-
-  <mat-card-content>
-    <div class="flex space-x-2">
-      <img [ngSrc]="image" [alt]="product.title" width="80" height="80" *ngFor="let image of product.images.slice(0,3)">
-    </div>
-    <p>
-      {{ product.description }}
-    </p>
-    <p>
-      {{product.price | currency}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <a color="primary" mat-raised-button [routerLink]="[product.id]">Editar</a>
-  </mat-card-actions>
-</mat-card>
+@for (product of products; track product) {
+  <mat-card class="mb-2">
+    <mat-card-header>
+      <mat-card-title>{{ product.title }}</mat-card-title>
+      <mat-card-subtitle>{{ product.category.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex space-x-2">
+        @for (image of product.images.slice(0,3); track image) {
+          <img [ngSrc]="image" [alt]="product.title" width="80" height="80">
+        }
+      </div>
+      <p>
+        {{ product.description }}
+      </p>
+      <p>
+        {{product.price | currency}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a color="primary" mat-raised-button [routerLink]="[product.id]">Editar</a>
+    </mat-card-actions>
+  </mat-card>
+}
