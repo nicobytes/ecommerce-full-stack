@@ -22,14 +22,9 @@
     </mat-form-field>
     @defer (when isMobile()) {
       <app-list [products]="products()" />
-    } @loading {
-      <p>loading</p>
     }
-
     @defer (when !isMobile()) {
       <app-table [products]="products()" />
-    } @loading {
-      <p>loading</p>
     }
   </mat-card-content>
 </mat-card>
