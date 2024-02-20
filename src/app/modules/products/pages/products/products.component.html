@@ -20,16 +20,10 @@
         }
       </mat-select>
     </mat-form-field>
-    @defer (when isMobile()) {
+    @if (isMobile()) {
       <app-list [products]="products()" />
-    } @loading {
-      <p>loading</p>
-    }
-
-    @defer (when !isMobile()) {
+    } @else {
       <app-table [products]="products()" />
-    } @loading {
-      <p>loading</p>
     }
   </mat-card-content>
 </mat-card>
