@@ -1,0 +1,19 @@
+name = "nicobytes_store_api"
+compatibility_date = "2023-12-01"
+node_compat = true
+
+# [vars]
+# MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+[[d1_databases]]
+binding = "DB_STORE"
+database_name = "nicobytes_store"
+database_id = "ffe00f06-24a4-4b9a-9c80-2d0245ecc362"
