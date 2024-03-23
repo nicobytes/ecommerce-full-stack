@@ -1,19 +1,19 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { CreateCategorySchema, CategorySchema } from '@src/dtos/category.dto';
-import { createCategory } from '@src/services/category.service';
+import { CreateProductSchema, ProductSchema } from '@src/dtos/product.dto';
+import { createProduct } from '@src/services/products.service';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['category'],
+  tags: ['product'],
   method: 'post',
   path: '/',
   request: {
     body: {
       content: {
         'application/json': {
-          schema: CreateCategorySchema,
+          schema: CreateProductSchema,
         },
       },
     },
@@ -22,10 +22,10 @@ const route = createRoute({
     200: {
       content: {
         'application/json': {
-          schema: CategorySchema,
+          schema: ProductSchema,
         },
       },
-      description: 'Retrieve new category',
+      description: 'Retrieve new product',
     },
   },
 });
@@ -33,7 +33,7 @@ const route = createRoute({
 app.openapi(route, async (c) => {
   const db = c.get('db');
   const dto = c.req.valid('json');
-  const rta = await createCategory(db, dto);
+  const rta = await createProduct(db, dto);
   return c.json(rta);
 });
 

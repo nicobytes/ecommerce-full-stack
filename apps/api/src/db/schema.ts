@@ -1,5 +1,19 @@
-import { sql } from "drizzle-orm";
-import { text, integer, sqliteTable } from "drizzle-orm/sqlite-core";
+import { sql, relations } from "drizzle-orm";
+import { text, integer, sqliteTable, customType } from "drizzle-orm/sqlite-core";
+
+const arrayStr = customType<{ data: string[], driverData: string, notNull: true }>(
+  {
+    dataType() {
+      return 'text';
+    },
+    toDriver(data) {
+      return data.join(',');
+    },
+    fromDriver(value) {
+      return value.split(',');
+    },
+  },
+);
 
 export const categories = sqliteTable('categories', {
   id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
@@ -33,12 +47,19 @@ export const products = sqliteTable('products', {
   title: text('title').notNull(),
   description: text('description').notNull(),
   price: integer('price').notNull(),
-  images: text('images', { mode: 'json' }).notNull().$type<string>(),
+  images: arrayStr('images').notNull(),
   createdAt: integer('created_at', { mode: 'timestamp' })
     .notNull()
     .default(sql`(unixepoch())`),
   updatedAt: integer('updated_at', { mode: 'timestamp' })
     .notNull()
     .default(sql`(unixepoch())`),
-  categoryId: integer("category_id").references(() => categories.id)
+  categoryId: integer("category_id").notNull().references(() => categories.id)
 });
+
+export const productsRelations = relations(products, ({ one }) => ({
+  category: one(categories, {
+    fields: [products.categoryId],
+    references: [categories.id],
+  }),
+}));

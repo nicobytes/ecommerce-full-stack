@@ -1,25 +1,25 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { CategoryIdSchema, CategorySchema } from '@src/dtos/category.dto';
-import { getCategoryById } from '@src/services/category.service';
+import { ProductIdSchema, ProductSchema } from '@src/dtos/product.dto';
+import { getProductById } from '@src/services/products.service';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['category'],
+  tags: ['product'],
   method: 'get',
   path: '/{id}',
   request: {
-    params: CategoryIdSchema,
+    params: ProductIdSchema,
   },
   responses: {
     200: {
       content: {
         'application/json': {
-          schema: CategorySchema,
+          schema: ProductSchema,
         },
       },
-      description: 'Retrieve the category',
+      description: 'Retrieve the product',
     },
   },
 });
@@ -27,7 +27,7 @@ const route = createRoute({
 app.openapi(route, async (c) => {
   const db = c.get('db');
   const { id } = c.req.valid('param');
-  const result = await getCategoryById(db, +id);
+  const result = await getProductById(db, +id);
   return c.json(result);
 });
 

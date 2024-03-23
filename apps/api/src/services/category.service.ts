@@ -9,24 +9,25 @@ export const getAllCategories = (db: DB) => {
 }
 
 export const getCategoryById = async (db: DB, id: number) => {
-  const results = await db
-    .select()
-    .from(categories)
-    .where(eq(categories.id, id));
-  if (results.length === 0) {
+  const category = await db.query.categories.findFirst({
+    where: eq(categories.id, id),
+  });
+  if (!category) {
     throw new HTTPException(400, { message: `Category with id ${id} not found.` })
   }
-  return results[0];
+  return category;
 }
 
 export const createCategory = async (db: DB, dto: CreateCategoryDto) => {
-  const [newCategory] = await db
+  const results = await db
     .insert(categories)
-    .values({
-      name: dto.name,
-      image: dto.image
-    })
+    .values({...dto})
     .returning();
+
+  if (results.length === 0) {
+    throw new HTTPException(400, { message: `Error` })
+  }
+  const [newCategory] = results;
   return newCategory;
 }
 
@@ -36,10 +37,12 @@ export const updateCategory = async (db: DB, id: number, dto: UpdateCategoryDto)
     .set({ ...dto, updatedAt: new Date() })
     .where(eq(categories.id, id))
     .returning();
+
   if (results.length === 0) {
     throw new HTTPException(400, { message: `Category with id ${id} not found.` })
   }
-  return results[0];
+  const [newCategory] = results;
+  return newCategory;
 }
 
 

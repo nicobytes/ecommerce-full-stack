@@ -1,5 +1,4 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
-import { createRoute } from '@hono/zod-openapi';
+import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
 import { UpdateCategoryShema, CategorySchema, CategoryIdSchema } from '@src/dtos/category.dto';
 import { updateCategory } from '@src/services/category.service';
 import { App } from "@src/types";
