@@ -51,3 +51,15 @@ export const updateProduct = async (db: DB, id: number, dto: UpdateProductDto) =
   const [product] = results;
   return getProductById(db, product.insertedId);
 }
+
+export const deleteProduct = async (db: DB, id: number) => {
+  const results = await db
+    .delete(products)
+    .where(eq(products.id, id))
+    .returning();
+  if (results.length === 0) {
+    throw new HTTPException(400, { message: `Product with id ${id} not found.` })
+  }
+  const [product] = results;
+  return product;
+}
