@@ -1,4 +1,4 @@
-name: Deployment
+name: API Deployment
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
       - 'apps/api/**'
 
 jobs:
-  deploy-api:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy
+      - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
