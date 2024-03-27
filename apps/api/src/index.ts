@@ -13,6 +13,7 @@ import deleteCategory from '@src/routes/categories/deleteCategory';
 import createProduct from '@src/routes/products/createProduct';
 import getProducts from '@src/routes/products/getProducts';
 import getProduct from '@src/routes/products/getProduct';
+import updateProduct from '@src/routes/products/updateProduct';
 
 const app = new OpenAPIHono();
 app.use("*", cors());
@@ -29,6 +30,7 @@ app.route('/api/v1/categories', deleteCategory);
 app.route('/api/v1/products', createProduct);
 app.route('/api/v1/products', getProducts);
 app.route('/api/v1/products', getProduct);
+app.route('/api/v1/products', updateProduct);
 
 app.get("/ui", swaggerUI({ url: "/docs" }));
 app.doc("/docs", {

@@ -1,6 +1,6 @@
 import { products } from '@src/db/schema';
 import { HTTPException } from 'hono/http-exception';
-import { CreateProductDto } from '@src/dtos/product.dto';
+import { CreateProductDto, UpdateProductDto } from '@src/dtos/product.dto';
 import { eq } from "drizzle-orm";
 import { DB } from '@src/types';
 
@@ -36,4 +36,18 @@ export const createProduct = async (db: DB, dto: CreateProductDto) => {
   }
   const [newProduct] = results;
   return getProductById(db, newProduct.insertedId);
+}
+
+export const updateProduct = async (db: DB, id: number, dto: UpdateProductDto) => {
+  const results = await db
+    .update(products)
+    .set({ ...dto, updatedAt: new Date() })
+    .where(eq(products.id, id))
+    .returning({ insertedId: products.id });
+
+  if (results.length === 0) {
+    throw new HTTPException(400, { message: `Product with id ${id} not found.` })
+  }
+  const [product] = results;
+  return getProductById(db, product.insertedId);
 }

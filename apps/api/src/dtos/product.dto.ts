@@ -55,3 +55,6 @@ export const CreateProductSchema = ProductSchema.omit({ id: true });
 export type CreateProductDto = z.infer<typeof CreateProductSchema>;
 
 export const ProductListSchema = z.array(ProductSchema);
+
+export const UpdateProductShema = CreateProductSchema.partial();
+export type UpdateProductDto = z.infer<typeof UpdateProductShema>;
