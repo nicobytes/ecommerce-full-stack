@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "wrangler:dev": "wrangler pages dev ./dist/cms/browser --compatibility-date=2024-03-28"
+    "wrangler:dev": "ng build && wrangler pages dev ./dist/cms/browser --compatibility-date=2024-03-28"
   },
   "private": true,
   "dependencies": {
