@@ -29,4 +29,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: ./apps/admin
-          command: pages deploy ./dist/cms/browser --project-name=nicobytes_store_admin
+          command: pages deploy ./dist/cms/browser --project-name=nicobytes-store-admin

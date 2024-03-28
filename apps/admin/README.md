@@ -9,3 +9,5 @@ You can use this project in different Angular versions:
 - [v16](https://github.com/nicobytes/ecommerce-admin/tree/v16)
 - [v15](https://github.com/nicobytes/ecommerce-admin/tree/v15)
 
+npx wrangler d1 create nicobytes_store
+npx wrangler pages project create nicobytes-store-admin --production-branch=main
