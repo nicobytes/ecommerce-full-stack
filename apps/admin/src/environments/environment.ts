@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://api.escuelajs.co/api'
+  API_URL: 'https://api.nicobytes.store'
 };
 
 /*

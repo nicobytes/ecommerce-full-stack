@@ -34,7 +34,7 @@ app.route('/api/v1/products', getProduct);
 app.route('/api/v1/products', updateProduct);
 app.route('/api/v1/products', deleteProduct);
 
-app.get("/ui", swaggerUI({ url: "/docs" }));
+app.get("/", swaggerUI({ url: "/docs" }));
 app.doc("/docs", {
   info: {
     title: "Fake Store API",
