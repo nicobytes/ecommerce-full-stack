@@ -16,6 +16,12 @@ import getProduct from '@src/routes/products/getProduct';
 import updateProduct from '@src/routes/products/updateProduct';
 import deleteProduct from '@src/routes/products/deleteProduct';
 
+import createUser from '@src/routes/users/createUser';
+import getUsers from '@src/routes/users/getUsers';
+import getUser from '@src/routes/users/getUser';
+import updateUser from '@src/routes/users/updateUser';
+import deleteUser from '@src/routes/users/deleteUser';
+
 const app = new OpenAPIHono();
 app.use("*", cors());
 app.use('*', prettyJSON());
@@ -33,6 +39,12 @@ app.route('/api/v1/products', getProducts);
 app.route('/api/v1/products', getProduct);
 app.route('/api/v1/products', updateProduct);
 app.route('/api/v1/products', deleteProduct);
+
+app.route('/api/v1/users', createUser);
+app.route('/api/v1/users', getUsers);
+app.route('/api/v1/users', getUser);
+app.route('/api/v1/users', updateUser);
+app.route('/api/v1/users', deleteUser);
 
 app.get("/", swaggerUI({ url: "/docs" }));
 app.doc("/docs", {

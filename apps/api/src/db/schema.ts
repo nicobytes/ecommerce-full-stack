@@ -1,4 +1,4 @@
-import { sql, relations } from "drizzle-orm";
+import { sql, relations, getTableColumns } from "drizzle-orm";
 import { text, integer, sqliteTable, customType } from "drizzle-orm/sqlite-core";
 
 const arrayStr = customType<{ data: string[], driverData: string, notNull: true }>(
@@ -27,12 +27,14 @@ export const categories = sqliteTable('categories', {
     .default(sql`(unixepoch())`)
 });
 
+export const userRoles = ["customer", "admin", "seller"] as const;
+
 export const users = sqliteTable('users', {
   id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
-  role: text('role').notNull(),
+  role: text('role', { enum: userRoles }).notNull(),
   avatar: text('avatar').notNull(),
   createdAt: integer('created_at', { mode: 'timestamp' })
     .notNull()
@@ -41,6 +43,8 @@ export const users = sqliteTable('users', {
     .notNull()
     .default(sql`(unixepoch())`)
 });
+
+export const userColumns = getTableColumns(users);
 
 export const products = sqliteTable('products', {
   id: integer('id', { mode: 'number' }).primaryKey({ autoIncrement: true }),

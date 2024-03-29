@@ -1,25 +1,25 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { ProductSchema, ProductIdSchema } from '@src/dtos/product.dto';
-import { deleteProduct } from '@src/services/products.service';
+import { UserIdSchema, UserSchemaResponse } from '@src/dtos/user.dto';
+import { deleteUser } from '@src/services/user.service';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['products'],
+  tags: ['users'],
   method: 'delete',
   path: '/{id}',
   request: {
-    params: ProductIdSchema,
+    params: UserIdSchema,
   },
   responses: {
     200: {
       content: {
         'application/json': {
-          schema: ProductSchema,
+          schema: UserSchemaResponse,
         },
       },
-      description: 'Retrieve deleted product',
+      description: 'Retrieve deleted user',
     },
   },
 });
@@ -27,7 +27,7 @@ const route = createRoute({
 app.openapi(route, async (c) => {
   const db = c.get('db');
   const { id }  = c.req.valid('param');
-  const rta = await deleteProduct(db, +id);
+  const rta = await deleteUser(db, +id);
   return c.json(rta);
 });
 

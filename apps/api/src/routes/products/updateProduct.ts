@@ -6,7 +6,7 @@ import { App } from "@src/types";
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['product'],
+  tags: ['products'],
   method: 'put',
   path: '/{id}',
   request: {

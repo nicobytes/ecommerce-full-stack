@@ -1,4 +1,4 @@
-name = "nicobytes_store_api"
+name = "nicobytes-store-api"
 main = "src/index.ts"
 compatibility_date = "2023-12-01"
 

@@ -1,19 +1,20 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { CreateProductSchema, ProductSchema } from '@src/dtos/product.dto';
-import { createProduct } from '@src/services/products.service';
+import { UpdateUserShema, UserSchemaResponse, UserIdSchema } from '@src/dtos/user.dto';
+import { updateUser } from '@src/services/user.service';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['products'],
-  method: 'post',
-  path: '/',
+  tags: ['users'],
+  method: 'put',
+  path: '/{id}',
   request: {
+    params: UserIdSchema,
     body: {
       content: {
         'application/json': {
-          schema: CreateProductSchema,
+          schema: UpdateUserShema,
         },
       },
     },
@@ -22,18 +23,19 @@ const route = createRoute({
     200: {
       content: {
         'application/json': {
-          schema: ProductSchema,
+          schema: UserSchemaResponse,
         },
       },
-      description: 'Retrieve new product',
+      description: 'Retrieve updated user',
     },
   },
 });
 
 app.openapi(route, async (c) => {
   const db = c.get('db');
+  const { id }  = c.req.valid('param');
   const dto = c.req.valid('json');
-  const rta = await createProduct(db, dto);
+  const rta = await updateUser(db, +id, dto);
   return c.json(rta);
 });
 
