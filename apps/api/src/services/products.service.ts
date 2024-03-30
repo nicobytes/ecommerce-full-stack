@@ -1,6 +1,7 @@
 import { products } from '@src/db/schema';
 import { HTTPException } from 'hono/http-exception';
 import { CreateProductDto, UpdateProductDto } from '@src/dtos/product.dto';
+import { getCategoryById } from '@src/services/category.service';
 import { eq } from "drizzle-orm";
 import { DB } from '@src/types';
 
@@ -26,6 +27,7 @@ export const getProductById = async (db: DB, id: number) => {
 }
 
 export const createProduct = async (db: DB, dto: CreateProductDto) => {
+  await getCategoryById(db, dto.categoryId);
   const results = await db
     .insert(products)
     .values({...dto})

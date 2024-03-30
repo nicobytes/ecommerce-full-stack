@@ -1,6 +1,7 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
 import { CreateProductSchema, ProductSchema } from '@src/dtos/product.dto';
 import { createProduct } from '@src/services/products.service';
+import { jwtMiddleware } from '@src/middlewares/jwt.middleware';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();

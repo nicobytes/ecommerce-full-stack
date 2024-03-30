@@ -1,21 +1,19 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { UpdateUserShema, UserSchemaResponse, UserIdSchema } from '@src/dtos/user.dto';
-import { updateUser } from '@src/services/user.service';
-import { jwtMiddleware } from '@src/middlewares/jwt.middleware';
+import { LoginSchema, ResponseSchema } from '@src/dtos/auth.dto';
+import { doLogin } from '@src/services/auth.service';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['users'],
-  method: 'put',
-  path: '/{id}',
+  tags: ['auth'],
+  method: 'post',
+  path: '/',
   request: {
-    params: UserIdSchema,
     body: {
       content: {
         'application/json': {
-          schema: UpdateUserShema,
+          schema: LoginSchema,
         },
       },
     },
@@ -24,19 +22,19 @@ const route = createRoute({
     200: {
       content: {
         'application/json': {
-          schema: UserSchemaResponse,
+          schema: ResponseSchema,
         },
       },
-      description: 'Retrieve updated user',
+      description: 'Retrieve the access token.',
     },
   },
 });
 
 app.openapi(route, async (c) => {
   const db = c.get('db');
-  const { id }  = c.req.valid('param');
+  const jwtSecret = c.env.JWT_SECRET;
   const dto = c.req.valid('json');
-  const rta = await updateUser(db, +id, dto);
+  const rta = await doLogin(db, dto, jwtSecret);
   return c.json(rta);
 });
 

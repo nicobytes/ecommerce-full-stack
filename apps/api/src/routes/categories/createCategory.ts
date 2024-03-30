@@ -1,6 +1,7 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
 import { CreateCategorySchema, CategorySchema } from '@src/dtos/category.dto';
 import { createCategory } from '@src/services/category.service';
+import { jwtMiddleware } from '@src/middlewares/jwt.middleware';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
@@ -28,6 +29,7 @@ const route = createRoute({
       description: 'Retrieve new category',
     },
   },
+  public: true,
 });
 
 app.openapi(route, async (c) => {

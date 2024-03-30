@@ -26,6 +26,16 @@ export const getUserById = async (db: DB, id: number) => {
   return entity;
 }
 
+export const getUserByEmail = async (db: DB, email: string) => {
+  const entity = await db.query.users.findFirst({
+    where: eq(users.email, email)
+  });
+  if (!entity) {
+    throw new HTTPException(400, { message: `User with email ${email} not found.` })
+  }
+  return entity;
+}
+
 export const createUser = async (db: DB, dto: CreateUserDto) => {
   const hashPassword = await bcrypt.hash(dto.password, 10);
 

@@ -1,6 +1,7 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
 import { CategorySchema, CategoryIdSchema } from '@src/dtos/category.dto';
 import { deleteCategory } from '@src/services/category.service';
+import { jwtMiddleware } from '@src/middlewares/jwt.middleware';
 import { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
