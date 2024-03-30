@@ -20,7 +20,7 @@ export class AuthService {
   authState$ = this.authState.asObservable();
 
   login(email: string, password: string) {
-    const url = `${environment.API_URL}/v1/auth/login`;
+    const url = `${environment.API_URL}/api/v1/auth/login`;
     return this.http.post<LoginRta>(url, {email, password})
     .pipe(
       tap(response => this.tokenService.saveToken(response.access_token)),
