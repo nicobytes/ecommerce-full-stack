@@ -45,6 +45,7 @@ app.route('/api/v1/products', getProduct);
 
 app.route('/api/v1/users', getUsers);
 app.route('/api/v1/users', getUser);
+app.route('/api/v1/users', createUser);
 
 // Private paths
 
@@ -58,7 +59,7 @@ app.route('/api/v1/products', createProduct);
 app.route('/api/v1/products', updateProduct);
 app.route('/api/v1/products', deleteProduct);
 
-app.route('/api/v1/users', createUser);
+
 app.route('/api/v1/users', updateUser);
 app.route('/api/v1/users', deleteUser);
 
