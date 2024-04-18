@@ -15,6 +15,9 @@ import { Category } from '@models/category.model';
 import { CategoryService } from '@services/category.service';
 import { TableComponent } from '@modules/products/components/table/table.component';
 import { ListComponent } from '@modules/products/components/list/list.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -33,6 +36,12 @@ export default class ProductsComponent implements OnInit, OnChanges {
   counter = computed(() => this.products().length);
   showProgress = signal(false);
   @Input() categoryId?: string;
+
+  private breakpointObserver$ = inject(BreakpointObserver);
+  isMobile = toSignal(
+    this.breakpointObserver$.observe(Breakpoints.Handset)
+      .pipe(map((result) => result.matches),
+      ), { initialValue: true });
 
   constructor() {
     this.categorySelected.valueChanges.subscribe((value) => {

@@ -4,10 +4,10 @@
   </button>
   <span>Products @if (counter()) {
     <span>({{ counter() }})</span>
-  } </span>
+    } </span>
 </mat-toolbar>
 @if (showProgress()) {
-  <mat-progress-bar mode="query"></mat-progress-bar>
+<mat-progress-bar mode="query"></mat-progress-bar>
 }
 <mat-card>
   <mat-card-content>
@@ -16,10 +16,20 @@
       <mat-select [formControl]="categorySelected">
         <mat-option value="all">All</mat-option>
         @for (category of categories(); track category.id) {
-          <mat-option [value]="category.id">{{category.name}}</mat-option>
+        <mat-option [value]="category.id">{{category.name}}</mat-option>
         }
       </mat-select>
     </mat-form-field>
-    <app-table [products]="products()" />
+    @defer (when isMobile()) {
+      <app-list [products]="products()" />
+    } @loading {
+      <p>loading</p>
+    }
+
+    @defer (when !isMobile()) {
+      <app-table [products]="products()" />
+    } @loading {
+      <p>loading</p>
+    }
   </mat-card-content>
 </mat-card>

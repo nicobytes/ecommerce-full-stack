@@ -13,7 +13,7 @@ export class CategoryService {
   constructor() { }
 
   getAll() {
-    const url = `${environment.API_URL}/v1/categories`;
+    const url = `${environment.API_URL}/api/v1/categories`;
     return this.http.get<Category[]>(url);
   }
 }

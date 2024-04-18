@@ -14,19 +14,19 @@ export class ProductService {
   constructor() { }
 
   getAll(params?: Params) {
-    const url = `${environment.API_URL}/v1/products`;
+    const url = `${environment.API_URL}/api/v1/products`;
     return this.http.get<Product[]>(url, {
       params
     });
   }
 
   getOne(id: string | number) {
-    const url = `${environment.API_URL}/v1/products/${id}`;
+    const url = `${environment.API_URL}/api/v1/products/${id}`;
     return this.http.get<Product>(url);
   }
 
   updateOne(id: string | number, changes: Partial<Product>) {
-    const url = `${environment.API_URL}/v1/products/${id}`;
+    const url = `${environment.API_URL}/api/v1/products/${id}`;
     return this.http.put<Product>(url, changes);
   }
 }
