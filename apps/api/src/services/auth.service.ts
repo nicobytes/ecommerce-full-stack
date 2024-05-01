@@ -1,6 +1,6 @@
 import { HTTPException } from 'hono/http-exception';
-import { sign } from 'hono/jwt';
-import { getUserByEmail } from '@src/services/user.service';
+import { sign, verify } from 'hono/jwt';
+import { getUserByEmail, getUserById } from '@src/services/user.service';
 import { DB } from '@src/types';
 import bcrypt from 'bcryptjs';
 
@@ -29,4 +29,9 @@ export const doLogin = async (db: DB, data: { email: string, password: string },
   return {
     access_token: accessToken,
   };
+}
+
+
+export const getProfile = async(tokenToVerify: string, secretKey: string) => {
+  return
 }

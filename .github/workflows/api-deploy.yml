@@ -19,7 +19,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: ./apps/api
-          command: d1 migrations apply nicobytes_store
+          command: d1 migrations apply prod_nicobytes_store
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:

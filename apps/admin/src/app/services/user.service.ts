@@ -13,7 +13,7 @@ export class UserService {
   constructor() { }
 
   getAll() {
-    const url = `${environment.API_URL}/v1/users`;
+    const url = `${environment.API_URL}/api/v1/users`;
     return this.http.get<User[]>(url);
   }
 }

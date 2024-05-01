@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   getProfile() {
-    const url = `${environment.API_URL}/v1/auth/profile`;
+    const url = `${environment.API_URL}/api/v1/auth/profile`;
     return this.http.get<User>(url);
   }
 

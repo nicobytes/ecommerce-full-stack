@@ -2,20 +2,11 @@ name = "nicobytes-store-api"
 main = "src/index.ts"
 compatibility_date = "2023-12-01"
 
-# [vars]
-# MY_VAR = "my-variable"
-
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
+[placement]
+mode = "smart"
 
 [[d1_databases]]
 binding = "DB_STORE"
-database_name = "nicobytes_store"
-database_id = "ffe00f06-24a4-4b9a-9c80-2d0245ecc362"
-migrations_table = "d1_migrations"
-migrations_dir = "migrations"
+database_name = "prod_nicobytes_store"
+database_id = "0e2c1c39-db95-44de-8b24-41c82217b230"
+preview_database_id="e6d426ae-1403-43cf-a2e8-2c7a48fda75f"

@@ -23,8 +23,10 @@ import getUsers from '@src/routes/users/getUsers';
 import getUser from '@src/routes/users/getUser';
 import updateUser from '@src/routes/users/updateUser';
 import deleteUser from '@src/routes/users/deleteUser';
+import seed from '@src/routes/seed/seed';
 
 import login from '@src/routes/auth/login';
+import profile from '@src/routes/auth/profile';
 
 const app = new OpenAPIHono();
 app.use("*", cors());
@@ -46,10 +48,13 @@ app.route('/api/v1/products', getProduct);
 app.route('/api/v1/users', getUsers);
 app.route('/api/v1/users', getUser);
 app.route('/api/v1/users', createUser);
+app.route('/api/v1/seed', seed);
 
 // Private paths
 
 app.use('/api/v1/*', jwtMiddleware);
+
+app.route('/api/v1/auth/profile', profile);
 
 app.route('/api/v1/categories', createCategory);
 app.route('/api/v1/categories', updateCategory);
