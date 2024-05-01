@@ -24,8 +24,11 @@ export const generateAccessToken = async (userId: number, role: string, secret: 
 }
 
 export const doLogin = async (db: DB, data: { email: string, password: string }, secret: string) => {
+  console.log('doLogin', data);
   const user = await validateAuth(db, data);
+  console.log('user', user);
   const accessToken = await generateAccessToken(user.id, user.role, secret);
+  console.log('accessToken', accessToken);
   return {
     access_token: accessToken,
   };
