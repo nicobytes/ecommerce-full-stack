@@ -58,3 +58,17 @@ export const ProductListSchema = z.array(ProductSchema);
 
 export const UpdateProductShema = CreateProductSchema.partial();
 export type UpdateProductDto = z.infer<typeof UpdateProductShema>;
+
+export const QueryParamsSchema = z.object({
+  categoryId: z
+    .coerce.number()
+    .optional()
+    .openapi({
+      param: {
+        name: 'category',
+        in: 'query'
+      },
+      example: 1,
+    }),
+});
+export type QueryParamsDto = z.infer<typeof QueryParamsSchema>;

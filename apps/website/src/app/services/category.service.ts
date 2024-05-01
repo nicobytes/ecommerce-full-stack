@@ -12,7 +12,7 @@ export class CategoryService {
 
   getAll() {
     return this.http.get<Category[]>(
-      `https://api.escuelajs.co/api/v1/categories`,
+      `https://api.nicobytes.store/api/v1/categories`,
     );
   }
 }

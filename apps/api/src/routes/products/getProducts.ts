@@ -1,5 +1,5 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { ProductListSchema } from '@src/dtos/product.dto';
+import { ProductListSchema, QueryParamsSchema } from '@src/dtos/product.dto';
 import { getAllProducts } from '@src/services/products.service';
 import { App } from "@src/types";
 
@@ -9,6 +9,9 @@ const route = createRoute({
   tags: ['products'],
   method: 'get',
   path: '/',
+  request: {
+    query: QueryParamsSchema,
+  },
   responses: {
     200: {
       content: {
@@ -23,7 +26,8 @@ const route = createRoute({
 
 app.openapi(route, async (c) => {
   const db = c.get('db');
-  const results = await getAllProducts(db);
+  const query = c.req.valid('query');
+  const results = await getAllProducts(db, query);
   return c.json(results);
 });
 

@@ -1,15 +1,22 @@
 import { products } from '@src/db/schema';
 import { HTTPException } from 'hono/http-exception';
-import { CreateProductDto, UpdateProductDto } from '@src/dtos/product.dto';
+import { CreateProductDto, UpdateProductDto, QueryParamsDto } from '@src/dtos/product.dto';
 import { getCategoryById } from '@src/services/category.service';
-import { eq } from "drizzle-orm";
 import { DB } from '@src/types';
+import { and, eq, lt, or, SQL } from "drizzle-orm";
 
-export const getAllProducts = (db: DB) => {
+export const getAllProducts = (db: DB, query?: QueryParamsDto) => {
+  const where: SQL[] = [];
+
+  if (query && query.categoryId) {
+    where.push(eq(products.categoryId, query.categoryId));
+  }
+
   return db.query.products.findMany({
     with: {
       category: true,
-    }
+    },
+    where: and(...where),
   });
 }
 
