@@ -29,7 +29,7 @@ app.openapi(route, async (c) => {
   const authorization = c.req.header('Authorization');
   if (authorization) {
     const tokenToVerify = authorization.replace('Bearer ', '');
-    const decodedPayload = await verify(tokenToVerify, jwtSecret) as { sub: string, role: string };
+    const decodedPayload = await verify(tokenToVerify, jwtSecret, "HS256") as { sub: string, role: string };
     const user = await getUserById(db, +decodedPayload.sub);
     return c.json(user);
   } else {
