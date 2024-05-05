@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Category } from '@models/category.model';
+import { environment } from '@envs/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class CategoryService {
 
   getAll() {
     return this.http.get<Category[]>(
-      `https://api.nicobytes.store/api/v1/categories`,
+      `${environment.API_URL}/api/v1/categories`,
     );
   }
 }

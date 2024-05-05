@@ -3,7 +3,7 @@ import { HTTPException } from 'hono/http-exception';
 import { CreateProductDto, UpdateProductDto, QueryParamsDto } from '@src/dtos/product.dto';
 import { getCategoryById } from '@src/services/category.service';
 import { DB } from '@src/types';
-import { and, eq, lt, or, SQL } from "drizzle-orm";
+import { and, eq, SQL } from "drizzle-orm";
 
 export const getAllProducts = (db: DB, query?: QueryParamsDto) => {
   const where: SQL[] = [];

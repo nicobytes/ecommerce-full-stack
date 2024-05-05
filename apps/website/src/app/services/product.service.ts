@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Product } from '@models/product.model';
+import { environment } from '@envs/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class ProductService {
   constructor() {}
 
   getProducts(category_id?: string) {
-    const url = new URL(`https://api.nicobytes.store/api/v1/products`);
+    const url = new URL(`${environment.API_URL}/api/v1/products`);
     if (category_id) {
       url.searchParams.set('categoryId', category_id);
     }
@@ -20,7 +21,7 @@ export class ProductService {
 
   getOne(id: string) {
     return this.http.get<Product>(
-      `https://api.nicobytes.store/api/v1/products/${id}`,
+      `${environment.API_URL}/api/v1/products/${id}`,
     );
   }
 }

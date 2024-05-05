@@ -65,7 +65,7 @@ export const QueryParamsSchema = z.object({
     .optional()
     .openapi({
       param: {
-        name: 'category',
+        name: 'categoryId',
         in: 'query'
       },
       example: 1,
