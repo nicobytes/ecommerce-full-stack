@@ -1,4 +1,4 @@
-name: Admin App Deployment
+name: Website Deployment
 
 on:
   push:
@@ -29,4 +29,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: ./apps/website
-          command: pages deploy ./dist/store/browser --project-name=nicobytes-store-website
+          command: pages deploy ./dist/store/cloudflare --project-name=nicobytes-store-website
