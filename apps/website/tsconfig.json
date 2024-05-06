@@ -19,9 +19,13 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "ES2022",
       "dom"
+    ],
+    "types": [
+      "@cloudflare/workers-types/2023-07-01"
     ],
     "paths": {
       "@shared/*": ["src/app/domains/shared/*"],
