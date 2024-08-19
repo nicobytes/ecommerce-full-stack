@@ -23,6 +23,7 @@ import getUsers from '@src/routes/users/getUsers';
 import getUser from '@src/routes/users/getUser';
 import updateUser from '@src/routes/users/updateUser';
 import deleteUser from '@src/routes/users/deleteUser';
+import getLocations from '@src/routes/locations/getLocations';
 import seed from '@src/routes/seed/seed';
 
 import login from '@src/routes/auth/login';
@@ -50,6 +51,8 @@ app.route('/api/v1/users', getUser);
 app.route('/api/v1/users', createUser);
 app.route('/api/v1/seed', seed);
 
+app.route('/api/v1/locations', getLocations);
+
 // Private paths
 
 app.use('/api/v1/*', jwtMiddleware);
@@ -63,7 +66,6 @@ app.route('/api/v1/categories', deleteCategory);
 app.route('/api/v1/products', createProduct);
 app.route('/api/v1/products', updateProduct);
 app.route('/api/v1/products', deleteProduct);
-
 
 app.route('/api/v1/users', updateUser);
 app.route('/api/v1/users', deleteUser);
