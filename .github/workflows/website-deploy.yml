@@ -23,10 +23,18 @@ jobs:
       - name: Build
         working-directory: ./apps/website
         run: npm run build
-      - name: Deploy Page
+      - name: Deploy SSR
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: ./apps/website
           command: pages deploy ./dist/store/cloudflare --project-name=nicobytes-store-website
+
+      - name: Deploy SPA
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: ./apps/website
+          command: pages deploy ./dist/store/browser --project-name=nicobytes-store-website-spa
