@@ -61,7 +61,7 @@ export const QueryParamsSchema = z.object({
     .transform((v) => {
       return {
         latitude: Number.parseFloat(v.latitude),
-        longitude: Number.parseFloat(v.latitude),
+        longitude: Number.parseFloat(v.longitude),
       };
     }),
 });
