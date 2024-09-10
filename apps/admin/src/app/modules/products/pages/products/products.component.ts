@@ -25,10 +25,10 @@ import { map } from 'rxjs/operators';
   imports: [ReactiveFormsModule, MatToolbarModule, MatIconModule, MatProgressBarModule, MatCardModule, MatSelectModule, RouterLinkWithHref, TableComponent, MatButtonModule, ListComponent]
 })
 export default class ProductsComponent implements OnInit, OnChanges {
-  private productService = inject(ProductService);
-  private categoriesService = inject(CategoryService);
-  private uiService = inject(UIService);
-  private router = inject(Router);
+  readonly #productService = inject(ProductService);
+  #categoriesService = inject(CategoryService);
+  #uiService = inject(UIService);
+  #router = inject(Router);
   categorySelected = new FormControl();
   categories = signal<Category[]>([]);
   products = signal<Product[]>([]);
@@ -36,7 +36,7 @@ export default class ProductsComponent implements OnInit, OnChanges {
   showProgress = signal(false);
   @Input() categoryId?: string;
 
-  private breakpointObserver = inject(BreakpointObserver);
+  private readonly breakpointObserver = inject(BreakpointObserver);
   private isMobile$ = this.breakpointObserver
   .observe(Breakpoints.Handset)
   .pipe(
@@ -50,7 +50,7 @@ export default class ProductsComponent implements OnInit, OnChanges {
       if (value !== 'all') {
         queryParams.categoryId = value;
       }
-      this.router.navigate(['/admin/products'], { queryParams });
+      this.#router.navigate(['/admin/products'], { queryParams });
     });
   }
 
@@ -67,19 +67,19 @@ export default class ProductsComponent implements OnInit, OnChanges {
   }
 
   toggleDrawer() {
-    this.uiService.toggleDrawer();
+    this.#uiService.toggleDrawer();
   }
 
   getProducts(params: Params) {
     this.showProgress.set(true);
-    this.productService.getAll(params).subscribe((data) => {
+    this.#productService.getAll(params).subscribe((data) => {
       this.products.set(data);
       this.showProgress.set(false);
     });
   }
 
   getCategories() {
-    this.categoriesService.getAll().subscribe((data) => {
+    this.#categoriesService.getAll().subscribe((data) => {
       this.categories.set(data);
     });
   }

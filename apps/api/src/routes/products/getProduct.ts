@@ -1,32 +1,32 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { ProductIdSchema, ProductSchema } from '@src/dtos/product.dto';
-import { getProductById } from '@src/services/products.service';
-import { App } from "@src/types";
+import { ProductIdSchema, ProductSchema } from "@src/dtos/product.dto";
+import { getProductById } from "@src/services/products.service";
+import type { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['products'],
-  method: 'get',
-  path: '/{id}',
+  tags: ["products"],
+  method: "get",
+  path: "/{id}",
   request: {
     params: ProductIdSchema,
   },
   responses: {
     200: {
       content: {
-        'application/json': {
+        "application/json": {
           schema: ProductSchema,
         },
       },
-      description: 'Retrieve the product',
+      description: "Retrieve the product",
     },
   },
 });
 
 app.openapi(route, async (c) => {
-  const db = c.get('db');
-  const { id } = c.req.valid('param');
+  const db = c.get("db");
+  const { id } = c.req.valid("param");
   const result = await getProductById(db, +id);
   return c.json(result);
 });

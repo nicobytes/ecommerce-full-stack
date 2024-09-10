@@ -1,4 +1,4 @@
-import { z } from '@hono/zod-openapi';
+import { z } from "@hono/zod-openapi";
 
 export const CategoryIdSchema = z.object({
   id: z
@@ -6,25 +6,20 @@ export const CategoryIdSchema = z.object({
     .min(1)
     .openapi({
       param: {
-        name: 'id',
-        in: 'path',
+        name: "id",
+        in: "path",
       },
-      example: '1',
+      example: "1",
     }),
 });
 
 export const CreateCategorySchema = z.object({
-  name: z
-    .string()
-    .min(3)
-    .openapi({
-      example: 'Male',
-    }),
-  image: z
-    .string()
-    .openapi({
-      example: 'https://api.lorem.space/image/book?w=150&h=220',
-    }),
+  name: z.string().min(3).openapi({
+    example: "Male",
+  }),
+  image: z.string().openapi({
+    example: "https://api.lorem.space/image/book?w=150&h=220",
+  }),
 });
 export type CreateCategoryDto = z.infer<typeof CreateCategorySchema>;
 
@@ -37,12 +32,12 @@ export const CategorySchema = z
       example: 1,
     }),
     name: z.string().openapi({
-      example: 'John Doe',
+      example: "John Doe",
     }),
     image: z.string().openapi({
-      example: 'as',
+      example: "as",
     }),
   })
-  .openapi('Category');
+  .openapi("Category");
 
 export const CatergoriesSchema = z.array(CategorySchema);

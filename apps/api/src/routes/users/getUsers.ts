@@ -1,29 +1,29 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { UserListSchema } from '@src/dtos/user.dto';
-import { getAllUsers } from '@src/services/user.service';
-import { jwtMiddleware } from '@src/middlewares/jwt.middleware';
-import { App } from "@src/types";
+import { UserListSchema } from "@src/dtos/user.dto";
+import { jwtMiddleware } from "@src/middlewares/jwt.middleware";
+import { getAllUsers } from "@src/services/user.service";
+import type { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['users'],
-  method: 'get',
-  path: '/',
+  tags: ["users"],
+  method: "get",
+  path: "/",
   responses: {
     200: {
       content: {
-        'application/json': {
+        "application/json": {
           schema: UserListSchema,
         },
       },
-      description: 'Retrieve all users',
+      description: "Retrieve all users",
     },
   },
 });
 
 app.openapi(route, async (c) => {
-  const db = c.get('db');
+  const db = c.get("db");
   const results = await getAllUsers(db);
   return c.json(results);
 });

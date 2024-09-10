@@ -1,8 +1,8 @@
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 
-function generateLocation() {
+function generateLocation(origin: { latitude: number; longitude: number }) {
   const [latitude, longitude] = faker.location.nearbyGPSCoordinate({
-    origin: [4.60971, -74.08175],
+    origin: [origin.latitude, origin.longitude],
   });
 
   return {
@@ -11,11 +11,15 @@ function generateLocation() {
     description: faker.lorem.sentence(),
     latitude,
     longitude,
-  }
+  };
 }
 
-export const getAllLocations = () => {
-  return faker.helpers.multiple(generateLocation, {
-    count: 5,
+export const getAllLocations = (
+  origin: { latitude: number; longitude: number },
+  size = 15,
+) => {
+  const generatorFn = () => generateLocation(origin);
+  return faker.helpers.multiple(generatorFn, {
+    count: size,
   });
-}
+};

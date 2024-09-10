@@ -1,6 +1,6 @@
-import { createFactory } from 'hono/factory';
-import { jwt } from 'hono/jwt';
-import { App } from '@src/types';
+import type { App } from "@src/types";
+import { createFactory } from "hono/factory";
+import { jwt } from "hono/jwt";
 
 const factory = createFactory<App>();
 

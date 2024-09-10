@@ -1,28 +1,28 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
-import { CatergoriesSchema } from '@src/dtos/category.dto';
-import { getAllCategories } from '@src/services/category.service';
-import { App } from "@src/types";
+import { CatergoriesSchema } from "@src/dtos/category.dto";
+import { getAllCategories } from "@src/services/category.service";
+import type { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
 
 const route = createRoute({
-  tags: ['category'],
-  method: 'get',
-  path: '/',
+  tags: ["category"],
+  method: "get",
+  path: "/",
   responses: {
     200: {
       content: {
-        'application/json': {
+        "application/json": {
           schema: CatergoriesSchema,
         },
       },
-      description: 'Retrieve all categories',
+      description: "Retrieve all categories",
     },
   },
 });
 
 app.openapi(route, async (c) => {
-  const db = c.get('db');
+  const db = c.get("db");
   const results = await getAllCategories(db);
   return c.json(results);
 });
