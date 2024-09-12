@@ -1,6 +1,6 @@
 import { OpenAPIHono, createRoute } from "@hono/zod-openapi";
 import { LocationsSchema, QueryParamsSchema } from "@src/dtos/location.dto";
-import { getAllLocations } from "@src/services/location.service";
+import { generateLocations } from "@src/services/location.service";
 import type { App } from "@src/types";
 
 const app = new OpenAPIHono<App>();
@@ -25,8 +25,8 @@ const route = createRoute({
 });
 
 app.openapi(route, (c) => {
-  const { size, origin } = c.req.valid("query");
-  const results = getAllLocations(origin, size);
+  const { size, origin, radius } = c.req.valid("query");
+  const results = generateLocations(origin, size, radius);
   return c.json(results);
 });
 
