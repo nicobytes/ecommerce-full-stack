@@ -24,6 +24,17 @@ export const LocationSchema = z
 export const LocationsSchema = z.array(LocationSchema);
 
 export const QueryParamsSchema = z.object({
+  radius: z.coerce
+    .number()
+    .optional()
+    .openapi({
+      param: {
+        name: "radius",
+        in: "query",
+      },
+      example: 10,
+    })
+    .default(10),
   size: z.coerce
     .number()
     .optional()
