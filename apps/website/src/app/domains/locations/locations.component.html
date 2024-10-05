@@ -1,1 +1,23 @@
-<p>locations works!</p>
+<div class="flex space-x-4 h-[40rem]">
+  <div class="h-full">
+    <!--
+      <input type="range" name="zoom" min="0" max="20" class="w-full" [(ngModel)]="zoom" />
+    -->
+    <div class="divide-y h-full overflow-auto pr-4">
+      @for(location of $locations(); track location) {
+        <div class="max-w-md text-gray-900" aria-hidden="true">
+          <div class="flex flex-col pb-3">
+              <dt class="mb-1 text-gray-500 md:text-lg 0">{{ location.name }}</dt>
+              <dd class="text-lg font-semibold">{{ location.description }}</dd>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="w-4/5">
+    <div class="w-full h-full">
+    </div>
+
+  </div>
+</div>

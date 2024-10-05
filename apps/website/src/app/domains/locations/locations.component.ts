@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import type { Location } from '@models/location.model';
 
 @Component({
   selector: 'app-locations',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './locations.component.css'
 })
 export default class LocationsComponent {
+
+  $locations = signal<Location[]>([]);
 
 }
