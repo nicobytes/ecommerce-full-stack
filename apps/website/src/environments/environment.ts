@@ -1,3 +1,3 @@
 export const environment = {
-  API_URL: 'https://api.nicobytes.store'
+  API_URL: 'https://api.escuelajs.co'
 };
