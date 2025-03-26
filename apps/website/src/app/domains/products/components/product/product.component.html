@@ -1,23 +1,29 @@
+@let data = product();
+
 <div class="group rounded-lg border">
   <a
-    [routerLink]="['/product', product.id]"
-    class="w-full overflow-hidden rounded-t-lg bg-gray-200"
-  >
-    <img
-      [src]="product.images[0]"
-      [alt]="product.title"
-      class="h-full w-full object-cover object-center group-hover:opacity-75"
-    />
+    [routerLink]="['/product', data.slug]"
+    class="w-full overflow-hidden rounded-t-lg bg-gray-200">
+    <div class="relative h-80">
+      <img
+        [ngSrc]="data.images[0]"
+        [alt]="data.title"
+        [fill]="true"
+        loading="lazy"
+        class="h-full w-full object-cover object-center group-hover:opacity-75" />
+    </div>
   </a>
   <div class="flex flex-col space-y-2 p-4">
-    <h3 class="text-sm text-gray-700">{{ product.title }}</h3>
+    <h3 class="text-sm text-gray-700">{{ data.title }}</h3>
     <p class="text-lg font-medium text-gray-900">
-      {{ product.price | currency: "$" : "symbol" : "1.0" }}
+      {{ data.price | currency: '$' : 'symbol' : '1.0' }}
+    </p>
+    <p class="text-sm font-medium text-gray-500">
+      {{ data.creationAt | timeAgo }}
     </p>
     <button
       class="text-black bg-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 w-full"
-      (click)="addToCartHandler()"
-    >
+      (click)="addToCartHandler()">
       Add to cart
     </button>
   </div>

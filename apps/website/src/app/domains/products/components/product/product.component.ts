@@ -1,20 +1,21 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, input, output } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLinkWithHref } from '@angular/router';
-import { Product } from '@models/product.model';
+import { Product } from '@shared/models/product.model';
+
+import { TimeAgoPipe } from '@shared/pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-product',
-  standalone: true,
-  imports: [CommonModule, RouterLinkWithHref],
+  imports: [CommonModule, TimeAgoPipe, RouterLinkWithHref, NgOptimizedImage],
   templateUrl: './product.component.html',
 })
 export class ProductComponent {
-  @Input({ required: true }) product!: Product;
+  readonly product = input.required<Product>();
 
-  @Output() addToCart = new EventEmitter();
+  readonly addToCart = output<Product>();
 
   addToCartHandler() {
-    this.addToCart.emit(this.product);
+    this.addToCart.emit(this.product());
   }
 }

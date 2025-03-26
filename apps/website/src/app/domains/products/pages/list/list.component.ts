@@ -1,55 +1,48 @@
-import { Component, Input, OnChanges, OnInit, inject, signal } from '@angular/core';
-
+import { Component, inject, input, resource } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref } from '@angular/router';
 import { ProductComponent } from '@products/components/product/product.component';
+
+import { Product } from '@shared/models/product.model';
+import { CartService } from '@shared/services/cart.service';
+import { ProductService } from '@shared/services/product.service';
+import { CategoryService } from '@shared/services/category.service';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { HeaderComponent } from '@shared/components/header/header.component';
-import { Product } from '@models/product.model';
-import { CartService } from '@services/cart.service';
-import { ProductService } from '@services/product.service';
-import { CategoryService } from '@services/category.service';
-import { Category } from '@models/category.model';
 
 @Component({
   selector: 'app-list',
-  standalone: true,
-  imports: [ProductComponent, HeaderComponent, RouterLinkWithHref],
+  imports: [CommonModule, ProductComponent, RouterLinkWithHref, HeaderComponent],
   templateUrl: './list.component.html',
 })
-export default class ListComponent implements OnInit, OnChanges {
-  products = signal<Product[]>([]);
-  categories = signal<Category[]>([]);
+export default class ListComponent {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
   private categoryService = inject(CategoryService);
-  @Input() category_id?: string;
+  readonly slug = input<string>();
 
-  ngOnInit() {
-    this.getCategories();
-  }
+  categoriesResource = rxResource({
+    loader: () => this.categoryService.getAll(),
+  });
 
-  ngOnChanges() {
-    this.getProducts();
-  }
+  productsResource = rxResource({
+    request: () => ({ category_slug: this.slug() }),
+    loader: ({ request }) => this.productService.getProducts(request),
+  });
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
 
-  private getProducts() {
-    this.productService.getProducts(this.category_id).subscribe({
-      next: (products) => {
-        this.products.set(products);
-      },
-      error: () => {},
-    });
+  resetCategories() {
+    this.categoriesResource.set([]);
   }
 
-  private getCategories() {
-    this.categoryService.getAll().subscribe({
-      next: (data) => {
-        this.categories.set(data);
-      },
-      error: () => {},
-    });
+  reloadCategories() {
+    this.categoriesResource.reload();
+  }
+
+  reloadProducts() {
+    this.productsResource.reload();
   }
 }

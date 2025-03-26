@@ -1,20 +1,18 @@
-<div class="flex space-x-4 mt-5">
-  <div class="w-56">
-    <ul>
+<div class="flex mt-5 flex-col md:flex-row md:space-x-4">
+  <div class="w-full mb-4 md:w-56">
+    <ul class="text-center md:text-left">
       <li>
-        <a routerLink="/">All Products</a>
+        <a routerLink="/">All</a>
       </li>
-      @for (category of categories(); track category) {
+      @for (category of categoriesResource.value(); track category) {
         <li>
-          <a routerLink="/" [queryParams]="{ category_id: category.id }">{{
-            category.name
-          }}</a>
+          <a routerLink="/category/{{ category.slug }}">{{ category.name }}</a>
         </li>
       }
     </ul>
   </div>
-  <div class="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-    @for (product of products(); track product) {
+  <div class="grid grid-cols-2 gap-8 w-full md:grid-cols-4">
+    @for (product of productsResource.value(); track product) {
       <app-product [product]="product" (addToCart)="addToCart($event)" />
     }
   </div>

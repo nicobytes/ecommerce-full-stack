@@ -27,11 +27,11 @@
       "@cloudflare/workers-types/2023-07-01"
     ],
     "paths": {
-      "@shared/*": ["src/app/domains/shared/*"],
-      "@services/*": ["src/app/services/*"],
-      "@models/*": ["src/app/models/*"],
-      "@products/*": ["src/app/domains/products/*"],
-      "@envs/*": ["src/environments/*"],
+      "@shared/*": ["./src/app/domains/shared/*"],
+      "@models/*": ["src/app/domains/shared/models/*"],
+      "@products/*": ["./src/app/domains/products/*"],
+      "@info/*": ["./src/app/domains/info/*"],
+      "@env/*": ["./src/environments/*"]
     }
   },
   "angularCompilerOptions": {

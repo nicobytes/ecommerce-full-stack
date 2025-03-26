@@ -8,4 +8,5 @@ export interface Product {
   images: string[];
   creationAt: string;
   category: Category;
+  slug: string;
 }
