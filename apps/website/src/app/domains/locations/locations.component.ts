@@ -10,7 +10,7 @@ interface Location {
 }
 
 @Component({
-  selector: 'locations',
+  selector: 'app-locations',
   imports: [],
   templateUrl: './locations.component.html',
 })
@@ -20,13 +20,14 @@ export default class LocationsComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<Location[]>('https://api.escuelajs.co/api/v1/locations')
+    this.http
+      .get<Location[]>('https://api.escuelajs.co/api/v1/locations')
       .subscribe(data => {
         this.locations = data;
       });
   }
 
   get name() {
-    return 'Locations';
+    return this.locations.map(location => location.name).join(', ');
   }
 }
