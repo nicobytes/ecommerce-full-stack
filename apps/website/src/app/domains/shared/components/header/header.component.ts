@@ -5,11 +5,7 @@ import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    CommonModule,
-    RouterLinkWithHref,
-    RouterLinkActive,
-  ],
+  imports: [CommonModule, RouterLinkWithHref, RouterLinkActive],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {

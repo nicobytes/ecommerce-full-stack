@@ -7,13 +7,14 @@ import { environment } from '@env/environment';
   providedIn: 'root',
 })
 export class ProductService {
-   #http = inject(HttpClient);
+  #http = inject(HttpClient);
 
   getProducts(params: { category_id?: string; category_slug?: string }) {
     const url = new URL(`${environment.apiUrl}/api/v1/products`);
     if (params.category_id) {
       url.searchParams.set('categoryId', params.category_id);
     }
+
     if (params.category_slug) {
       url.searchParams.set('categorySlug', params.category_slug);
     }

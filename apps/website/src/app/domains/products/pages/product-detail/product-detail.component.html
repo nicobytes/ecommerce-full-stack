@@ -12,16 +12,10 @@
             class="w-full object-cover object-center"
             [ngSrc]="cover" />
         </div>
-      </div>
-      <div class="flex items-center justify-center mt-1">
+      </div><div class="flex items-center justify-center mt-1">
         <div class="grid grid-cols-3 gap-1">
           @for (img of data.images; track img) {
-            <img
-              width="80"
-              height="80"
-              alt="ecommerce"
-              class="object-cover object-center rounded border-2 border-gray-200"
-              [ngSrc]="img"
+            <img width="80" height="80" tabindex="0" role="button" (keydown.enter)="changeCover(img)"  alt="ecommerce"  class="object-cover object-center rounded border-2 border-gray-200"   [ngSrc]="img"
               (click)="changeCover(img)"
               [class.border-red-400]="img === cover" />
           }
@@ -35,9 +29,7 @@
       <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
         {{ data.title }}
       </h1>
-      <p class="leading-relaxed">
-        {{ data.description }}
-      </p>
+      <p class="leading-relaxed">{{ data.description }}</p>
       <p class="title-font font-medium text-2xl text-gray-900 mt-5">
         {{ data.price | currency: '$' : 'symbol' : '1.0' }}
       </p>
