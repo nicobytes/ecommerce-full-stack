@@ -1,1 +1,9 @@
-<p>locations works!</p>
+<ul>
+  @for (location of locations; track location.id) {
+    <li>
+      <a>
+        {{ location.name }}
+      </a>
+    </li>
+  }
+</ul>
