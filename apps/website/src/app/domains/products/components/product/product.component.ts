@@ -15,6 +15,10 @@ export class ProductComponent {
 
   readonly addToCart = output<Product>();
 
+  ngOnInit() {
+
+  }
+
   addToCartHandler() {
     this.addToCart.emit(this.product());
   }
