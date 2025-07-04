@@ -28,6 +28,6 @@ export default class LocationsComponent implements OnInit {
   }
 
   get name() {
-    return this.locations.map(location => location.name).join(', ');
+    return 'name';
   }
 }
