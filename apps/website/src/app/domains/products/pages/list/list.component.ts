@@ -21,12 +21,12 @@ export default class ListComponent {
   readonly slug = input<string>();
 
   categoriesResource = rxResource({
-    loader: () => this.categoryService.getAll(),
+    stream: () => this.categoryService.getAll(),
   });
 
   productsResource = rxResource({
-    request: () => ({ category_slug: this.slug() }),
-    loader: ({ request }) => this.productService.getProducts(request),
+    params: () => ({ category_slug: this.slug() }),
+    stream: ({ params }) => this.productService.getProducts(params),
   });
 
   addToCart(product: Product) {

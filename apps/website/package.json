@@ -1,61 +1,61 @@
 {
-  "name": "store",
+  "name": "website",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "npm run build && wrangler pages dev dist/store/cloudflare --compatibility-date=2024-05-02 --experimental-local",
-    "build": "ng build && npm run process",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:store": "node dist/store/server/server.mjs",
-    "process": "node ./tools/copy-files.mjs && node ./tools/alter-polyfills.mjs",
-    "lint": "ng lint",
-    "lint:fix": "ng lint --fix",
-    "format": "prettier --write ."
+    "serve:ssr:website": "node dist/website/server/server.mjs",
+    "lint": "ng lint"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "19.2.3",
-    "@angular/common": "19.2.3",
-    "@angular/compiler": "19.2.3",
-    "@angular/core": "19.2.3",
-    "@angular/forms": "19.2.3",
-    "@angular/platform-browser": "19.2.3",
-    "@angular/platform-browser-dynamic": "19.2.3",
-    "@angular/platform-server": "19.2.3",
-    "@angular/router": "19.2.3",
-    "@angular/ssr": "^19.2.5",
-    "date-fns": "2.30.0",
-    "rxjs": "7.8.0",
-    "tslib": "2.3.0",
-    "wavesurfer.js": "7.3.2",
-    "zone.js": "0.15.0"
+    "@angular/common": "^20.2.0",
+    "@angular/compiler": "^20.2.0",
+    "@angular/core": "^20.2.0",
+    "@angular/forms": "^20.2.0",
+    "@angular/platform-browser": "^20.2.0",
+    "@angular/platform-server": "^20.2.0",
+    "@angular/router": "^20.2.0",
+    "@angular/ssr": "^20.2.2",
+    "@tailwindcss/postcss": "^4.1.13",
+    "date-fns": "^4.1.0",
+    "express": "^5.1.0",
+    "postcss": "^8.5.6",
+    "rxjs": "~7.8.0",
+    "tailwindcss": "^4.1.13",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "19.2.5",
-    "@angular/cli": "19.2.5",
-    "@angular/compiler-cli": "19.2.3",
-    "@cloudflare/workers-types": "^4.20240502.0",
-    "@types/jasmine": "4.3.0",
-    "@types/node": "^18.18.0",
-    "angular-eslint": "19.3.0",
-    "autoprefixer": "10.4.16",
-    "eslint": "^9.23.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-prettier": "^5.2.5",
-    "jasmine-core": "4.6.0",
-    "karma": "6.4.0",
-    "karma-chrome-launcher": "3.2.0",
-    "karma-coverage": "2.2.0",
-    "karma-jasmine": "5.1.0",
-    "karma-jasmine-html-reporter": "2.1.0",
-    "postcss": "8.4.30",
-    "prettier": "^3.5.3",
-    "prettier-eslint": "^16.3.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.5.4",
-    "typescript-eslint": "8.27.0",
-    "wrangler": "4.5.0"
+    "@angular/build": "^20.2.2",
+    "@angular/cli": "^20.2.2",
+    "@angular/compiler-cli": "^20.2.0",
+    "@types/express": "^5.0.1",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.17.19",
+    "angular-eslint": "20.2.0",
+    "eslint": "^9.33.0",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.40.0"
   }
 }
