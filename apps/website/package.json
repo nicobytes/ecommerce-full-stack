@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "wrangler:dev": "ng build && wrangler dev",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -47,6 +48,8 @@
     "prettier-eslint": "^16.3.0",
     "tailwindcss": "4.2.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.33.1"
+    "typescript-eslint": "^8.33.1",
+    "wrangler": "^4.67.0",
+    "xhr2": "^0.2.1"
   }
 }

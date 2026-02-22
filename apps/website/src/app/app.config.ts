@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   provideZonelessChangeDetection,
+  provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import {
   PreloadAllModules,
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
       withPreloading(PreloadAllModules)
     ),
     provideHttpClient(withFetch()),
+    provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay(), withIncrementalHydration()),
     provideZonelessChangeDetection()
   ],
