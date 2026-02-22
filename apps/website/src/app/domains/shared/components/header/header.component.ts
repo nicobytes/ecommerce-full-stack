@@ -4,7 +4,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { CartService } from '../../services/cart.service';
 import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
@@ -12,11 +12,10 @@ import { SearchComponent } from '../search/search.component';
 @Component({
   selector: 'app-header',
   imports: [
-    CommonModule,
     RouterLinkWithHref,
     RouterLinkActive,
-    SearchComponent,
-  ],
+    SearchComponent
+],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

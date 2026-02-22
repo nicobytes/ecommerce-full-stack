@@ -5,7 +5,7 @@ import {
   input,
   resource,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterLinkWithHref } from '@angular/router';
 import { ProductComponent } from '@products/components/product/product.component';
 
@@ -17,7 +17,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list',
-  imports: [CommonModule, ProductComponent, RouterLinkWithHref],
+  imports: [ProductComponent, RouterLinkWithHref],
   templateUrl: './list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
