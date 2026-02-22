@@ -19,10 +19,10 @@ export class RelatedComponent {
   $slug = input.required<string>({ alias: 'slug' });
 
   relatedProducts = rxResource({
-    request: () => ({
+    params: () => ({
       slug: this.$slug(),
     }),
-    loader: ({ request }) =>
-      this.productService.getRelatedProducts(request.slug),
+    stream: ({ params }) =>
+      this.productService.getRelatedProducts(params.slug),
   });
 }

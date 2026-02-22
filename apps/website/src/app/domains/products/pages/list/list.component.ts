@@ -32,8 +32,8 @@ export default class ListComponent {
   });
 
   productsResource = rxResource({
-    request: () => ({ category_slug: this.slug() }),
-    loader: ({ request }) => this.productService.getProducts(request),
+    params: () => ({ category_slug: this.slug() }),
+    stream: ({ params }) => this.productService.getProducts(params),
   });
 
   addToCart(product: Product) {

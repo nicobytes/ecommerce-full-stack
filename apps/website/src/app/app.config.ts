@@ -1,6 +1,6 @@
 import {
   ApplicationConfig,
-  provideExperimentalZonelessChangeDetection,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import {
   PreloadAllModules,
@@ -26,6 +26,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay(), withIncrementalHydration()),
-    provideExperimentalZonelessChangeDetection(),
+    provideZonelessChangeDetection()
   ],
 };

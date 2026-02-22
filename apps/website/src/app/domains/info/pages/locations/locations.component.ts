@@ -27,14 +27,14 @@ export default class LocationsComponent {
   }
 
   locationRs = resource({
-    request: () => ({
+    params: () => ({
       origin: this.$origin(),
     }),
-    loader: async ({ request }) => {
+    loader: async ({ params }) => {
       const url = new URL(`${environment.apiUrl}/api/v1/locations`);
 
-      if (request.origin) {
-        url.searchParams.set('origin', request.origin);
+      if (params.origin) {
+        url.searchParams.set('origin', params.origin);
       }
 
       const response = await fetch(url.toString());

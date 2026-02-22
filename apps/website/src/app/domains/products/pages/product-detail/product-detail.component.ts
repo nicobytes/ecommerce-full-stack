@@ -23,11 +23,11 @@ export default class ProductDetailComponent {
   readonly slug = input.required<string>();
 
   productRs = rxResource({
-    request: () => ({
+    params: () => ({
       slug: this.slug(),
     }),
-    loader: ({ request }) => {
-      return this.productService.getOneBySlug(request.slug);
+    stream: ({ params }) => {
+      return this.productService.getOneBySlug(params.slug);
     },
   });
 
