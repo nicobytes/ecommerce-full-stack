@@ -1,4 +1,10 @@
-import { Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  resource,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref } from '@angular/router';
 import { ProductComponent } from '@products/components/product/product.component';
@@ -13,6 +19,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
   selector: 'app-list',
   imports: [CommonModule, ProductComponent, RouterLinkWithHref],
   templateUrl: './list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ListComponent {
   private cartService = inject(CartService);
@@ -20,13 +27,13 @@ export default class ListComponent {
   private categoryService = inject(CategoryService);
   readonly slug = input<string>();
 
-  categoriesResource = rxResource({
-    stream: () => this.categoryService.getAll(),
+  categoriesResource = resource({
+    loader: () => this.categoryService.getAllPromise(),
   });
 
   productsResource = rxResource({
-    params: () => ({ category_slug: this.slug() }),
-    stream: ({ params }) => this.productService.getProducts(params),
+    request: () => ({ category_slug: this.slug() }),
+    loader: ({ request }) => this.productService.getProducts(request),
   });
 
   addToCart(product: Product) {

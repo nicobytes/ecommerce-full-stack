@@ -1,26 +1,38 @@
 import {
   Component,
   inject,
-  signal,
-  OnInit,
   input,
   linkedSignal,
+  effect,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProductService } from '@shared/services/product.service';
-import { Product } from '@shared/models/product.model';
 import { CartService } from '@shared/services/cart.service';
-
+import { rxResource } from '@angular/core/rxjs-interop';
+import { environment } from '@env/environment';
+import { MetaTagsService } from '@shared/services/meta-tags.service';
+import { RelatedComponent } from '@products/components/related/related.component';
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage, RelatedComponent],
   templateUrl: './product-detail.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ProductDetailComponent implements OnInit {
-  readonly slug = input<string>();
-  $product = signal<Product | null>(null);
+export default class ProductDetailComponent {
+  readonly slug = input.required<string>();
+
+  productRs = rxResource({
+    request: () => ({
+      slug: this.slug(),
+    }),
+    loader: ({ request }) => {
+      return this.productService.getOneBySlug(request.slug);
+    },
+  });
+
   $cover = linkedSignal({
-    source: this.$product,
+    source: this.productRs.value,
     computation: (product, previousValue) => {
       if (product && product.images.length > 0) {
         return product.images[0];
@@ -30,16 +42,20 @@ export default class ProductDetailComponent implements OnInit {
   });
   private productService = inject(ProductService);
   private cartService = inject(CartService);
+  private metaTagsService = inject(MetaTagsService);
 
-  ngOnInit() {
-    const slug = this.slug();
-    if (slug) {
-      this.productService.getOneBySlug(slug).subscribe({
-        next: product => {
-          this.$product.set(product);
-        },
-      });
-    }
+  constructor() {
+    effect(() => {
+      const product = this.productRs.value();
+      if (product) {
+        this.metaTagsService.updateMetaTags({
+          title: product.title,
+          description: product.description,
+          image: product.images[0],
+          url: `${environment.domain}/product/${product.slug}`,
+        });
+      }
+    });
   }
 
   changeCover(newImg: string) {
@@ -47,7 +63,7 @@ export default class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
-    const product = this.$product();
+    const product = this.productRs.value();
     if (product) {
       this.cartService.addToCart(product);
     }

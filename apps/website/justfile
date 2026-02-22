@@ -1,0 +1,3 @@
+dev:
+    pnpm install
+    pnpm start

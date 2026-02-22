@@ -1,12 +1,24 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService } from '@shared/services/cart.service';
+import { CartService } from '../../services/cart.service';
 import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterLinkWithHref, RouterLinkActive],
+  imports: [
+    CommonModule,
+    RouterLinkWithHref,
+    RouterLinkActive,
+    SearchComponent,
+  ],
   templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   hideSideMenu = signal(true);

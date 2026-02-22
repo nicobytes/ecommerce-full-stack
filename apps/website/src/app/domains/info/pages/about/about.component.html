@@ -1,0 +1,34 @@
+<div>
+  <h1 class="text-lg font-bold">About</h1>
+  <p class="text-base">
+    Lorem ipsum dolor
+    <span appHighlight>sit amet consectetur adipisicing elit.</span> Facere vel
+    delectus numquam aliquid itaque nulla. Alias fugiat est, voluptatem commodi
+    soluta, ad et eveniet odit rem perferendis porro, quidem iste.
+  </p>
+  <p class="text-base">Numero de clientes</p>
+  <p>
+    <input [(ngModel)]="duration" type="range" min="0" max="1000" />
+  </p>
+  <p>Parent message: {{ message() }}</p>
+  @if (duration() > 0) {
+    <app-counter [duration]="duration()" [(message)]="message" />
+  }
+  <div>
+    <app-wave-audio audioUrl="assets/audio.mp3" />
+  </div>
+
+  <p>with init: {{ $withInit() }}</p>
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded-md"
+    (click)="emitWithInit()">
+    emit with init
+  </button>
+
+  <p>without init: {{ $withoutInit() }}</p>
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded-md"
+    (click)="emitWithoutInit()">
+    emit without init
+  </button>
+</div>
