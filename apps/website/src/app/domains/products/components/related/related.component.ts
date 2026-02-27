@@ -22,7 +22,6 @@ export class RelatedComponent {
     params: () => ({
       slug: this.$slug(),
     }),
-    stream: ({ params }) =>
-      this.productService.getRelatedProducts(params.slug),
+    stream: ({ params }) => this.productService.getRelatedProducts(params.slug),
   });
 }

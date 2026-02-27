@@ -12,7 +12,6 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
-
 @Component({
   selector: 'app-counter',
   imports: [],

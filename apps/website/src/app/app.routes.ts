@@ -30,9 +30,7 @@ export const routes: Routes = [
       {
         path: 'product/:slug',
         loadComponent: () =>
-          import(
-            './domains/products/pages/product-detail/product-detail.component'
-          ),
+          import('./domains/products/pages/product-detail/product-detail.component'),
       },
     ],
   },

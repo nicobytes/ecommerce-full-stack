@@ -28,6 +28,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay(), withIncrementalHydration()),
-    provideZonelessChangeDetection()
+    provideZonelessChangeDetection(),
   ],
 };

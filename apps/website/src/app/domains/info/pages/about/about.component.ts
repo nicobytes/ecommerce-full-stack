@@ -14,8 +14,8 @@ import { BehaviorSubject, delay, Subject } from 'rxjs';
     CounterComponent,
     WaveAudioComponent,
     HighlightDirective,
-    FormsModule
-],
+    FormsModule,
+  ],
   templateUrl: './about.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
