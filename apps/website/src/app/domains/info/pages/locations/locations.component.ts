@@ -5,7 +5,7 @@ import {
   resource,
   signal,
 } from '@angular/core';
-import { environment } from '@env/environment';
+import { environment } from '@store/website/environments/environment';
 
 @Component({
   selector: 'app-locations',
@@ -18,7 +18,7 @@ export default class LocationsComponent {
 
   constructor() {
     afterNextRender(() => {
-      navigator.geolocation.getCurrentPosition(position => {
+      navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
         const origin = `${position.coords.latitude},${position.coords.longitude}`;
         this.$origin.set(origin);

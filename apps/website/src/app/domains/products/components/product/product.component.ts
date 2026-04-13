@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLinkWithHref } from '@angular/router';
-import { Product } from '@shared/models/product.model';
+import { Product } from '@store/types';
 
-import { TimeAgoPipe } from '@shared/pipes/time-ago.pipe';
+import { TimeAgoPipe } from '../../../shared/pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-product',

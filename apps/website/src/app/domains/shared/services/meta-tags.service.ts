@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
-import { environment } from '@env/environment';
+import { environment } from '@store/website/environments/environment';
 
 export interface PageMetaData {
   title: string;
@@ -31,7 +31,7 @@ export class MetaTagsService {
 
     const tags = this.generateMetaDefinitions(metaDataToUpdate);
 
-    tags.forEach(tag => this.metaService.updateTag(tag));
+    tags.forEach((tag) => this.metaService.updateTag(tag));
     this.titleService.setTitle(metaDataToUpdate.title);
   }
 
