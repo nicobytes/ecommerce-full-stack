@@ -2,61 +2,73 @@
 @let cover = $cover();
 
 @if (data && cover) {
-  <div class="w-full flex flex-col md:flex-row md:space-x-10">
-    <div class="flex flex-col w-full md:w-1/3">
-      <div class="w-full rounded border border-gray-200">
-        <div class="relative h-96">
+  <section class="pt-8 pb-16 animate-fade-in">
+    <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+
+      <div class="w-full lg:w-1/2 flex flex-col gap-4">
+        <div class="relative overflow-hidden rounded-2xl bg-sand/30 aspect-square">
           <img
-            alt="ecommerce"
+            [alt]="data.title"
             [fill]="true"
-            class="w-full object-cover object-center"
+            class="w-full h-full object-cover object-center transition-transform duration-500"
             [ngSrc]="cover" />
         </div>
-      </div>
-      <div class="flex items-center justify-center mt-1">
-        <div class="grid grid-cols-3 gap-1">
+        <div class="flex gap-3">
           @for (img of data.images; track img) {
-            <img
-              width="80"
-              height="80"
-              tabindex="0"
-              role="button"
-              (keydown.enter)="changeCover(img)"
-              alt="ecommerce"
-              class="object-cover object-center rounded border-2 border-gray-200"
-              [ngSrc]="img"
+            <button
               (click)="changeCover(img)"
-              [class.border-red-400]="img === cover" />
+              (keydown.enter)="changeCover(img)"
+              class="relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 hover:opacity-80"
+              [class]="img === cover ? 'border-sienna shadow-md' : 'border-transparent opacity-60 hover:opacity-100'"
+            >
+              <img
+                width="80"
+                height="80"
+                [alt]="data.title"
+                class="w-full h-full object-cover object-center"
+                [ngSrc]="img" />
+            </button>
           }
         </div>
       </div>
-    </div>
-    <div class="mt-5 w-full">
-      <h2 class="text-sm title-font text-gray-500 tracking-widest">
-        {{ data.category.name | uppercase }}
-      </h2>
-      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-        {{ data.title }}
-      </h1>
-      <p class="leading-relaxed">
-        {{ data.description }}
-      </p>
-      <p class="title-font font-medium text-2xl text-gray-900 mt-5">
-        {{ data.price | currency: '$' : 'symbol' : '1.0' }}
-      </p>
-      <button
-        (click)="addToCart()"
-        class="flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
-        Add To Cart
-      </button>
-    </div>
-  </div>
 
-  <div class="mt-80"></div>
+      <div class="w-full lg:w-1/2 flex flex-col justify-center">
+        <div class="lg:max-w-lg">
+          <p class="text-[10px] uppercase tracking-[0.2em] text-sienna font-medium mb-3">
+            {{ data.category.name }}
+          </p>
+          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight mb-6">
+            {{ data.title }}
+          </h1>
+          <p class="text-warm-gray font-light leading-relaxed mb-8 text-base">
+            {{ data.description }}
+          </p>
 
-  @defer (on viewport) {
-    <app-related [slug]="data.slug" />
-  } @placeholder {
-    <p>Loading...</p>
-  }
+          <div class="flex items-baseline gap-3 mb-8">
+            <span class="font-display text-3xl text-charcoal">
+              {{ data.price | currency: '$' : 'symbol' : '1.0' }}
+            </span>
+          </div>
+
+          <button
+            (click)="addToCart()"
+            class="w-full lg:w-auto lg:min-w-[280px] bg-charcoal text-cream py-4 px-10 rounded-xl text-sm font-medium uppercase tracking-[0.15em] hover:bg-sienna transition-colors duration-300">
+            Add to Bag
+          </button>
+        </div>
+      </div>
+    </div>
+
+    @if (data.slug) {
+      <div class="mt-24">
+        @defer (on viewport) {
+          <app-related [slug]="data.slug" />
+        } @placeholder {
+          <div class="flex justify-center py-12">
+            <div class="w-6 h-6 border-2 border-charcoal/20 border-t-sienna rounded-full animate-spin"></div>
+          </div>
+        }
+      </div>
+    }
+  </section>
 }

@@ -1,19 +1,36 @@
-<div class="flex mt-5 flex-col md:flex-row md:space-x-4">
-  <div class="w-full mb-4 md:w-56">
-    <ul class="text-center md:text-left">
-      <li>
-        <a routerLink="/">All</a>
-      </li>
-      @for (category of categoriesResource.value(); track category) {
+<section class="pt-6 pb-16 animate-fade-in">
+  <div class="flex flex-col md:flex-row gap-8 lg:gap-14">
+    <aside class="w-full md:w-48 lg:w-56 shrink-0">
+      <h2 class="text-[10px] uppercase tracking-[0.2em] text-warm-gray/60 font-medium mb-4">Categories</h2>
+      <ul class="flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
         <li>
-          <a routerLink="/category/{{ category.slug }}">{{ category.name }}</a>
+          <a
+            routerLink="/"
+            class="block px-4 py-2.5 text-sm rounded-lg transition-colors whitespace-nowrap"
+            routerLinkActive="bg-charcoal text-cream font-medium"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >All Products</a>
         </li>
-      }
-    </ul>
+        @for (category of categoriesResource.value(); track category) {
+          <li>
+            <a
+              routerLink="/category/{{ category.slug }}"
+              class="block px-4 py-2.5 text-sm text-charcoal/70 hover:text-charcoal hover:bg-charcoal/5 rounded-lg transition-colors whitespace-nowrap"
+              routerLinkActive="!bg-charcoal !text-cream font-medium"
+            >{{ category.name }}</a>
+          </li>
+        }
+      </ul>
+    </aside>
+
+    <div class="flex-1">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+        @for (product of productsResource.value(); track product; let i = $index) {
+          <div class="animate-fade-in-up" [style.animation-delay]="(i * 0.06) + 's'">
+            <app-product [product]="product" (addToCart)="addToCart($event)" />
+          </div>
+        }
+      </div>
+    </div>
   </div>
-  <div class="grid grid-cols-2 gap-8 w-full md:grid-cols-4">
-    @for (product of productsResource.value(); track product) {
-      <app-product [product]="product" (addToCart)="addToCart($event)" />
-    }
-  </div>
-</div>
+</section>

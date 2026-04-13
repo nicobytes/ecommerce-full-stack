@@ -6,7 +6,7 @@ import {
   resource,
 } from '@angular/core';
 
-import { RouterLinkWithHref } from '@angular/router';
+import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 import { ProductComponent } from '../../components/product/product.component';
 
 import { Product } from '@store/types';
@@ -16,7 +16,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list',
-  imports: [ProductComponent, RouterLinkWithHref],
+  imports: [ProductComponent, RouterLinkWithHref, RouterLinkActive],
   templateUrl: './list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -31,7 +31,10 @@ export default class ListComponent {
   });
 
   productsResource = rxResource({
-    params: () => ({ categorySlug: this.slug() }),
+    params: () => {
+      const slug = this.slug();
+      return slug ? { categorySlug: slug } : {};
+    },
     stream: ({ params }) => this.productService.getAll(params),
   });
 
