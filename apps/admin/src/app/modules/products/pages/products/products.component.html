@@ -1,13 +1,21 @@
 <mat-toolbar color="primary">
-  <button (click)="toggleDrawer()" type="button" aria-label="Toggle sidenav" mat-icon-button>
+  <button
+    (click)="toggleDrawer()"
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+  >
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span>Products @if (counter()) {
-    <span>({{ counter() }})</span>
-  } </span>
+  <span
+    >Products
+    @if (counter()) {
+      <span>({{ counter() }})</span>
+    }
+  </span>
 </mat-toolbar>
 @if (showProgress()) {
-  <mat-progress-bar mode="query"></mat-progress-bar>
+  <mat-progress-bar mode="query" />
 }
 <mat-card>
   <mat-card-content>
@@ -16,11 +24,11 @@
       <mat-select [formControl]="categorySelected">
         <mat-option value="all">All</mat-option>
         @for (category of categories(); track category.id) {
-          <mat-option [value]="category.id">{{category.name}}</mat-option>
+          <mat-option [value]="category.id">{{ category.name }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
-    @if(isMobile()) {
+    @if (isMobile()) {
       @defer {
         <app-list [products]="products()" />
       }

@@ -1,13 +1,21 @@
 <mat-toolbar color="primary">
-  <button (click)="goToBack()" type="button" aria-label="Toggle sidenav" mat-icon-button>
+  <button
+    (click)="goToBack()"
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+  >
     <mat-icon aria-label="back">arrow_back</mat-icon>
   </button>
-  <span>Product: @if (product(); as product) {
-    <span>{{ product.title }}</span>
-  }</span>
+  <span
+    >Product:
+    @if (product(); as product) {
+      <span>{{ product.title }}</span>
+    }
+  </span>
 </mat-toolbar>
 @if (showProgress()) {
-  <mat-progress-bar mode="query"></mat-progress-bar>
+  <mat-progress-bar mode="query" />
 }
 @if (product(); as product) {
   <mat-card>
@@ -15,22 +23,18 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-form-field class="w-full">
           <mat-label>Title</mat-label>
-          <input matInput formControlName="title">
+          <input matInput formControlName="title" />
         </mat-form-field>
-        <mat-form-field  class="w-full">
+        <mat-form-field class="w-full">
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="description"></textarea>
         </mat-form-field>
         <mat-form-field class="w-full">
           <mat-label>Price</mat-label>
-          <input matInput formControlName="price">
+          <input matInput formControlName="price" />
         </mat-form-field>
-        <button type="submit" color="primary" mat-raised-button >
-          Save
-        </button>
+        <button type="submit" color="primary" mat-raised-button>Save</button>
       </form>
     </mat-card-content>
   </mat-card>
 }
-
-
