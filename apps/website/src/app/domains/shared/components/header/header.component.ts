@@ -4,26 +4,41 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { ConnectedPosition, CdkOverlayOrigin, CdkConnectedOverlay } from '@angular/cdk/overlay';
 
+import { CurrencyPipe } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
 import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLinkWithHref, RouterLinkActive, SearchComponent],
+  imports: [RouterLinkWithHref, RouterLinkActive, SearchComponent, CdkOverlayOrigin, CdkConnectedOverlay, CurrencyPipe],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  hideSideMenu = signal(true);
+  cartOpen = signal(false);
   showMenu = signal(false);
   private cartService = inject(CartService);
   cart = this.cartService.cart;
   total = this.cartService.total;
 
-  toogleSideMenu() {
-    this.hideSideMenu.update(prevState => !prevState);
+  cartPositions: ConnectedPosition[] = [
+    {
+      originX: 'end',
+      originY: 'bottom',
+      overlayX: 'end',
+      overlayY: 'top',
+    },
+  ];
+
+  toggleCart() {
+    this.cartOpen.update(prevState => !prevState);
+  }
+
+  closeCart() {
+    this.cartOpen.set(false);
   }
 
   toggleMenu() {

@@ -1,135 +1,169 @@
-<nav>
-  <div class="w-full flex flex-wrap items-center justify-between mx-auto py-4">
-    <div class="flex items-center">
-      <button
-        (click)="toggleMenu()"
-        data-collapse-toggle="navbar-default"
-        type="button"
-        class="mr-4 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-        aria-controls="navbar-default"
-        aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 17 14">
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15" />
-        </svg>
-      </button>
-      <a href="/" class="flex items-center mr-10">
-        <img src="/assets/logo.png" class="h-10" alt="NgStore" />
-        <span class="self-center text-xl font-semibold whitespace-nowrap"
-          >NgStore</span
+<nav class="sticky top-0 z-50 bg-cream/80 backdrop-blur-xl border-b border-charcoal/5">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+    <div class="flex items-center justify-between h-16 md:h-20">
+
+      <div class="flex items-center gap-4 md:gap-10">
+        <button
+          (click)="toggleMenu()"
+          type="button"
+          class="inline-flex items-center justify-center w-10 h-10 text-charcoal/60 hover:text-charcoal rounded-full hover:bg-charcoal/5 transition-colors md:hidden"
+          [attr.aria-expanded]="showMenu()"
+          aria-label="Toggle menu"
         >
-      </a>
-      <div
-        class="flex-col items-center border rounded-lg absolute top-16 left-3 bg-white p-4 md:relative md:top-0 md:left-0 md:flex md:flex-row md:space-x-4 md:border-none md:p-0"
-        [class.hidden]="!showMenu()">
-        <ul
-          class="flex flex-col space-y-4 mb-4 md:flex-row md:space-y-0 md:space-x-4 md:mb-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            @if (showMenu()) {
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            } @else {
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+            }
+          </svg>
+        </button>
+
+        <a routerLink="/" class="flex items-center gap-2 group">
+          <span class="font-display text-2xl md:text-3xl text-charcoal tracking-tight">NgStore</span>
+        </a>
+
+        <div
+          class="hidden md:flex items-center gap-8"
+        >
+          <ul class="flex items-center gap-8">
+            <li>
+              <a
+                routerLink="/"
+                routerLinkActive="text-sienna"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal transition-colors"
+                aria-current="page"
+              >Home</a>
+            </li>
+            <li>
+              <a
+                routerLink="/about"
+                routerLinkActive="text-sienna"
+                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal transition-colors"
+              >About</a>
+            </li>
+            <li>
+              <a
+                routerLink="/locations"
+                routerLinkActive="text-sienna"
+                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal transition-colors"
+              >Locations</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="hidden md:block">
+          <app-search />
+        </div>
+
+        <button
+          class="relative p-2.5 rounded-full hover:bg-charcoal/5 transition-colors group"
+          cdkOverlayOrigin
+          #cartOrigin="cdkOverlayOrigin"
+          (click)="toggleCart()"
+          aria-label="Shopping cart"
+        >
+          @if (cart().length > 0) {
+            <span class="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-sienna text-white text-[10px] font-semibold">
+              {{ cart().length }}
+            </span>
+          }
+          <svg class="w-5 h-5 text-charcoal/70 group-hover:text-charcoal transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    @if (showMenu()) {
+      <div class="md:hidden border-t border-charcoal/5 py-4 animate-slide-down">
+        <ul class="flex flex-col gap-3 mb-4">
           <li>
             <a
               routerLink="/"
-              routerLinkActive="underline"
+              routerLinkActive="text-sienna"
               [routerLinkActiveOptions]="{ exact: true }"
-              class="block hover:underline"
-              aria-current="page"
-              >Home</a
-            >
+              (click)="toggleMenu()"
+              class="block text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal py-2 transition-colors"
+            >Home</a>
           </li>
           <li>
             <a
               routerLink="/about"
-              routerLinkActive="underline"
-              class="block hover:underline"
-              >About</a
-            >
+              routerLinkActive="text-sienna"
+              (click)="toggleMenu()"
+              class="block text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal py-2 transition-colors"
+            >About</a>
           </li>
           <li>
             <a
               routerLink="/locations"
-              routerLinkActive="underline"
-              class="block hover:underline"
-              >Locations</a
-            >
-          </li>
-          <li>
-            <a
-              routerLink="/services"
-              routerLinkActive="underline"
-              class="block hover:underline"
-              >Services</a
-            >
+              routerLinkActive="text-sienna"
+              (click)="toggleMenu()"
+              class="block text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal py-2 transition-colors"
+            >Locations</a>
           </li>
         </ul>
         <app-search />
       </div>
-    </div>
-    <div class="flex items-center">
-      <button class="p-2 border rounded relative" (click)="toogleSideMenu()">
-        <div
-          class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs">
-          {{ cart().length }}
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-        </svg>
-      </button>
-    </div>
+    }
   </div>
 </nav>
 
-<div
-  class="fixed border-l-4 top-0 right-0 bg-red z-40 w-72 h-screen p-4 overflow-y-auto transition-transform bg-white"
-  [class.translate-x-full]="hideSideMenu()">
-  <div class="flex justify-between items-center">
-    <p class="text-xl">My Cart</p>
-    <button (click)="toogleSideMenu()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
-  </div>
-  <div class="pt-4 flex flex-col">
-    @for (product of cart(); track product) {
-      <div class="flex justify-between items-center space-y-2">
-        <div class="flex space-x-2 items-center">
-          <img
-            class="w-6 h-6"
-            [src]="product.images[0]"
-            [alt]="product.title" />
-          <h3>{{ product.title }}</h3>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="cartOrigin"
+  [cdkConnectedOverlayOpen]="cartOpen()"
+  [cdkConnectedOverlayPositions]="cartPositions"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="closeCart()"
+  (overlayOutsideClick)="closeCart()"
+>
+  <div class="w-96 mt-3 rounded-2xl shadow-2xl bg-cream border border-charcoal/10 p-6 animate-slide-down">
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="font-display text-xl text-charcoal">Your Bag</h2>
+      <button
+        (click)="closeCart()"
+        class="p-1.5 rounded-full hover:bg-charcoal/5 transition-colors"
+        aria-label="Close cart"
+      >
+        <svg class="w-4 h-4 text-charcoal/50" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    @if (cart().length === 0) {
+      <p class="text-warm-gray text-sm text-center py-8">Your bag is empty</p>
+    } @else {
+      <div class="flex flex-col divide-y divide-charcoal/5">
+        @for (product of cart(); track product) {
+          <div class="flex items-center gap-4 py-4">
+            <img
+              class="w-14 h-14 rounded-xl object-cover bg-sand"
+              [src]="product.images[0]"
+              [alt]="product.title"
+            />
+            <div class="flex-1 min-w-0">
+              <h3 class="text-sm font-medium text-charcoal truncate">{{ product.title }}</h3>
+              <p class="text-sm text-warm-gray mt-0.5">{{ product.price | currency:'$':'symbol':'1.0' }}</p>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="border-t border-charcoal/10 pt-4 mt-2">
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-sm text-warm-gray uppercase tracking-wider">Total</span>
+          <span class="font-display text-xl text-charcoal">{{ total() | currency:'$':'symbol':'1.0' }}</span>
         </div>
-        <p>{{ product.price }}</p>
+        <button class="w-full bg-charcoal text-cream py-3.5 rounded-xl text-sm font-medium uppercase tracking-wider hover:bg-sienna transition-colors">
+          Checkout
+        </button>
       </div>
     }
-    <div>
-      <p>Total: {{ total() }}</p>
-    </div>
   </div>
-</div>
+</ng-template>

@@ -1,16 +1,26 @@
-import { ApplicationConfig } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+} from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { HTTP_INTERCEPTORS, withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { provideAnimations } from '@angular/platform-browser/animations';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { API_URL } from '@store/data-access';
+import { environment } from '@store/admin/environments/environment';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations()
-  ]
-}
+    provideAnimationsAsync(),
+    { provide: API_URL, useValue: environment.API_URL },
+  ],
+};

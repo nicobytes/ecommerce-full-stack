@@ -1,10 +1,18 @@
-<div>
-  <div #wave></div>
-  <button (click)="playPause()">
+<div class="flex items-center gap-4">
+  <button
+    (click)="playPause()"
+    class="w-12 h-12 rounded-full bg-sienna text-white flex items-center justify-center hover:bg-sienna-dark transition-colors shrink-0 shadow-md"
+    [attr.aria-label]="isPlaying() ? 'Pause' : 'Play'"
+  >
     @if (isPlaying()) {
-      <span>Pause</span>
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+      </svg>
     } @else {
-      Play
+      <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z" />
+      </svg>
     }
   </button>
+  <div #wave class="flex-1 min-w-0"></div>
 </div>

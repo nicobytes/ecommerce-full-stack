@@ -6,18 +6,17 @@ import {
   resource,
 } from '@angular/core';
 
-import { RouterLinkWithHref } from '@angular/router';
-import { ProductComponent } from '@products/components/product/product.component';
+import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
+import { ProductComponent } from '../../components/product/product.component';
 
-import { Product } from '@shared/models/product.model';
-import { CartService } from '@shared/services/cart.service';
-import { ProductService } from '@shared/services/product.service';
-import { CategoryService } from '@shared/services/category.service';
+import { Product } from '@store/types';
+import { CartService } from '../../../shared/services/cart.service';
+import { ProductService, CategoryService } from '@store/data-access';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list',
-  imports: [ProductComponent, RouterLinkWithHref],
+  imports: [ProductComponent, RouterLinkWithHref, RouterLinkActive],
   templateUrl: './list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -32,8 +31,11 @@ export default class ListComponent {
   });
 
   productsResource = rxResource({
-    params: () => ({ category_slug: this.slug() }),
-    stream: ({ params }) => this.productService.getProducts(params),
+    params: () => {
+      const slug = this.slug();
+      return slug ? { categorySlug: slug } : {};
+    },
+    stream: ({ params }) => this.productService.getAll(params),
   });
 
   addToCart(product: Product) {

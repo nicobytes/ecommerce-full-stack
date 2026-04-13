@@ -1,28 +1,46 @@
-import { Component, inject, Input, OnInit, signal, OnChanges, computed } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnInit,
+  signal,
+  OnChanges,
+  computed,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterLinkWithHref, Router, Params } from '@angular/router';
+import { Router, Params } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { ProductService } from '@services/product.service';
-import { UIService } from '@services/ui.service';
-import { Product } from '@models/product.model';
+import { ProductService } from '@store/data-access';
+import { UIService } from '@store/admin/app/services/ui.service';
+import { Product } from '@store/types';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
-import { Category } from '@models/category.model';
-import { CategoryService } from '@services/category.service';
-import { TableComponent } from '@modules/products/components/table/table.component';
-import { ListComponent } from '@modules/products/components/list/list.component';
+import { Category } from '@store/types';
+import { CategoryService } from '@store/data-access';
+import { TableComponent } from '@store/admin/app/modules/products/components/table/table.component';
+import { ListComponent } from '@store/admin/app/modules/products/components/list/list.component';
 import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, MatToolbarModule, MatIconModule, MatProgressBarModule, MatCardModule, MatSelectModule, RouterLinkWithHref, TableComponent, MatButtonModule, ListComponent]
+  imports: [
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatSelectModule,
+    TableComponent,
+    MatButtonModule,
+    ListComponent,
+  ],
 })
 export default class ProductsComponent implements OnInit, OnChanges {
   readonly #productService = inject(ProductService);
@@ -38,17 +56,15 @@ export default class ProductsComponent implements OnInit, OnChanges {
 
   private readonly breakpointObserver = inject(BreakpointObserver);
   private isMobile$ = this.breakpointObserver
-  .observe(Breakpoints.Handset)
-  .pipe(
-    map(result => result.matches)
-  );
-  isMobile = toSignal(this.isMobile$, {initialValue: false});
+    .observe(Breakpoints.Handset)
+    .pipe(map((result) => result.matches));
+  isMobile = toSignal(this.isMobile$, { initialValue: false });
 
   constructor() {
     this.categorySelected.valueChanges.subscribe((value) => {
       const queryParams: Params = {};
       if (value !== 'all') {
-        queryParams.categoryId = value;
+        queryParams['categoryId'] = value;
       }
       this.#router.navigate(['/admin/products'], { queryParams });
     });
@@ -61,7 +77,7 @@ export default class ProductsComponent implements OnInit, OnChanges {
   ngOnChanges() {
     const params: Params = {};
     if (this.categoryId) {
-      params.categoryId = this.categoryId;
+      params['categoryId'] = this.categoryId;
     }
     this.getProducts(params);
   }

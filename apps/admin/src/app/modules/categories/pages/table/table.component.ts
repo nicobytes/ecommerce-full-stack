@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 
-import { TableDataSource } from '@utils/data-source';
-import { CategoryService } from '@services/category.service';
-import { UIService } from '@services/ui.service';
-import { Category } from '@models/category.model';
+import { TableDataSource } from '@store/admin/app/utils/data-source';
+import { CategoryService } from '@store/data-access';
+import { UIService } from '@store/admin/app/services/ui.service';
+import { Category } from '@store/types';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -13,13 +13,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-    selector: 'app-categories-table',
-    templateUrl: './table.component.html',
-    standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatTableModule, NgOptimizedImage]
+  selector: 'app-categories-table',
+  templateUrl: './table.component.html',
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatTableModule,
+    NgOptimizedImage,
+  ],
 })
 export class TableComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name','image','actions'];
+  displayedColumns: string[] = ['id', 'name', 'image', 'actions'];
   dataSource = new TableDataSource<Category>();
   private service = inject(CategoryService);
   private uiService = inject(UIService);

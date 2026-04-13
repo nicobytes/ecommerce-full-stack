@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from '@shared/components/layout/layout.component';
-import { NotFoundComponent } from '@info/pages/not-found/not-found.component';
+import { LayoutComponent } from './domains/shared/components/layout/layout.component';
+import { NotFoundComponent } from './domains/info/pages/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -30,7 +30,9 @@ export const routes: Routes = [
       {
         path: 'product/:slug',
         loadComponent: () =>
-          import('./domains/products/pages/product-detail/product-detail.component'),
+          import(
+            './domains/products/pages/product-detail/product-detail.component'
+          ),
       },
     ],
   },

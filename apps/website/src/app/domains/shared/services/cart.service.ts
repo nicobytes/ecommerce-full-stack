@@ -1,5 +1,5 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Product } from '@store/types';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,6 @@ export class CartService {
   });
 
   addToCart(product: Product) {
-    this.cart.update(state => [...state, product]);
+    this.cart.update((state) => [...state, product]);
   }
 }

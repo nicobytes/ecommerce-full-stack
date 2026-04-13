@@ -1,14 +1,20 @@
 <mat-sidenav-container class="h-full">
-  <mat-sidenav #drawer class="w-60" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+  <mat-sidenav
+    #drawer
+    class="w-60"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
     @if (user) {
       <mat-list>
         <mat-list-item>
           <mat-icon matListItemIcon>account_circle</mat-icon>
           <h4 matListItemTitle>{{ user.name }}</h4>
-          <p matListItemLine class="demo-2"> {{ user.email }} </p>
+          <p matListItemLine class="demo-2">{{ user.email }}</p>
         </mat-list-item>
-        <mat-divider></mat-divider>
+        <mat-divider />
       </mat-list>
     }
     <mat-nav-list>
@@ -25,7 +31,7 @@
         <mat-icon matListItemIcon>dns</mat-icon>
         Categories
       </a>
-      <mat-divider></mat-divider>
+      <mat-divider />
       <div div mat-subheader>Users</div>
       <a mat-list-item routerLink="/admin/users">
         <mat-icon matListItemIcon>group</mat-icon>
@@ -38,6 +44,6 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <router-outlet />
   </mat-sidenav-content>
 </mat-sidenav-container>

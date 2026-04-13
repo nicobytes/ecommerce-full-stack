@@ -1,4 +1,44 @@
-<div class="container mx-auto px-4 md:px-0">
+<div class="min-h-screen flex flex-col bg-cream">
+  <div class="h-1 bg-gradient-to-r from-sienna via-sienna-dark to-charcoal"></div>
+
   <app-header />
-  <router-outlet />
+
+  <main class="flex-1 w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+    <router-outlet />
+  </main>
+
+  <footer class="bg-charcoal text-cream mt-20">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div>
+          <h3 class="font-display text-2xl mb-4">NgStore</h3>
+          <p class="text-sand/70 font-light leading-relaxed text-sm max-w-xs">
+            Curated collections for the discerning eye. We bring together exceptional products with refined taste.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-[0.2em] text-sand/50 mb-5 font-medium">Navigate</h4>
+          <ul class="space-y-3">
+            <li><a routerLink="/" class="text-sand/70 hover:text-white transition-colors text-sm">Home</a></li>
+            <li><a routerLink="/about" class="text-sand/70 hover:text-white transition-colors text-sm">About</a></li>
+            <li><a routerLink="/locations" class="text-sand/70 hover:text-white transition-colors text-sm">Locations</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs uppercase tracking-[0.2em] text-sand/50 mb-5 font-medium">Connect</h4>
+          <ul class="space-y-3">
+            <li><span class="text-sand/70 text-sm">hello&#64;ngstore.com</span></li>
+            <li><span class="text-sand/70 text-sm">+1 (555) 000-0000</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sand/40 text-xs">&copy; 2026 NgStore. All rights reserved.</p>
+        <p class="text-sand/40 text-xs font-light italic font-display">Crafted with care</p>
+      </div>
+    </div>
+  </footer>
 </div>

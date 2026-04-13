@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { AuthService } from '@services/auth.service';
+import { AuthService } from '@store/admin/app/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,13 +14,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    standalone: true,
-    imports: [MatCardModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatSnackBarModule]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  standalone: true,
+  imports: [
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+  ],
 })
 export class LoginComponent {
-
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
@@ -38,16 +46,15 @@ export class LoginComponent {
     if (this.form.valid) {
       this.showSpinner = true;
       const { email, password } = this.form.getRawValue();
-      this.auth.login(email, password)
-        .subscribe({
-          next: () => {
-            this.router.navigate(['/admin']);
-          },
-          error: () => {
-            this.showSpinner = false;
-            this.openSnackBar('Invalid credentials', 'Close');
-          }
-        });
+      this.auth.login(email, password).subscribe({
+        next: () => {
+          this.router.navigate(['/admin']);
+        },
+        error: () => {
+          this.showSpinner = false;
+          this.openSnackBar('Invalid credentials', 'Close');
+        },
+      });
     } else {
       this.form.markAllAsTouched();
     }

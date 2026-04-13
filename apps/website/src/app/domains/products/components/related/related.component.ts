@@ -5,8 +5,8 @@ import {
   input,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ProductComponent } from '@products/components/product/product.component';
-import { ProductService } from '@shared/services/product.service';
+import { ProductComponent } from '../product/product.component';
+import { ProductService } from '@store/data-access';
 
 @Component({
   selector: 'app-related',
@@ -16,11 +16,11 @@ import { ProductService } from '@shared/services/product.service';
 })
 export class RelatedComponent {
   productService = inject(ProductService);
-  $slug = input.required<string>({ alias: 'slug' });
+  slug = input.required<string>();
 
   relatedProducts = rxResource({
     params: () => ({
-      slug: this.$slug(),
+      slug: this.slug(),
     }),
     stream: ({ params }) => this.productService.getRelatedProducts(params.slug),
   });

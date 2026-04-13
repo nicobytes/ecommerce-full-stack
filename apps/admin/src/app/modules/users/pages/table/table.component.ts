@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 
-import { TableDataSource } from '@utils/data-source';
-import { UserService } from '@services/user.service';
-import { UIService } from '@services/ui.service';
-import { User } from '@models/user.model';
+import { TableDataSource } from '@store/admin/app/utils/data-source';
+import { UserService } from '@store/admin/app/services/user.service';
+import { UIService } from '@store/admin/app/services/ui.service';
+import { User } from '@store/types';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -13,13 +13,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-    selector: 'app-table',
-    templateUrl: './table.component.html',
-    standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatCardModule, MatTableModule, NgOptimizedImage]
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatTableModule,
+    NgOptimizedImage,
+  ],
 })
 export class TableComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'email', 'name', 'role', 'avatar', 'actions'];
+  displayedColumns: string[] = [
+    'id',
+    'email',
+    'name',
+    'role',
+    'avatar',
+    'actions',
+  ];
   dataSource = new TableDataSource<User>();
   private service = inject(UserService);
   private uiService = inject(UIService);
