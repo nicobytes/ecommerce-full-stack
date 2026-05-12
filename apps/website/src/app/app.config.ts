@@ -10,6 +10,7 @@ import {
   withPreloading,
 } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHashbrown } from '@hashbrownai/angular';
 import {
   provideClientHydration,
   withEventReplay,
@@ -31,5 +32,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay(), withIncrementalHydration()),
     provideZonelessChangeDetection(),
     { provide: API_URL, useValue: environment.apiUrl },
+    provideHashbrown({
+      baseUrl: 'http://localhost:3333/api/chat',
+    }),
   ],
 };

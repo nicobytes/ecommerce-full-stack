@@ -4,17 +4,19 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import type { Chat } from '@hashbrownai/core';
+import {
+  MagicText,
+  RenderMessageComponent,
+  chatResource,
+} from '@hashbrownai/angular';
 
 import { ChatDrawerService } from '../../services/chat-drawer.service';
-import { CHAT_MOCK_MESSAGES } from './chat.mock';
-import { ChatMessage } from './chat.types';
-
-function nextMessageId(): string {
-  return globalThis.crypto?.randomUUID?.() ?? `msg-${Date.now()}`;
-}
 
 @Component({
   selector: 'app-chat',
+  standalone: true,
+  imports: [MagicText, RenderMessageComponent],
   templateUrl: './chat.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -28,15 +30,16 @@ export class ChatComponent {
   private readonly chatDrawer = inject(ChatDrawerService);
 
   readonly draft = signal('');
-  readonly messages = signal<ChatMessage[]>([...CHAT_MOCK_MESSAGES]);
+
+  readonly chat = chatResource({
+    debugName: 'website-chat',
+    model: 'gemini-3-flash-preview',
+    system:
+      'You are NgStore customer support: concise, friendly, and accurate about products, shipping, and orders.',
+  });
 
   close(): void {
     this.chatDrawer.close();
-  }
-
-  chatBubbleClasses(message: ChatMessage): string {
-    const tone = message.bubbleTone;
-    return tone ? `chat-bubble chat-bubble-${tone}` : 'chat-bubble';
   }
 
   send(): void {
@@ -44,38 +47,8 @@ export class ChatComponent {
     if (!text) {
       return;
     }
-
-    const userMsg: ChatMessage = {
-      id: nextMessageId(),
-      placement: 'end',
-      authorName: 'You',
-      timeLabel: 'Just now',
-      text,
-      footer: 'Sent',
-      avatarInitials: 'YO',
-      bubbleTone: 'info',
-    };
-
-    this.messages.update((list) => [...list, userMsg]);
+    this.chat.sendMessage({ role: 'user', content: text });
     this.draft.set('');
-
-    const replyId = nextMessageId();
-    globalThis.setTimeout(() => {
-      this.messages.update((list) => [
-        ...list,
-        {
-          id: replyId,
-          placement: 'start',
-          authorName: 'NgStore',
-          timeLabel: 'Just now',
-          text:
-            'Thanks for your message — a teammate will follow up shortly. This is a demo reply.',
-          footer: 'Delivered',
-          avatarInitials: 'NG',
-          bubbleTone: 'neutral',
-        },
-      ]);
-    }, 500);
   }
 
   onComposerKeydown(event: KeyboardEvent): void {
@@ -83,5 +56,40 @@ export class ChatComponent {
       event.preventDefault();
       this.send();
     }
+  }
+
+  /** Plain string for user bubbles and `hb-magic-text`. */
+  userDisplayText(message: Chat.UserMessage): string {
+    const c = message.content;
+    if (c == null) {
+      return '';
+    }
+    return typeof c === 'string' ? c : JSON.stringify(c);
+  }
+
+  /** `hb-render-message` only when the model returned generative UI (`content.ui`). */
+  isUiAssistantContent(
+    message: Chat.AssistantMessage<string, Chat.AnyTool>,
+  ): boolean {
+    const c = message.content;
+    return (
+      typeof c === 'object' &&
+      c !== null &&
+      'ui' in c &&
+      Array.isArray((c as { ui: unknown }).ui)
+    );
+  }
+
+  assistantMagicText(
+    message: Chat.AssistantMessage<string, Chat.AnyTool>,
+  ): string {
+    const c = message.content;
+    if (c == null || c === '') {
+      return '';
+    }
+    if (typeof c === 'string') {
+      return c;
+    }
+    return JSON.stringify(c);
   }
 }

@@ -7,6 +7,10 @@ lint:
 test:
   npx nx affected:test
 
+ri:
+  rm -rf node_modules
+  npm install
+
 build:
   npx nx affected:build
 
@@ -15,3 +19,6 @@ website-serve:
 
 website-build:
   npx nx build website
+
+api-serve:
+  npx nx serve api
