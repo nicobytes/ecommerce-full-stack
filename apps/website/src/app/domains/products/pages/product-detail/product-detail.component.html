@@ -4,14 +4,16 @@
 @if (data && cover) {
   <section class="pt-8 pb-16 animate-fade-in">
     <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
-
       <div class="w-full lg:w-1/2 flex flex-col gap-4">
-        <div class="relative overflow-hidden rounded-2xl bg-sand/30 aspect-square">
+        <div
+          class="relative overflow-hidden rounded-2xl bg-sand/30 aspect-square"
+        >
           <img
             [alt]="data.title"
             [fill]="true"
             class="w-full h-full object-cover object-center transition-transform duration-500"
-            [ngSrc]="cover" />
+            [ngSrc]="cover"
+          />
         </div>
         <div class="flex gap-3">
           @for (img of data.images; track img) {
@@ -19,14 +21,19 @@
               (click)="changeCover(img)"
               (keydown.enter)="changeCover(img)"
               class="relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 hover:opacity-80"
-              [class]="img === cover ? 'border-sienna shadow-md' : 'border-transparent opacity-60 hover:opacity-100'"
+              [class]="
+                img === cover
+                  ? 'border-sienna shadow-md'
+                  : 'border-transparent opacity-60 hover:opacity-100'
+              "
             >
               <img
                 width="80"
                 height="80"
                 [alt]="data.title"
                 class="w-full h-full object-cover object-center"
-                [ngSrc]="img" />
+                [ngSrc]="img"
+              />
             </button>
           }
         </div>
@@ -34,10 +41,14 @@
 
       <div class="w-full lg:w-1/2 flex flex-col justify-center">
         <div class="lg:max-w-lg">
-          <p class="text-[10px] uppercase tracking-[0.2em] text-sienna font-medium mb-3">
+          <span
+            class="badge badge-primary badge-outline badge-sm uppercase tracking-[0.2em] mb-3"
+          >
             {{ data.category.name }}
-          </p>
-          <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight mb-6">
+          </span>
+          <h1
+            class="font-display text-3xl md:text-4xl lg:text-5xl text-charcoal leading-tight mb-6"
+          >
             {{ data.title }}
           </h1>
           <p class="text-warm-gray font-light leading-relaxed mb-8 text-base">
@@ -52,7 +63,8 @@
 
           <button
             (click)="addToCart()"
-            class="w-full lg:w-auto lg:min-w-[280px] bg-charcoal text-cream py-4 px-10 rounded-xl text-sm font-medium uppercase tracking-[0.15em] hover:bg-sienna transition-colors duration-300">
+            class="btn btn-secondary btn-lg w-full lg:w-auto lg:min-w-[280px] uppercase tracking-[0.15em] text-sm hover:bg-sienna hover:border-sienna transition-colors duration-300"
+          >
             Add to Bag
           </button>
         </div>
@@ -65,7 +77,7 @@
           <app-related [slug]="data.slug" />
         } @placeholder {
           <div class="flex justify-center py-12">
-            <div class="w-6 h-6 border-2 border-charcoal/20 border-t-sienna rounded-full animate-spin"></div>
+            <span class="loading loading-spinner loading-md text-sienna"></span>
           </div>
         }
       </div>

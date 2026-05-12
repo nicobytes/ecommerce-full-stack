@@ -1,32 +1,38 @@
 @let data = product();
 
-<div class="group relative flex flex-col">
-  <a
-    [routerLink]="['/product', data.slug]"
-    class="block relative overflow-hidden rounded-2xl bg-sand/40 aspect-[3/4]">
-    <img
-      [ngSrc]="data.images[0]"
-      [alt]="data.title"
-      [fill]="true"
-      loading="lazy"
-      class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105" />
+<div class="card bg-base-100 group relative">
+  <figure class="relative overflow-hidden rounded-2xl aspect-3/4">
+    <a [routerLink]="['/product', data.slug]" class="block w-full h-full">
+      <img
+        [ngSrc]="data.images[0]"
+        [alt]="data.title"
+        [fill]="true"
+        loading="lazy"
+        class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+    </a>
     @if (data.creationAt) {
-      <span class="absolute top-3 left-3 bg-cream/90 backdrop-blur-sm text-warm-gray text-[10px] uppercase tracking-wider font-medium px-2.5 py-1 rounded-full">
+      <span
+        class="badge badge-sm absolute top-3 left-3 bg-cream/90 backdrop-blur-sm text-warm-gray border-0 text-[10px] uppercase tracking-wider font-medium"
+      >
         {{ data.creationAt | timeAgo }}
       </span>
     }
-  </a>
+  </figure>
 
-  <div class="pt-4 pb-2 flex flex-col gap-1.5">
-    <h3 class="text-sm text-charcoal/80 font-light leading-snug line-clamp-2">{{ data.title }}</h3>
+  <div class="card-body px-0 pt-4 pb-2 gap-1.5">
+    <h3 class="text-sm text-charcoal/80 font-light leading-snug line-clamp-2">
+      {{ data.title }}
+    </h3>
     <p class="font-display text-lg text-charcoal">
       {{ data.price | currency: '$' : 'symbol' : '1.0' }}
     </p>
   </div>
 
   <button
-    class="w-full mt-auto py-3 bg-charcoal text-cream text-xs font-medium uppercase tracking-[0.15em] rounded-xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-sienna"
-    (click)="addToCartHandler()">
+    class="btn btn-secondary btn-block mt-auto text-xs uppercase tracking-[0.15em] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-sienna hover:border-sienna"
+    (click)="addToCartHandler()"
+  >
     Add to Bag
   </button>
 </div>

@@ -1,13 +1,17 @@
 <div class="animate-fade-in">
-  <div class="flex items-center gap-6 mb-10">
-    <div class="h-px flex-1 bg-charcoal/10"></div>
-    <h2 class="font-display text-2xl md:text-3xl text-charcoal whitespace-nowrap">You May Also Like</h2>
-    <div class="h-px flex-1 bg-charcoal/10"></div>
+  <div class="divider font-display text-2xl md:text-3xl text-charcoal">
+    You May Also Like
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-    @for (product of relatedProducts.value(); track product.id; let i = $index) {
-      <div class="animate-fade-in-up" [style.animation-delay]="(i * 0.08) + 's'">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 mt-10"
+  >
+    @for (
+      product of relatedProducts.value();
+      track product.id;
+      let i = $index
+    ) {
+      <div class="animate-fade-in-up" [style.animation-delay]="i * 0.08 + 's'">
         <app-product [product]="product" />
       </div>
     }

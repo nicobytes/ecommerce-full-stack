@@ -32,6 +32,7 @@
     "@vitest/ui": "~4.1.0",
     "angular-eslint": "^21.2.0",
     "autoprefixer": "^10.4.27",
+    "daisyui": "^5.5.19",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "jsdom": "^27.1.0",
