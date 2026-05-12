@@ -8,10 +8,35 @@ import type { Chat } from '@hashbrownai/core';
 import {
   MagicText,
   RenderMessageComponent,
-  chatResource,
+  type StructuredChatResourceRef,
+  uiChatResource,
+  type UiAssistantMessage,
+  type UiChatResourceRef,
+  type UiChatSchema,
 } from '@hashbrownai/angular';
 
 import { ChatDrawerService } from '../../services/chat-drawer.service';
+import { NGSTORE_CHAT_SYSTEM_PROMPT } from './prompt';
+import { getProductsTool } from './tools/get_products.tool';
+import { AiChatProductListComponent } from './ui/chat-product-list.component';
+
+/** Actual runtime merges structured chat refs; typings omit loading helpers (see `@hashbrownai/angular`). */
+type UiChatRuntimeRef = UiChatResourceRef<Chat.AnyTool> &
+  Pick<
+    StructuredChatResourceRef<UiChatSchema, Chat.AnyTool>,
+    | 'isLoading'
+    | 'isSending'
+    | 'isGenerating'
+    | 'isReceiving'
+    | 'isRunningToolCalls'
+    | 'isLoadingThread'
+    | 'isSavingThread'
+    | 'threadLoadError'
+    | 'threadSaveError'
+    | 'sendingError'
+    | 'generatingError'
+    | 'reload'
+  >;
 
 @Component({
   selector: 'app-chat',
@@ -21,7 +46,7 @@ import { ChatDrawerService } from '../../services/chat-drawer.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class:
-      'min-h-full w-full max-w-sm bg-base-200 border-l border-base-content/10 flex flex-col shadow-xl',
+      'flex min-h-0 h-dvh w-full max-w-2xl flex-col self-stretch bg-base-200 border-l border-base-content/10 overflow-hidden shadow-xl relative z-10',
     role: 'complementary',
     'aria-labelledby': 'chat-drawer-title',
   },
@@ -31,12 +56,13 @@ export class ChatComponent {
 
   readonly draft = signal('');
 
-  readonly chat = chatResource({
+  readonly chat = uiChatResource({
     debugName: 'website-chat',
-    model: 'gemini-3-flash-preview',
-    system:
-      'You are NgStore customer support: concise, friendly, and accurate about products, shipping, and orders.',
-  });
+    model: 'gemini-2.5-flash',
+    system: NGSTORE_CHAT_SYSTEM_PROMPT,
+    tools: [getProductsTool],
+    components: [AiChatProductListComponent],
+  }) as UiChatRuntimeRef;
 
   close(): void {
     this.chatDrawer.close();
@@ -68,9 +94,7 @@ export class ChatComponent {
   }
 
   /** `hb-render-message` only when the model returned generative UI (`content.ui`). */
-  isUiAssistantContent(
-    message: Chat.AssistantMessage<string, Chat.AnyTool>,
-  ): boolean {
+  isUiAssistantContent(message: UiAssistantMessage): boolean {
     const c = message.content;
     return (
       typeof c === 'object' &&
@@ -80,16 +104,20 @@ export class ChatComponent {
     );
   }
 
-  assistantMagicText(
-    message: Chat.AssistantMessage<string, Chat.AnyTool>,
-  ): string {
-    const c = message.content;
+  assistantMagicText(message: UiAssistantMessage): string {
+    const c = message.content as unknown;
     if (c == null || c === '') {
       return '';
     }
     if (typeof c === 'string') {
       return c;
     }
-    return JSON.stringify(c);
+    if (typeof c === 'object' && c !== null && 'ui' in c) {
+      return '';
+    }
+    if (typeof c === 'object' && c !== null) {
+      return JSON.stringify(c);
+    }
+    return '';
   }
 }

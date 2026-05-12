@@ -34,6 +34,7 @@ export const appConfig: ApplicationConfig = {
     { provide: API_URL, useValue: environment.apiUrl },
     provideHashbrown({
       baseUrl: 'http://localhost:3333/api/chat',
+      emulateStructuredOutput: true,
     }),
   ],
 };

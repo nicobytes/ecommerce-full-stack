@@ -54,6 +54,14 @@
 }
 
 @layer base {
+  /*
+   * DaisyUI sets :root --page-scroll-gutter: stable while the drawer is open,
+   * which reserves a blank strip beside the viewport.
+   */
+  :root:has(#website-chat-drawer:checked) {
+    --page-scroll-gutter: auto;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
