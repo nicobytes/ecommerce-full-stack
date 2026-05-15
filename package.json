@@ -67,13 +67,15 @@
     "@angular/platform-server": "~21.2.0",
     "@angular/router": "~21.2.0",
     "@angular/ssr": "~21.2.0",
+    "@google/genai": "^1.29.1",
     "@hashbrownai/angular": "^0.4.1",
     "@hashbrownai/core": "^0.4.1",
     "@hashbrownai/google": "^0.4.1",
-    "@google/genai": "^1.29.1",
+    "@hashbrownai/openai": "^0.4.1",
     "axios": "^1.6.0",
     "date-fns": "^2.30.0",
     "express": "^4.21.2",
+    "marked": "18.0.3",
     "rxjs": "~7.8.0",
     "wavesurfer.js": "^7.12.6"
   }

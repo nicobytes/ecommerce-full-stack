@@ -5,6 +5,7 @@
 
 import type { Chat } from '@hashbrownai/core';
 import { HashbrownGoogle } from '@hashbrownai/google';
+import { HashbrownOpenAI } from '@hashbrownai/openai';
 import express from 'express';
 import * as path from 'path';
 
@@ -37,7 +38,7 @@ app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to api!' });
 });
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat/google', async (req, res) => {
   const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: 'Missing GOOGLE_API_KEY' });
@@ -64,6 +65,21 @@ app.post('/api/chat', async (req, res) => {
     }
     res.end();
   }
+});
+
+app.post('/api/chat', async (req, res) => {
+  const stream = HashbrownOpenAI.stream.text({
+    apiKey: process.env.OPENAI_API_KEY!,
+    request: req.body, // must be Chat.Api.CompletionCreateParams
+  });
+
+  res.header('Content-Type', 'application/octet-stream');
+
+  for await (const chunk of stream) {
+    res.write(chunk); // Pipe each encoded frame as it arrives
+  }
+
+  res.end();
 });
 
 const port = process.env.PORT || 3333;

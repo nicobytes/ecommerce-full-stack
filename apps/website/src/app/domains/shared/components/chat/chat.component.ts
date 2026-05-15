@@ -19,6 +19,7 @@ import { ChatDrawerService } from '../../services/chat-drawer.service';
 import { NGSTORE_CHAT_SYSTEM_PROMPT } from './prompt';
 import { getProductsTool } from './tools/get_products.tool';
 import { AiChatProductListComponent } from './ui/chat-product-list.component';
+import { AiMarkdownComponent } from './ui/mardown.component';
 
 /** Actual runtime merges structured chat refs; typings omit loading helpers (see `@hashbrownai/angular`). */
 type UiChatRuntimeRef = UiChatResourceRef<Chat.AnyTool> &
@@ -58,10 +59,10 @@ export class ChatComponent {
 
   readonly chat = uiChatResource({
     debugName: 'website-chat',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5.5-2026-04-23',
     system: NGSTORE_CHAT_SYSTEM_PROMPT,
     tools: [getProductsTool],
-    components: [AiChatProductListComponent],
+    components: [AiChatProductListComponent, AiMarkdownComponent],
   }) as UiChatRuntimeRef;
 
   close(): void {
