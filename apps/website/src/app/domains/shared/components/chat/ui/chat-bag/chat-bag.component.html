@@ -1,0 +1,18 @@
+<div
+  class="w-80 max-w-full p-2 rounded-xl border border-base-content/10 bg-base-100"
+>
+  <div class="flex flex-col divide-y divide-base-content/5">
+    <ng-content />
+  </div>
+  <div
+    class="divider my-2 before:bg-base-content/10 after:bg-base-content/10"
+  ></div>
+  <div class="flex justify-between items-center px-1 pb-1">
+    <span class="text-sm text-base-content/60 uppercase tracking-wider"
+      >Total</span
+    >
+    <span class="text-lg font-medium text-base-content">{{
+      total() | currency: '$' : 'symbol' : '1.0'
+    }}</span>
+  </div>
+</div>

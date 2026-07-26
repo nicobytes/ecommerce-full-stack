@@ -1,8 +1,11 @@
 import {
+  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import type { Chat } from '@hashbrownai/core';
 import {
@@ -17,9 +20,13 @@ import {
 
 import { ChatDrawerService } from '../../services/chat-drawer.service';
 import { NGSTORE_CHAT_SYSTEM_PROMPT } from './prompt';
+import { getBagTool } from './tools/get_bag.tool';
+import { getCategoriesTool } from './tools/get_categories.tool';
 import { getProductsTool } from './tools/get_products.tool';
-import { AiMarkdown } from './ui/ai-markdown';
-import { AiChatProductListComponent } from './ui/chat-product-list.component';
+import { AiMarkdown } from './ui/ai-markdown/ai-markdown';
+import { AiChatBagComponent } from './ui/chat-bag/chat-bag.component';
+import { AiChatCategoryListComponent } from './ui/chat-category-list/chat-category-list.component';
+import { AiChatProductListComponent } from './ui/chat-product-list/chat-product-list.component';
 
 /** Actual runtime merges structured chat refs; typings omit loading helpers (see `@hashbrownai/angular`). */
 type UiChatRuntimeRef = UiChatResourceRef<Chat.AnyTool> &
@@ -54,15 +61,37 @@ type UiChatRuntimeRef = UiChatResourceRef<Chat.AnyTool> &
 })
 export class ChatComponent {
   private readonly chatDrawer = inject(ChatDrawerService);
+  private readonly messagesEl =
+    viewChild<ElementRef<HTMLElement>>('messages');
 
   readonly draft = signal('');
 
   readonly chat = uiChatResource({
     model: 'gpt-5.5-2026-04-23',
     system: NGSTORE_CHAT_SYSTEM_PROMPT,
-    tools: [getProductsTool],
-    components: [AiMarkdown, AiChatProductListComponent],
+    tools: [getProductsTool, getCategoriesTool, getBagTool],
+    components: [
+      AiMarkdown,
+      AiChatProductListComponent,
+      AiChatCategoryListComponent,
+      AiChatBagComponent,
+    ],
   }) as UiChatRuntimeRef;
+
+  constructor() {
+    afterRenderEffect(() => {
+      // Re-run when messages stream or tool UI lands.
+      this.chat.value();
+      this.chat.isGenerating();
+      this.chat.isReceiving();
+      this.chat.isRunningToolCalls();
+
+      const el = this.messagesEl()?.nativeElement;
+      if (el) {
+        el.scrollTop = el.scrollHeight;
+      }
+    });
+  }
 
   close(): void {
     this.chatDrawer.close();

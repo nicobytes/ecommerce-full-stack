@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { exposeComponent } from '@hashbrownai/angular';
 
-import { AiChatProductCardComponent } from './chat-product-card.component';
+import { AiChatProductCardComponent } from '../chat-product-card/chat-product-card.component';
 import { ChatProductListFallbackComponent } from './chat-product-list-fallback.component';
 
 @Component({

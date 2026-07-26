@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 import { exposeComponent } from '@hashbrownai/angular';
 import { s } from '@hashbrownai/core';
 
-import { ChatDrawerService } from '../../../services/chat-drawer.service';
+import { ChatDrawerService } from '../../../../services/chat-drawer.service';
 import { ChatProductCardFallbackComponent } from './chat-product-card-fallback.component';
 
 @Component({
