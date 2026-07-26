@@ -11,8 +11,20 @@ import * as path from 'path';
 
 const app = express();
 
+const allowedOrigins = (
+  process.env.CORS_ORIGIN ??
+  'http://localhost:4200,https://curso-angular-avanzado--storeapp-fea1f.us-central1.hosted.app'
+)
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
@@ -74,18 +86,26 @@ app.post('/api/chat/openai', async (req, res) => {
     return;
   }
 
-  const stream = HashbrownOpenAI.stream.text({
-    apiKey,
-    request: req.body, // must be Chat.Api.CompletionCreateParams
-  });
+  try {
+    const stream = HashbrownOpenAI.stream.text({
+      apiKey,
+      request: req.body as Chat.Api.CompletionCreateParams,
+    });
 
-  res.header('Content-Type', 'application/octet-stream');
+    res.setHeader('Content-Type', 'application/octet-stream');
 
-  for await (const chunk of stream) {
-    res.write(chunk); // Pipe each encoded frame as it arrives
+    for await (const chunk of stream) {
+      res.write(chunk);
+    }
+    res.end();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    if (!res.headersSent) {
+      res.status(500).json({ error: message });
+      return;
+    }
+    res.end();
   }
-
-  res.end();
 });
 
 const port = process.env.PORT || 3333;

@@ -1,9 +1,13 @@
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 
-const angularApp = new AngularAppEngine({
-  // TODO: This is a security-sensitive option. Remove if not needed. For more information, see https://angular.dev/best-practices/security#configuring-trusted-proxy-headers
-  trustProxyHeaders: ['x-forwarded-host', 'x-forwarded-proto'],
-});
+const trustProxyHeaders =
+  process.env['TRUST_PROXY_HEADERS'] === 'true'
+    ? (['x-forwarded-host', 'x-forwarded-proto'] as const)
+    : undefined;
+
+const angularApp = new AngularAppEngine(
+  trustProxyHeaders ? { trustProxyHeaders: [...trustProxyHeaders] } : undefined,
+);
 
 export const reqHandler = createRequestHandler(async (req) => {
   const res = await angularApp.handle(req);

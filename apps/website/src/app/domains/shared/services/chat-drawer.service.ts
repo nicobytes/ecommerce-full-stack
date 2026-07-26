@@ -4,17 +4,18 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ChatDrawerService {
-  readonly open = signal(false);
+  readonly #open = signal(false);
+  readonly open = this.#open.asReadonly();
 
   toggle(): void {
-    this.open.update((o) => !o);
+    this.#open.update((o) => !o);
   }
 
   close(): void {
-    this.open.set(false);
+    this.#open.set(false);
   }
 
   setOpen(value: boolean): void {
-    this.open.set(value);
+    this.#open.set(value);
   }
 }
