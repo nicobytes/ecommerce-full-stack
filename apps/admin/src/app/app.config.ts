@@ -7,6 +7,7 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr
 } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -19,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideAnimationsAsync(),
     { provide: API_URL, useValue: environment.API_URL },
   ],

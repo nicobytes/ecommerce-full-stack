@@ -3,12 +3,12 @@ import { s } from '@hashbrownai/core';
 import { marked } from 'marked';
 
 import {
-    Component,
-    ViewEncapsulation,
-    computed,
-    inject,
-    input,
-    SecurityContext
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+  SecurityContext,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 

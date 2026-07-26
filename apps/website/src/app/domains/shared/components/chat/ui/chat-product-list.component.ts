@@ -16,7 +16,7 @@ export const AiChatProductListComponent = exposeComponent(
   ChatProductListComponent,
   {
     description:
-      'Two-column grid for catalog products after getProducts (vertical scroll when many items). Wrap one or more app-chat-product-card elements as children.',
+      'Three-column grid for catalog products after getProducts (vertical scroll when many items). Wrap one or more app-chat-product-card elements as children.',
     input: {},
     children: [AiChatProductCardComponent],
   },

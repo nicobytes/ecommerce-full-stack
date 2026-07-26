@@ -58,7 +58,6 @@ export class ChatComponent {
   readonly draft = signal('');
 
   readonly chat = uiChatResource({
-    debugName: 'website-chat',
     model: 'gpt-5.5-2026-04-23',
     system: NGSTORE_CHAT_SYSTEM_PROMPT,
     tools: [getProductsTool],
