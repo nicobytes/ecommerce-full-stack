@@ -7,22 +7,22 @@ import type { JsonResolvedValue } from '@hashbrownai/core';
   standalone: true,
   template: `
     <div
-      class="w-80 max-w-full p-2 rounded-xl border border-base-content/10 bg-base-100"
+      class="w-80 max-w-full px-3 py-3.5 rounded-xl border border-base-content/10 bg-base-100"
       aria-hidden="true"
     >
       <div class="flex flex-col divide-y divide-base-content/5">
         @for (_ of skeletons; track $index) {
-          <div class="flex items-center gap-3 py-3 animate-pulse">
+          <div class="flex items-center gap-3.5 py-3.5 px-1.5 animate-pulse">
             <div class="h-14 w-14 shrink-0 rounded-xl bg-base-300"></div>
-            <div class="flex-1 min-w-0 space-y-2">
+            <div class="flex-1 min-w-0 space-y-2.5">
               <div class="h-3 w-2/3 rounded bg-base-300"></div>
               <div class="h-3 w-1/4 rounded bg-base-300"></div>
             </div>
           </div>
         }
       </div>
-      <div class="divider my-2 before:bg-base-content/10 after:bg-base-content/10"></div>
-      <div class="flex justify-between items-center px-1 pb-1 animate-pulse">
+      <div class="divider my-3 before:bg-base-content/10 after:bg-base-content/10"></div>
+      <div class="flex justify-between items-center px-1.5 pt-0.5 pb-0.5 animate-pulse">
         <div class="h-3 w-12 rounded bg-base-300"></div>
         <div class="h-5 w-16 rounded bg-base-300"></div>
       </div>

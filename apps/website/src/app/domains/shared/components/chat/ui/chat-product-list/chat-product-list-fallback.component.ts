@@ -6,8 +6,10 @@ import type { JsonResolvedValue } from '@hashbrownai/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   template: `
-    <div class="w-full max-w-full p-1" aria-hidden="true">
-      <div class="grid grid-cols-3 gap-3 pt-1 pb-2">
+    <div class="relative w-full max-w-full pt-0.5" aria-hidden="true">
+      <div
+        class="flex gap-3.5 overflow-hidden pb-1 *:w-[calc((100%-1.75rem)/3)] *:shrink-0"
+      >
         @for (_ of skeletons; track $index) {
           <div
             class="card card-compact bg-base-100 border border-base-content/10 shadow-sm animate-pulse"

@@ -2,85 +2,54 @@
   <a
     [routerLink]="['/category', slugValue]"
     (click)="closeDrawer()"
-    class="card card-compact bg-base-100 border border-base-content/10 shadow-sm h-full flex flex-col cursor-pointer no-underline text-inherit hover:border-base-content/20 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+    class="flex items-center gap-3.5 py-3.5 no-underline text-inherit hover:bg-base-content/5 rounded-lg px-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
   >
-    <figure class="relative px-3 pt-3">
-      @if (imageUrl()) {
-        <div
-          class="relative aspect-square w-full overflow-hidden rounded-xl bg-base-200"
-        >
-          <img
-            [src]="imageUrl()"
-            [alt]="name()"
-            class="absolute inset-0 h-full w-full object-cover object-center"
-            loading="lazy"
-          />
-        </div>
-      } @else {
-        <div
-          class="flex aspect-square w-full items-center justify-center rounded-xl bg-base-200 px-2 text-center text-[10px] text-base-content/50"
-        >
-          No image
-        </div>
-      }
-    </figure>
-    <div class="card-body gap-2 pt-2 pb-3 px-3 flex flex-col flex-1">
-      <h3
-        class="text-xs font-medium leading-snug line-clamp-2 text-base-content"
-      >
-        {{ name() }}
-      </h3>
-      <div class="card-actions mt-auto">
-        <span
-          class="btn btn-secondary btn-outline btn-xs w-full uppercase tracking-wider pointer-events-none"
-        >
-          Browse
-        </span>
+    <div class="avatar shrink-0">
+      <div class="w-14 rounded-xl bg-base-200">
+        @if (imageUrl()) {
+          <img [src]="imageUrl()" [alt]="name()" loading="lazy" />
+        }
       </div>
     </div>
-  </a>
-} @else {
-  <div
-    role="button"
-    tabindex="0"
-    class="card card-compact bg-base-100 border border-base-content/10 shadow-sm h-full flex flex-col cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-    [attr.aria-label]="'Category: ' + name()"
-    (click)="closeDrawer()"
-    (keydown.enter)="closeDrawer()"
-    (keydown.space)="$event.preventDefault(); closeDrawer()"
-  >
-    <figure class="relative px-3 pt-3">
-      @if (imageUrl()) {
-        <div
-          class="relative aspect-square w-full overflow-hidden rounded-xl bg-base-200"
-        >
-          <img
-            [src]="imageUrl()"
-            [alt]="name()"
-            class="absolute inset-0 h-full w-full object-cover object-center"
-            loading="lazy"
-          />
-        </div>
-      } @else {
-        <div
-          class="flex aspect-square w-full items-center justify-center rounded-xl bg-base-200 px-2 text-center text-[10px] text-base-content/50"
-        >
-          No image
-        </div>
-      }
-    </figure>
-    <div class="card-body gap-2 pt-2 pb-3 px-3 flex flex-col flex-1">
-      <h3
-        class="text-xs font-medium leading-snug line-clamp-2 text-base-content"
-      >
+    <div class="flex-1 min-w-0">
+      <h3 class="text-sm font-medium text-base-content truncate">
         {{ name() }}
       </h3>
-      <div class="card-actions mt-auto">
-        <span
-          class="btn btn-ghost btn-xs w-full text-base-content/50 pointer-events-none"
-          >No link</span
-        >
+      <p
+        class="text-xs text-base-content/50 mt-1 uppercase tracking-wider"
+      >
+        Browse
+      </p>
+    </div>
+    <svg
+      class="w-4 h-4 shrink-0 text-base-content/40"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+      />
+    </svg>
+  </a>
+} @else {
+  <div class="flex items-center gap-3.5 py-3.5 px-1.5">
+    <div class="avatar shrink-0">
+      <div class="w-14 rounded-xl bg-base-200">
+        @if (imageUrl()) {
+          <img [src]="imageUrl()" [alt]="name()" loading="lazy" />
+        }
       </div>
+    </div>
+    <div class="flex-1 min-w-0">
+      <h3 class="text-sm font-medium text-base-content truncate">
+        {{ name() }}
+      </h3>
+      <p class="text-xs text-base-content/40 mt-1">No link</p>
     </div>
   </div>
 }

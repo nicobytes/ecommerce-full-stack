@@ -32,7 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     { provide: API_URL, useValue: environment.apiUrl },
     provideHashbrown({
-      baseUrl: 'http://localhost:3333/api/chat',
+      baseUrl: 'http://localhost:3333/api/chat/openai',
     }),
   ],
 };

@@ -67,7 +67,7 @@ app.post('/api/chat/google', async (req, res) => {
   }
 });
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat/openai', async (req, res) => {
   const stream = HashbrownOpenAI.stream.text({
     apiKey: process.env.OPENAI_API_KEY!,
     request: req.body, // must be Chat.Api.CompletionCreateParams

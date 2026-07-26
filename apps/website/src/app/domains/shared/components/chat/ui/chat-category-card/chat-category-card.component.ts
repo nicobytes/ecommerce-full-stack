@@ -37,7 +37,7 @@ export const AiChatCategoryCardComponent = exposeComponent(
   ChatCategoryCardComponent,
   {
     description:
-      'Compact DaisyUI card for one catalog category — image, name, Browse link when slug exists.',
+      'List row for one catalog category — thumbnail, name, Browse link when slug exists.',
     fallback: ChatCategoryCardFallbackComponent,
     input: {
       name: s.string('Category display name from catalog'),

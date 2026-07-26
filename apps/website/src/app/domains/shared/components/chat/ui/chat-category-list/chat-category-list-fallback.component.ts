@@ -6,18 +6,17 @@ import type { JsonResolvedValue } from '@hashbrownai/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   template: `
-    <div class="w-full max-w-full p-1" aria-hidden="true">
-      <div class="grid grid-cols-3 gap-3 pt-1 pb-2">
+    <div
+      class="w-80 max-w-full px-3 py-2 rounded-xl border border-base-content/10 bg-base-100"
+      aria-hidden="true"
+    >
+      <div class="flex flex-col divide-y divide-base-content/5">
         @for (_ of skeletons; track $index) {
-          <div
-            class="card card-compact bg-base-100 border border-base-content/10 shadow-sm animate-pulse"
-          >
-            <figure class="relative px-3 pt-3">
-              <div class="aspect-square w-full rounded-xl bg-base-300"></div>
-            </figure>
-            <div class="card-body gap-2 pt-2 pb-3 px-3">
-              <div class="h-3 w-3/4 rounded bg-base-300"></div>
-              <div class="h-6 w-full rounded bg-base-300 mt-2"></div>
+          <div class="flex items-center gap-3.5 py-3.5 px-1.5 animate-pulse">
+            <div class="h-14 w-14 shrink-0 rounded-xl bg-base-300"></div>
+            <div class="flex-1 min-w-0 space-y-2">
+              <div class="h-3 w-2/3 rounded bg-base-300"></div>
+              <div class="h-3 w-1/4 rounded bg-base-300"></div>
             </div>
           </div>
         }

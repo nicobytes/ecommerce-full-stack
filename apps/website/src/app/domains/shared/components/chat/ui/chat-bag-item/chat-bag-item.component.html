@@ -2,7 +2,7 @@
   <a
     [routerLink]="['/product', slugValue]"
     (click)="closeDrawer()"
-    class="flex items-center gap-3 py-3 no-underline text-inherit hover:bg-base-content/5 rounded-lg px-1 -mx-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+    class="flex items-center gap-3.5 py-3.5 no-underline text-inherit hover:bg-base-content/5 rounded-lg px-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
   >
     <div class="avatar shrink-0">
       <div class="w-14 rounded-xl bg-base-200">
@@ -15,13 +15,13 @@
       <h3 class="text-sm font-medium text-base-content truncate">
         {{ title() }}
       </h3>
-      <p class="text-sm text-base-content/60 mt-0.5">
+      <p class="text-sm text-base-content/60 mt-1">
         {{ price() | currency: '$' : 'symbol' : '1.0' }}
       </p>
     </div>
   </a>
 } @else {
-  <div class="flex items-center gap-3 py-3 px-1 -mx-1">
+  <div class="flex items-center gap-3.5 py-3.5 px-1.5">
     <div class="avatar shrink-0">
       <div class="w-14 rounded-xl bg-base-200">
         @if (imageUrl()) {
@@ -33,7 +33,7 @@
       <h3 class="text-sm font-medium text-base-content truncate">
         {{ title() }}
       </h3>
-      <p class="text-sm text-base-content/60 mt-0.5">
+      <p class="text-sm text-base-content/60 mt-1">
         {{ price() | currency: '$' : 'symbol' : '1.0' }}
       </p>
     </div>

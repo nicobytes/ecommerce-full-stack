@@ -17,7 +17,7 @@ export const AiChatCategoryListComponent = exposeComponent(
   ChatCategoryListComponent,
   {
     description:
-      'Three-column grid for catalog categories after getCategories (vertical scroll when many items). Wrap one or more app-chat-category-card elements as children.',
+      'Vertical list of catalog categories after getCategories. Wrap one or more app-chat-category-card elements as children.',
     fallback: ChatCategoryListFallbackComponent,
     input: {},
     children: [AiChatCategoryCardComponent],

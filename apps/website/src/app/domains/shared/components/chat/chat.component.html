@@ -74,12 +74,16 @@
           <div class="chat chat-start">
             <div class="chat-header">NgStore</div>
             @if (isUiAssistantContent(message)) {
-              <div class="chat-bubble chat-bubble-neutral text-sm max-w-none">
+              <div
+                class="chat-bubble chat-bubble-neutral text-sm max-w-none leading-relaxed [&_hb-render-message]:flex [&_hb-render-message]:flex-col [&_hb-render-message]:gap-4 [&_ul]:my-2.5 [&_ul]:space-y-2 [&_p]:leading-relaxed [&_li]:leading-relaxed"
+              >
                 <hb-render-message [message]="$any(message)" />
               </div>
             } @else if (assistantMagicText(message); as text) {
               @if (text) {
-                <div class="chat-bubble chat-bubble-neutral text-sm">
+                <div
+                  class="chat-bubble chat-bubble-neutral text-sm leading-relaxed"
+                >
                   <hb-magic-text [text]="text" />
                 </div>
               }
