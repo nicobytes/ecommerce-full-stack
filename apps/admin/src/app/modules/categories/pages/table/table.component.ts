@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 
-import { TableDataSource } from '@store/admin/app/utils/data-source';
+import { TableDataSource } from '../../../../utils/data-source';
 import { CategoryService } from '@store/data-access';
-import { UIService } from '@store/admin/app/services/ui.service';
+import { UIService } from '../../../../services/ui.service';
 import { Category } from '@store/types';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';

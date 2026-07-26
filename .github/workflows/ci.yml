@@ -27,5 +27,11 @@ jobs:
       - name: Set Nx SHAs
         uses: nrwl/nx-set-shas@v4
 
-      - name: Run Affected Lint, Test, Build
-        run: npx nx affected -t lint test build
+      - name: Build
+        run: npx nx affected -t build
+
+      - name: Lint
+        run: npx nx affected -t lint
+
+      - name: Test
+        run: npx nx affected -t test

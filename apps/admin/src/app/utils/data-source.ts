@@ -18,6 +18,7 @@ export class TableDataSource<T> extends DataSource<T> {
     return total.length;
   }
 
-  disconnect() { }
-
+  disconnect(): void {
+    return;
+  }
 }

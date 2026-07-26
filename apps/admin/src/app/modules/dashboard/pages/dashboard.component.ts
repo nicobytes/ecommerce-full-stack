@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 
-import { AuthService } from '@store/admin/app/services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { User } from '@store/types';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';

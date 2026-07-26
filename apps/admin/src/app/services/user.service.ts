@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { environment } from '@store/admin/environments/environment';
+import { environment } from '../../environments/environment';
 import { User } from '@store/types';
 
 @Injectable({
@@ -9,8 +9,6 @@ import { User } from '@store/types';
 })
 export class UserService {
   private http = inject(HttpClient);
-
-  constructor() {}
 
   getAll() {
     const url = `${environment.API_URL}/api/v1/users`;

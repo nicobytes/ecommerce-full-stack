@@ -7,7 +7,7 @@
       "dependsOn": ["^build"],
       "inputs": ["default", "^default"]
     },
-    "@nx/eslint:lint": {
+    "lint": {
       "cache": true,
       "inputs": [
         "default",
@@ -51,7 +51,7 @@
     {
       "plugin": "@nx/eslint/plugin",
       "options": {
-        "targetName": "eslint:lint"
+        "targetName": "lint"
       }
     },
     {

@@ -68,8 +68,14 @@ app.post('/api/chat/google', async (req, res) => {
 });
 
 app.post('/api/chat/openai', async (req, res) => {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    res.status(500).json({ error: 'Missing OPENAI_API_KEY' });
+    return;
+  }
+
   const stream = HashbrownOpenAI.stream.text({
-    apiKey: process.env.OPENAI_API_KEY!,
+    apiKey,
     request: req.body, // must be Chat.Api.CompletionCreateParams
   });
 

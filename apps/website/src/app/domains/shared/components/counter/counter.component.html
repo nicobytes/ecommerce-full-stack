@@ -7,7 +7,7 @@
       <div class="text-xs text-warm-gray space-y-0.5">
         <p>
           Duration:
-          <span class="text-charcoal font-medium">{{ $duration() }}</span>
+          <span class="text-charcoal font-medium">{{ duration() }}</span>
         </p>
         <p>
           Double:
@@ -18,7 +18,7 @@
     <div class="divider my-0 before:bg-charcoal/10 after:bg-charcoal/10"></div>
     <div class="flex items-center justify-between">
       <p class="text-sm text-warm-gray">
-        Message: <span class="text-charcoal font-medium">{{ $message() }}</span>
+        Message: <span class="text-charcoal font-medium">{{ message() }}</span>
       </p>
       <button
         (click)="setMessage()"

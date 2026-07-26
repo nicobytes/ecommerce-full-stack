@@ -12,7 +12,7 @@ import {
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { API_URL } from '@store/data-access';
-import { environment } from '@store/admin/environments/environment';
+import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
