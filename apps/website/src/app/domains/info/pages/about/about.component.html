@@ -1,72 +1,115 @@
 <section class="pt-10 pb-16 animate-fade-in">
   <div class="mb-16">
-    <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight mb-6">
+    <h1
+      class="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight mb-6"
+    >
       About <span class="text-sienna italic">NgStore</span>
     </h1>
-    <div class="h-px w-20 bg-sienna/40"></div>
+    <div class="divider w-20 my-0 before:bg-sienna/40 after:bg-sienna/40"></div>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
     <div>
       <p class="text-warm-gray font-light leading-relaxed text-lg">
         Lorem ipsum dolor
-        <span appHighlight class="text-charcoal font-medium">sit amet consectetur adipisicing elit.</span>
-        Facere vel delectus numquam aliquid itaque nulla. Alias fugiat est, voluptatem commodi
-        soluta, ad et eveniet odit rem perferendis porro, quidem iste.
+        <span appHighlight class="text-charcoal font-medium"
+          >sit amet consectetur adipisicing elit.</span
+        >
+        Facere vel delectus numquam aliquid itaque nulla. Alias fugiat est,
+        voluptatem commodi soluta, ad et eveniet odit rem perferendis porro,
+        quidem iste.
       </p>
     </div>
     <div>
       <p class="text-warm-gray font-light leading-relaxed text-lg">
-        We believe in quality over quantity, curating each piece with intention and care.
-        Every product in our collection tells a story of craftsmanship and dedication.
+        We believe in quality over quantity, curating each piece with intention
+        and care. Every product in our collection tells a story of craftsmanship
+        and dedication.
       </p>
     </div>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-    <div class="bg-sand/30 rounded-2xl p-8">
-      <h2 class="font-display text-2xl text-charcoal mb-6">Interactive Demo</h2>
-      <div class="space-y-4">
-        <div>
-          <label class="text-xs uppercase tracking-[0.15em] text-warm-gray font-medium mb-2 block">Duration</label>
-          <input
-            [(ngModel)]="duration"
-            type="range"
-            min="0"
-            max="1000"
-            class="w-full accent-sienna" />
+    <div class="card bg-sand/30">
+      <div class="card-body">
+        <h2 class="card-title font-display text-2xl text-charcoal">
+          Interactive Demo
+        </h2>
+        <div class="space-y-4">
+          <div>
+            <label
+              for="duration"
+              class="text-xs uppercase tracking-[0.15em] text-warm-gray font-medium mb-2 block"
+              >Duration</label
+            >
+            <input
+              id="duration"
+              [(ngModel)]="duration"
+              type="range"
+              min="0"
+              max="1000"
+              class="range range-primary range-sm"
+            />
+          </div>
+          <p class="text-sm text-warm-gray">
+            Parent message:
+            <span class="text-charcoal font-medium">{{ message() }}</span>
+          </p>
+          @if (duration() > 0) {
+            <app-counter [duration]="duration()" [(message)]="message" />
+          }
         </div>
-        <p class="text-sm text-warm-gray">Parent message: <span class="text-charcoal font-medium">{{ message() }}</span></p>
-        @if (duration() > 0) {
-          <app-counter [duration]="duration()" [(message)]="message" />
-        }
       </div>
     </div>
 
-    <div class="bg-sand/30 rounded-2xl p-8">
-      <h2 class="font-display text-2xl text-charcoal mb-6">Audio Player</h2>
-      <app-wave-audio audioUrl="assets/audio.mp3" />
+    <div class="card bg-sand/30">
+      <div class="card-body">
+        <h2 class="card-title font-display text-2xl text-charcoal">
+          Audio Player
+        </h2>
+        <app-wave-audio audioUrl="assets/audio.mp3" />
+      </div>
     </div>
   </div>
 
-  <div class="bg-sand/30 rounded-2xl p-8">
-    <h2 class="font-display text-2xl text-charcoal mb-6">Signal Demos</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="bg-cream rounded-xl p-5">
-        <p class="text-sm text-warm-gray mb-3">with init: <span class="text-charcoal font-medium font-mono">{{ $withInit() }}</span></p>
-        <button
-          class="bg-charcoal text-cream px-5 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wider hover:bg-sienna transition-colors"
-          (click)="emitWithInit()">
-          Emit with init
-        </button>
-      </div>
-      <div class="bg-cream rounded-xl p-5">
-        <p class="text-sm text-warm-gray mb-3">without init: <span class="text-charcoal font-medium font-mono">{{ $withoutInit() }}</span></p>
-        <button
-          class="bg-charcoal text-cream px-5 py-2.5 rounded-xl text-xs font-medium uppercase tracking-wider hover:bg-sienna transition-colors"
-          (click)="emitWithoutInit()">
-          Emit without init
-        </button>
+  <div class="card bg-sand/30">
+    <div class="card-body">
+      <h2 class="card-title font-display text-2xl text-charcoal mb-4">
+        Signal Demos
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="card bg-cream">
+          <div class="card-body p-5">
+            <p class="text-sm text-warm-gray mb-3">
+              with init:
+              <span class="text-charcoal font-medium font-mono">{{
+                $withInit()
+              }}</span>
+            </p>
+            <button
+              class="btn btn-secondary btn-sm uppercase tracking-wider hover:bg-sienna hover:border-sienna"
+              (click)="emitWithInit()"
+            >
+              Emit with init
+            </button>
+          </div>
+        </div>
+        <div class="card bg-cream">
+          <div class="card-body p-5">
+            <p class="text-sm text-warm-gray mb-3">
+              without init:
+              <span class="text-charcoal font-medium font-mono">{{
+                $withoutInit()
+              }}</span>
+            </p>
+            <button
+              class="btn btn-secondary btn-sm uppercase tracking-wider hover:bg-sienna hover:border-sienna"
+              (click)="emitWithoutInit()"
+            >
+              Emit without init
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

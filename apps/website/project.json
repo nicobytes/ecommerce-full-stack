@@ -9,6 +9,7 @@
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/website",
         "browser": "apps/website/src/main.ts",
@@ -23,7 +24,7 @@
         "server": "apps/website/src/main.server.ts",
         "ssr": {
           "entry": "apps/website/src/server.ts",
-          "experimentalPlatform": "neutral"
+          "platform": "neutral"
         },
         "outputMode": "server"
       },
@@ -54,12 +55,12 @@
             }
           ]
         }
-      },
-      "defaultConfiguration": "production"
+      }
     },
     "serve": {
       "continuous": true,
       "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
       "configurations": {
         "production": {
           "buildTarget": "website:build:production"
@@ -67,11 +68,20 @@
         "development": {
           "buildTarget": "website:build:development"
         }
-      },
-      "defaultConfiguration": "development"
+      }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.mjs",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        {
+          "externalDependencies": ["eslint"]
+        }
+      ]
     },
     "test": {
       "executor": "@angular/build:unit-test",
@@ -84,6 +94,13 @@
         "buildTarget": "website:build",
         "staticFilePath": "dist/apps/website/browser",
         "spa": true
+      }
+    },
+    "deploy": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx wrangler pages deploy dist/apps/website/browser --project-name=nicobytes-store-website-spa"
       }
     }
   }

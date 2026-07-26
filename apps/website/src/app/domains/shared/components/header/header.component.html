@@ -1,54 +1,73 @@
-<nav class="sticky top-0 z-50 bg-cream/80 backdrop-blur-xl border-b border-charcoal/5">
-  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
-    <div class="flex items-center justify-between h-16 md:h-20">
-
+<nav
+  class="navbar sticky top-0 z-50 bg-base-100/80 backdrop-blur-xl border-b border-base-content/5"
+>
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 w-full">
+    <div class="flex items-center justify-between w-full">
       <div class="flex items-center gap-4 md:gap-10">
         <button
           (click)="toggleMenu()"
           type="button"
-          class="inline-flex items-center justify-center w-10 h-10 text-charcoal/60 hover:text-charcoal rounded-full hover:bg-charcoal/5 transition-colors md:hidden"
+          class="btn btn-ghost btn-circle md:hidden"
           [attr.aria-expanded]="showMenu()"
           aria-label="Toggle menu"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
             @if (showMenu()) {
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
             } @else {
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
+              />
             }
           </svg>
         </button>
 
         <a routerLink="/" class="flex items-center gap-2 group">
-          <span class="font-display text-2xl md:text-3xl text-charcoal tracking-tight">NgStore</span>
+          <span
+            class="font-display text-2xl md:text-3xl text-charcoal tracking-tight"
+            >NgStore</span
+          >
         </a>
 
-        <div
-          class="hidden md:flex items-center gap-8"
-        >
-          <ul class="flex items-center gap-8">
+        <div class="hidden md:flex items-center gap-8">
+          <ul class="menu menu-horizontal px-0 gap-2">
             <li>
               <a
                 routerLink="/"
                 routerLinkActive="text-sienna"
                 [routerLinkActiveOptions]="{ exact: true }"
-                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal transition-colors"
-                aria-current="page"
-              >Home</a>
+                ariaCurrentWhenActive="page"
+                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal bg-transparent hover:bg-transparent"
+                >Home</a
+              >
             </li>
             <li>
               <a
                 routerLink="/about"
                 routerLinkActive="text-sienna"
-                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal transition-colors"
-              >About</a>
+                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal bg-transparent hover:bg-transparent"
+                >About</a
+              >
             </li>
             <li>
               <a
                 routerLink="/locations"
                 routerLinkActive="text-sienna"
-                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal transition-colors"
-              >Locations</a>
+                class="text-xs uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal bg-transparent hover:bg-transparent"
+                >Locations</a
+              >
             </li>
           </ul>
         </div>
@@ -60,19 +79,55 @@
         </div>
 
         <button
-          class="relative p-2.5 rounded-full hover:bg-charcoal/5 transition-colors group"
+          type="button"
+          class="btn btn-ghost btn-circle relative"
           cdkOverlayOrigin
           #cartOrigin="cdkOverlayOrigin"
           (click)="toggleCart()"
           aria-label="Shopping cart"
         >
           @if (cart().length > 0) {
-            <span class="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-sienna text-white text-[10px] font-semibold">
+            <span
+              class="badge badge-primary badge-sm absolute -top-0.5 -right-0.5 text-[10px]"
+            >
               {{ cart().length }}
             </span>
           }
-          <svg class="w-5 h-5 text-charcoal/70 group-hover:text-charcoal transition-colors" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          <svg
+            class="w-5 h-5 text-charcoal/70"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+            />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-ghost btn-circle"
+          (click)="chatDrawer.toggle()"
+          [attr.aria-expanded]="chatDrawer.open()"
+          aria-controls="website-chat-drawer"
+          aria-label="Chat"
+        >
+          <svg
+            class="w-5 h-5 text-charcoal/70"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+            />
           </svg>
         </button>
       </div>
@@ -80,31 +135,34 @@
 
     @if (showMenu()) {
       <div class="md:hidden border-t border-charcoal/5 py-4 animate-slide-down">
-        <ul class="flex flex-col gap-3 mb-4">
+        <ul class="menu menu-vertical gap-1 p-0">
           <li>
             <a
               routerLink="/"
               routerLinkActive="text-sienna"
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="toggleMenu()"
-              class="block text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal py-2 transition-colors"
-            >Home</a>
+              class="text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal"
+              >Home</a
+            >
           </li>
           <li>
             <a
               routerLink="/about"
               routerLinkActive="text-sienna"
               (click)="toggleMenu()"
-              class="block text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal py-2 transition-colors"
-            >About</a>
+              class="text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal"
+              >About</a
+            >
           </li>
           <li>
             <a
               routerLink="/locations"
               routerLinkActive="text-sienna"
               (click)="toggleMenu()"
-              class="block text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal py-2 transition-colors"
-            >Locations</a>
+              class="text-sm uppercase tracking-[0.15em] font-medium text-charcoal/60 hover:text-charcoal"
+              >Locations</a
+            >
           </li>
         </ul>
         <app-search />
@@ -123,47 +181,72 @@
   (backdropClick)="closeCart()"
   (overlayOutsideClick)="closeCart()"
 >
-  <div class="w-96 mt-3 rounded-2xl shadow-2xl bg-cream border border-charcoal/10 p-6 animate-slide-down">
-    <div class="flex justify-between items-center mb-5">
-      <h2 class="font-display text-xl text-charcoal">Your Bag</h2>
-      <button
-        (click)="closeCart()"
-        class="p-1.5 rounded-full hover:bg-charcoal/5 transition-colors"
-        aria-label="Close cart"
-      >
-        <svg class="w-4 h-4 text-charcoal/50" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-
-    @if (cart().length === 0) {
-      <p class="text-warm-gray text-sm text-center py-8">Your bag is empty</p>
-    } @else {
-      <div class="flex flex-col divide-y divide-charcoal/5">
-        @for (product of cart(); track product) {
-          <div class="flex items-center gap-4 py-4">
-            <img
-              class="w-14 h-14 rounded-xl object-cover bg-sand"
-              [src]="product.images[0]"
-              [alt]="product.title"
+  <div
+    class="card w-96 mt-3 shadow-2xl bg-cream border border-charcoal/10 animate-slide-down"
+  >
+    <div class="card-body p-6">
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="card-title font-display text-xl text-charcoal">Your Bag</h2>
+        <button
+          (click)="closeCart()"
+          class="btn btn-ghost btn-circle btn-sm"
+          aria-label="Close cart"
+        >
+          <svg
+            class="w-4 h-4 text-charcoal/50"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
             />
-            <div class="flex-1 min-w-0">
-              <h3 class="text-sm font-medium text-charcoal truncate">{{ product.title }}</h3>
-              <p class="text-sm text-warm-gray mt-0.5">{{ product.price | currency:'$':'symbol':'1.0' }}</p>
-            </div>
-          </div>
-        }
-      </div>
-      <div class="border-t border-charcoal/10 pt-4 mt-2">
-        <div class="flex justify-between items-center mb-4">
-          <span class="text-sm text-warm-gray uppercase tracking-wider">Total</span>
-          <span class="font-display text-xl text-charcoal">{{ total() | currency:'$':'symbol':'1.0' }}</span>
-        </div>
-        <button class="w-full bg-charcoal text-cream py-3.5 rounded-xl text-sm font-medium uppercase tracking-wider hover:bg-sienna transition-colors">
-          Checkout
+          </svg>
         </button>
       </div>
-    }
+
+      @if (cart().length === 0) {
+        <p class="text-warm-gray text-sm text-center py-8">Your bag is empty</p>
+      } @else {
+        <div class="flex flex-col divide-y divide-charcoal/5">
+          @for (product of cart(); track product) {
+            <div class="flex items-center gap-4 py-4">
+              <div class="avatar">
+                <div class="w-14 rounded-xl bg-sand">
+                  <img [src]="product.images[0]" [alt]="product.title" />
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-sm font-medium text-charcoal truncate">
+                  {{ product.title }}
+                </h3>
+                <p class="text-sm text-warm-gray mt-0.5">
+                  {{ product.price | currency: '$' : 'symbol' : '1.0' }}
+                </p>
+              </div>
+            </div>
+          }
+        </div>
+        <div
+          class="divider my-2 before:bg-charcoal/10 after:bg-charcoal/10"
+        ></div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-sm text-warm-gray uppercase tracking-wider"
+            >Total</span
+          >
+          <span class="font-display text-xl text-charcoal">{{
+            total() | currency: '$' : 'symbol' : '1.0'
+          }}</span>
+        </div>
+        <button
+          class="btn btn-secondary btn-block uppercase tracking-wider text-sm"
+        >
+          Checkout
+        </button>
+      }
+    </div>
   </div>
 </ng-template>

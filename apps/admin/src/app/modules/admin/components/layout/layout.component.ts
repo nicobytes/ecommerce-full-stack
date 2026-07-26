@@ -3,15 +3,13 @@ import {
   OnInit,
   inject,
   ViewChild,
-  AfterContentInit,
-  AfterViewInit,
 } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
-import { AuthService } from '@store/admin/app/services/auth.service';
-import { UIService } from '@store/admin/app/services/ui.service';
+import { AuthService } from '../../../../services/auth.service';
+import { UIService } from '../../../../services/ui.service';
 import { User } from '@store/types';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';

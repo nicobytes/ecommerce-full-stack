@@ -1,18 +1,67 @@
 @import 'tailwindcss';
+@plugin "daisyui" {
+  themes: ngstore --default;
+}
+@plugin "daisyui/theme" {
+  name: 'ngstore';
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #faf7f2;
+  --color-base-200: #e8e0d5;
+  --color-base-300: #d5cec4;
+  --color-base-content: #1a1a1a;
+  --color-primary: #c4653a;
+  --color-primary-content: #faf7f2;
+  --color-secondary: #1a1a1a;
+  --color-secondary-content: #faf7f2;
+  --color-accent: #a8522e;
+  --color-accent-content: #faf7f2;
+  --color-neutral: #6b6560;
+  --color-neutral-content: #faf7f2;
+  --color-info: #5b8fb9;
+  --color-info-content: #faf7f2;
+  --color-success: #5a9a6b;
+  --color-success-content: #faf7f2;
+  --color-warning: #d4a843;
+  --color-warning-content: #1a1a1a;
+  --color-error: #c44b3a;
+  --color-error-content: #faf7f2;
+
+  --radius-selector: 1rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
 
 @theme {
-  --color-cream: #FAF7F2;
-  --color-sand: #E8E0D5;
-  --color-warm-gray: #6B6560;
-  --color-charcoal: #1A1A1A;
-  --color-sienna: #C4653A;
-  --color-sienna-dark: #A8522E;
+  --color-cream: #faf7f2;
+  --color-sand: #e8e0d5;
+  --color-warm-gray: #6b6560;
+  --color-charcoal: #1a1a1a;
+  --color-sienna: #c4653a;
+  --color-sienna-dark: #a8522e;
 
   --font-display: 'DM Serif Display', serif;
   --font-body: 'Outfit', sans-serif;
 }
 
 @layer base {
+  /*
+   * DaisyUI sets :root --page-scroll-gutter: stable while the drawer is open,
+   * which reserves a blank strip beside the viewport.
+   */
+  :root:has(#website-chat-drawer:checked) {
+    --page-scroll-gutter: auto;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -30,7 +79,12 @@
     color: white;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
   }
 }
@@ -48,8 +102,12 @@
   }
 
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes slide-down {
@@ -75,13 +133,31 @@
     animation: slide-down 0.4s ease-out both;
   }
 
-  .stagger-1 { animation-delay: 0.05s; }
-  .stagger-2 { animation-delay: 0.1s; }
-  .stagger-3 { animation-delay: 0.15s; }
-  .stagger-4 { animation-delay: 0.2s; }
-  .stagger-5 { animation-delay: 0.25s; }
-  .stagger-6 { animation-delay: 0.3s; }
-  .stagger-7 { animation-delay: 0.35s; }
-  .stagger-8 { animation-delay: 0.4s; }
-  .stagger-9 { animation-delay: 0.45s; }
+  .stagger-1 {
+    animation-delay: 0.05s;
+  }
+  .stagger-2 {
+    animation-delay: 0.1s;
+  }
+  .stagger-3 {
+    animation-delay: 0.15s;
+  }
+  .stagger-4 {
+    animation-delay: 0.2s;
+  }
+  .stagger-5 {
+    animation-delay: 0.25s;
+  }
+  .stagger-6 {
+    animation-delay: 0.3s;
+  }
+  .stagger-7 {
+    animation-delay: 0.35s;
+  }
+  .stagger-8 {
+    animation-delay: 0.4s;
+  }
+  .stagger-9 {
+    animation-delay: 0.45s;
+  }
 }

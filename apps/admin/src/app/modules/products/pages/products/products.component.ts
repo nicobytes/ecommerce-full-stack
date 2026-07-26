@@ -13,7 +13,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router, Params } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductService } from '@store/data-access';
-import { UIService } from '@store/admin/app/services/ui.service';
+import { UIService } from '../../../../services/ui.service';
 import { Product } from '@store/types';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -22,8 +22,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { Category } from '@store/types';
 import { CategoryService } from '@store/data-access';
-import { TableComponent } from '@store/admin/app/modules/products/components/table/table.component';
-import { ListComponent } from '@store/admin/app/modules/products/components/list/list.component';
+import { TableComponent } from '../../components/table/table.component';
+import { ListComponent } from '../../components/list/list.component';
 import { map } from 'rxjs/operators';
 
 @Component({

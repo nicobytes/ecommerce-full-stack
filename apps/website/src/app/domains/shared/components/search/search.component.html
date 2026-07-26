@@ -1,14 +1,23 @@
 <div class="relative group">
   <svg
-    class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray/60 group-focus-within:text-sienna transition-colors"
-    fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+    class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray/60 group-focus-within:text-sienna transition-colors pointer-events-none"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="2"
+    stroke="currentColor"
   >
-    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+    />
   </svg>
   <input
     [(ngModel)]="search"
     type="search"
-    class="w-full md:w-52 focus:md:w-72 pl-10 pr-4 py-2.5 text-sm text-charcoal bg-charcoal/5 border-0 rounded-full placeholder-warm-gray/50 outline-none focus:bg-white focus:ring-1 focus:ring-charcoal/10 focus:shadow-sm transition-all duration-300"
+    name="search"
+    aria-label="Search products"
+    class="input input-sm w-full md:w-52 focus:md:w-72 pl-10 bg-charcoal/5 border-0 rounded-full placeholder-warm-gray/50 text-charcoal focus:bg-white focus:ring-1 focus:ring-charcoal/10 focus:shadow-sm transition-all duration-300"
     placeholder="Search products..."
   />
 </div>

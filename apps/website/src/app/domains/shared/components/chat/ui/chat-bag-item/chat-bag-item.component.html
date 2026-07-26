@@ -1,0 +1,41 @@
+@if (slug(); as slugValue) {
+  <a
+    [routerLink]="['/product', slugValue]"
+    (click)="closeDrawer()"
+    class="flex items-center gap-3.5 py-3.5 no-underline text-inherit hover:bg-base-content/5 rounded-lg px-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+  >
+    <div class="avatar shrink-0">
+      <div class="w-14 rounded-xl bg-base-200">
+        @if (imageUrl()) {
+          <img [src]="imageUrl()" [alt]="title()" loading="lazy" />
+        }
+      </div>
+    </div>
+    <div class="flex-1 min-w-0">
+      <h3 class="text-sm font-medium text-base-content truncate">
+        {{ title() }}
+      </h3>
+      <p class="text-sm text-base-content/60 mt-1">
+        {{ price() | currency: '$' : 'symbol' : '1.0' }}
+      </p>
+    </div>
+  </a>
+} @else {
+  <div class="flex items-center gap-3.5 py-3.5 px-1.5">
+    <div class="avatar shrink-0">
+      <div class="w-14 rounded-xl bg-base-200">
+        @if (imageUrl()) {
+          <img [src]="imageUrl()" [alt]="title()" loading="lazy" />
+        }
+      </div>
+    </div>
+    <div class="flex-1 min-w-0">
+      <h3 class="text-sm font-medium text-base-content truncate">
+        {{ title() }}
+      </h3>
+      <p class="text-sm text-base-content/60 mt-1">
+        {{ price() | currency: '$' : 'symbol' : '1.0' }}
+      </p>
+    </div>
+  </div>
+}

@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgOptimizedImage, CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Product } from '@store/types';
-import { TableDataSource } from '@store/admin/app/utils/data-source';
+import { TableDataSource } from '../../../../utils/data-source';
 
 @Component({
   selector: 'app-table',

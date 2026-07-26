@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 
-import { environment } from '@store/admin/environments/environment';
+import { environment } from '../../environments/environment';
 import { LoginRta, User } from '@store/types';
-import { TokenService } from '@store/admin/app/services/token.service';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class AuthService {
     const url = `${environment.API_URL}/api/v1/auth/login`;
     return this.http.post<LoginRta>(url, { email, password }).pipe(
       tap((response) => this.tokenService.saveToken(response.access_token)),
-      switchMap((_) => this.getProfile()),
+      switchMap(() => this.getProfile()),
       tap((user) => this.authState.next(user)),
     );
   }

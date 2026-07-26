@@ -9,11 +9,11 @@ import {
   withComponentInputBinding,
   withPreloading,
 } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHashbrown } from '@hashbrownai/angular';
 import {
   provideClientHydration,
   withEventReplay,
-  withIncrementalHydration,
 } from '@angular/platform-browser';
 import { API_URL } from '@store/data-access';
 import { environment } from '../environments/environment';
@@ -26,10 +26,13 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withPreloading(PreloadAllModules),
     ),
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
-    provideClientHydration(withEventReplay(), withIncrementalHydration()),
+    provideClientHydration(withEventReplay()),
     provideZonelessChangeDetection(),
     { provide: API_URL, useValue: environment.apiUrl },
+    provideHashbrown({
+      baseUrl: environment.chatApiUrl,
+    }),
   ],
 };

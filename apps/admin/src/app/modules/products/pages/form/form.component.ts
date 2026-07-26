@@ -64,7 +64,7 @@ export default class FormComponent implements OnInit {
     const product = this.product();
     if (this.form.valid && product) {
       const formData = this.form.value;
-      this.productService.updateOne(product.id, formData).subscribe((data) => {
+      this.productService.updateOne(product.id, formData).subscribe(() => {
         this.location.back();
       });
     }

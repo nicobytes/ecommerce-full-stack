@@ -1,0 +1,169 @@
+<div
+  class="flex items-center justify-between gap-4 p-4 border-b border-base-content/10 shrink-0"
+>
+  <h2 id="chat-drawer-title" class="font-display text-lg text-charcoal">
+    Chat
+  </h2>
+  <button
+    type="button"
+    class="btn btn-ghost btn-circle btn-sm"
+    aria-label="Close chat"
+    (click)="close()"
+  >
+    <svg
+      class="w-4 h-4 text-charcoal/60"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+</div>
+
+<div
+  #messages
+  class="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-y-contain p-4 flex flex-col gap-4"
+>
+  @if (chat.sendingError(); as sendErr) {
+    <p class="text-error text-sm rounded-lg bg-error/10 px-3 py-2" role="alert">
+      {{ sendErr.message }}
+    </p>
+  }
+  @if (chat.generatingError(); as genErr) {
+    <p class="text-error text-sm rounded-lg bg-error/10 px-3 py-2" role="alert">
+      {{ genErr.message }}
+    </p>
+  }
+
+  @if (chat.value().length === 0) {
+    <div class="chat chat-start">
+      <div class="chat-header">NgStore</div>
+      <div class="chat-bubble chat-bubble-neutral">
+        Hi there — thanks for visiting NgStore. How can we help you today?
+      </div>
+      <div class="chat-footer opacity-50">NgStore assistant</div>
+    </div>
+  }
+
+  @for (message of chat.value(); track $index; let last = $last) {
+    @switch (message.role) {
+      @case ('user') {
+        <div class="chat chat-end">
+          <div class="chat-header">You</div>
+          <div class="chat-bubble chat-bubble-info text-sm">
+            <hb-magic-text [text]="userDisplayText(message)" />
+          </div>
+          <div class="chat-footer opacity-50">Sent</div>
+        </div>
+      }
+      @case ('assistant') {
+        @if (
+          isUiAssistantContent(message) ||
+          assistantMagicText(message) ||
+          (!isUiAssistantContent(message) &&
+            !assistantMagicText(message) &&
+            chat.isGenerating() &&
+            last)
+        ) {
+          <div class="chat chat-start">
+            <div class="chat-header">NgStore</div>
+            @if (isUiAssistantContent(message)) {
+              <div
+                class="chat-bubble chat-bubble-neutral text-sm max-w-none leading-relaxed [&_hb-render-message]:flex [&_hb-render-message]:flex-col [&_hb-render-message]:gap-4 [&_ul]:my-2.5 [&_ul]:space-y-2 [&_p]:leading-relaxed [&_li]:leading-relaxed"
+              >
+                <hb-render-message [message]="$any(message)" />
+              </div>
+            } @else if (assistantMagicText(message); as text) {
+              @if (text) {
+                <div
+                  class="chat-bubble chat-bubble-neutral text-sm leading-relaxed"
+                >
+                  <hb-magic-text [text]="text" />
+                </div>
+              }
+            }
+            @if (
+              !assistantMagicText(message) &&
+              !isUiAssistantContent(message) &&
+              chat.isGenerating() &&
+              last
+            ) {
+              <div class="chat-bubble chat-bubble-accent text-sm opacity-80">
+                …
+              </div>
+            }
+            <div class="chat-footer opacity-50">
+              @if (chat.isGenerating() && last) {
+                Typing…
+              } @else {
+                Delivered
+              }
+            </div>
+          </div>
+        }
+      }
+      @case ('error') {
+        <div class="chat chat-start">
+          <div class="chat-header">NgStore</div>
+          <div class="chat-bubble chat-bubble-error text-sm">
+            {{ message.content }}
+          </div>
+          @if (last) {
+            <div class="chat-footer">
+              <button
+                type="button"
+                class="btn btn-ghost btn-xs"
+                (click)="chat.reload()"
+              >
+                Retry
+              </button>
+            </div>
+          }
+        </div>
+      }
+    }
+  }
+</div>
+
+<div class="p-4 border-t border-base-content/10 shrink-0 bg-base-200">
+  <form class="flex flex-col gap-2" (submit)="$event.preventDefault(); send()">
+    <textarea
+      class="textarea textarea-bordered w-full resize-none text-sm bg-base-100 min-h-18"
+      rows="3"
+      placeholder="Type a message…"
+      [value]="draft()"
+      [disabled]="chat.isLoading()"
+      (input)="draft.set($any($event.target).value)"
+      (keydown)="onComposerKeydown($event)"
+      aria-label="Message"
+    ></textarea>
+    @if (chat.isGenerating()) {
+      <button
+        type="button"
+        class="btn btn-outline btn-sm uppercase tracking-wider"
+        (click)="stop()"
+      >
+        Stop
+      </button>
+    } @else {
+      <button
+        type="submit"
+        class="btn btn-secondary btn-sm uppercase tracking-wider"
+        [disabled]="!draft().trim() || chat.isLoading()"
+      >
+        @if (chat.isLoading()) {
+          <span class="loading loading-spinner loading-sm"></span>
+          Sending
+        } @else {
+          Send
+        }
+      </button>
+    }
+  </form>
+</div>

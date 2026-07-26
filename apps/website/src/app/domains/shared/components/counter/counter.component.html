@@ -1,18 +1,31 @@
-<div class="bg-cream rounded-xl p-5 space-y-3">
-  <div class="flex items-center gap-4">
-    <span class="font-mono text-3xl text-charcoal font-light tabular-nums">{{ $counter() }}</span>
-    <div class="text-xs text-warm-gray space-y-0.5">
-      <p>Duration: <span class="text-charcoal font-medium">{{ $duration() }}</span></p>
-      <p>Double: <span class="text-charcoal font-medium">{{ $doubleDuration() }}</span></p>
+<div class="card bg-cream">
+  <div class="card-body p-5 gap-3">
+    <div class="flex items-center gap-4">
+      <span class="font-mono text-3xl text-charcoal font-light tabular-nums">{{
+        $counter()
+      }}</span>
+      <div class="text-xs text-warm-gray space-y-0.5">
+        <p>
+          Duration:
+          <span class="text-charcoal font-medium">{{ duration() }}</span>
+        </p>
+        <p>
+          Double:
+          <span class="text-charcoal font-medium">{{ $doubleDuration() }}</span>
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="h-px bg-charcoal/10"></div>
-  <div class="flex items-center justify-between">
-    <p class="text-sm text-warm-gray">Message: <span class="text-charcoal font-medium">{{ $message() }}</span></p>
-    <button
-      (click)="setMessage()"
-      class="text-xs bg-charcoal/5 text-charcoal px-4 py-2 rounded-lg hover:bg-charcoal/10 transition-colors font-medium">
-      Set Message
-    </button>
+    <div class="divider my-0 before:bg-charcoal/10 after:bg-charcoal/10"></div>
+    <div class="flex items-center justify-between">
+      <p class="text-sm text-warm-gray">
+        Message: <span class="text-charcoal font-medium">{{ message() }}</span>
+      </p>
+      <button
+        (click)="setMessage()"
+        class="btn btn-ghost btn-sm text-xs font-medium text-charcoal"
+      >
+        Set Message
+      </button>
+    </div>
   </div>
 </div>

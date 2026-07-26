@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProductService } from '@store/data-access';
+import { Product } from '@store/types';
 import { CartService } from '../../../shared/services/cart.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { environment } from '../../../../../environments/environment';
@@ -22,7 +23,7 @@ import { RelatedComponent } from '../../components/related/related.component';
 export default class ProductDetailComponent {
   readonly slug = input.required<string>();
 
-  productRs = rxResource({
+  productRs = rxResource<Product, { slug: string }>({
     params: () => ({
       slug: this.slug(),
     }),

@@ -19,10 +19,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
-  $duration = input.required<number>({ alias: 'duration' });
-  $doubleDuration = computed(() => this.$duration() * 2);
-  $message = model.required<string>({ alias: 'message' });
-  $counter = signal(0);
+  readonly duration = input.required<number>();
+  readonly $doubleDuration = computed(() => this.duration() * 2);
+  readonly message = model.required<string>();
+  readonly $counter = signal(0);
   counterRef: number | null = null;
 
   constructor() {
@@ -33,7 +33,7 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('-'.repeat(10));
 
     effect(() => {
-      this.$message();
+      this.message();
       this.doSomethingTwo();
     });
 
@@ -79,8 +79,8 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
     // async, then, subs
     console.log('ngOnInit');
     console.log('-'.repeat(10));
-    console.log('duration =>', this.$duration());
-    console.log('message =>', this.$message());
+    console.log('duration =>', this.duration());
+    console.log('message =>', this.message());
   }
 
   ngAfterViewInit() {
@@ -109,6 +109,6 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setMessage() {
-    this.$message.set(Math.random().toString());
+    this.message.set(Math.random().toString());
   }
 }

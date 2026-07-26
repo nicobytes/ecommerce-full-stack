@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
-import { environment } from '@store/website/environments/environment';
+import { environment } from '../../../../environments/environment';
 
 export interface PageMetaData {
   title: string;

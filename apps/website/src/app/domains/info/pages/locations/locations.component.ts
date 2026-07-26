@@ -5,7 +5,7 @@ import {
   resource,
   signal,
 } from '@angular/core';
-import { environment } from '@store/website/environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-locations',

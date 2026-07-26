@@ -1,30 +1,54 @@
 <section class="pt-10 pb-16 animate-fade-in">
   <div class="mb-12 md:mb-16">
-    <h1 class="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight mb-4">
+    <h1
+      class="font-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight mb-4"
+    >
       Our <span class="text-sienna italic">Locations</span>
     </h1>
     <p class="text-warm-gray font-light text-base max-w-md">
       Visit us in person. Each store offers a unique experience.
     </p>
-    <div class="h-px w-20 bg-sienna/40 mt-6"></div>
+    <div
+      class="divider w-20 my-0 mt-6 before:bg-sienna/40 after:bg-sienna/40"
+    ></div>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     @for (location of locationRs.value(); track location.id; let i = $index) {
       <div
-        class="bg-sand/30 rounded-2xl p-8 hover:bg-sand/50 hover:shadow-lg transition-all duration-300 animate-fade-in-up group"
-        [style.animation-delay]="(i * 0.08) + 's'"
+        class="card bg-sand/30 hover:bg-sand/50 hover:shadow-lg transition-all duration-300 animate-fade-in-up group"
+        [style.animation-delay]="i * 0.08 + 's'"
       >
-        <div class="flex items-start gap-4">
-          <div class="w-10 h-10 rounded-full bg-sienna/10 flex items-center justify-center shrink-0 group-hover:bg-sienna/20 transition-colors">
-            <svg class="w-5 h-5 text-sienna" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-            </svg>
-          </div>
-          <div>
-            <h2 class="font-display text-xl text-charcoal mb-1">{{ location.name }}</h2>
-            <p class="text-sm text-warm-gray font-light">Open daily</p>
+        <div class="card-body p-8">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-10 h-10 rounded-full bg-sienna/10 flex items-center justify-center shrink-0 group-hover:bg-sienna/20 transition-colors"
+            >
+              <svg
+                class="w-5 h-5 text-sienna"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title font-display text-xl text-charcoal mb-1">
+                {{ location.name }}
+              </h2>
+              <p class="text-sm text-warm-gray font-light">Open daily</p>
+            </div>
           </div>
         </div>
       </div>

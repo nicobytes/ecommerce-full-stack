@@ -1,0 +1,52 @@
+<div class="relative w-full max-w-full pt-0.5">
+  <div
+    #scroller
+    class="flex gap-3.5 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-smooth pb-1 [scrollbar-width:thin] *:w-[calc((100%-1.75rem)/3)] *:min-w-0 *:shrink-0 *:snap-start"
+  >
+    <ng-content />
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-circle btn-sm btn-neutral absolute top-1/2 left-1 z-10 -translate-y-1/2 shadow-md"
+    aria-label="Previous products"
+    (click)="scrollByPage(-1)"
+  >
+    <svg
+      class="w-4 h-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15.75 19.5 8.25 12l7.5-7.5"
+      />
+    </svg>
+  </button>
+
+  <button
+    type="button"
+    class="btn btn-circle btn-sm btn-neutral absolute top-1/2 right-1 z-10 -translate-y-1/2 shadow-md"
+    aria-label="Next products"
+    (click)="scrollByPage(1)"
+  >
+    <svg
+      class="w-4 h-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+      />
+    </svg>
+  </button>
+</div>
