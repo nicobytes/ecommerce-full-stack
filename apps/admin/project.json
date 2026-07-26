@@ -76,6 +76,13 @@
         "staticFilePath": "dist/apps/admin/browser",
         "spa": true
       }
+    },
+    "deploy": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx wrangler pages deploy dist/apps/admin/browser --project-name=nicobytes-store-admin"
+      }
     }
   }
 }

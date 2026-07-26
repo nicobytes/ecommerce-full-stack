@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'apps/website/**'
 
 jobs:
   deploy:
@@ -13,28 +11,40 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Use Node.js 20.x
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 20
+          cache: npm
+
       - name: Install Dependencies
-        working-directory: ./apps/website
         run: npm ci
-      - name: Build
-        working-directory: ./apps/website
-        run: npm run build
-      - name: Deploy SSR
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: ./apps/website
-          command: pages deploy ./dist/store/cloudflare --project-name=nicobytes-store-website
+
+      - name: Set Nx SHAs
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Check if website is affected
+        id: affected
+        run: |
+          PROJECTS=$(npx nx show projects --affected --projects=website)
+          if [ -n "$PROJECTS" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "website not affected — skipping deploy"
+          fi
+
+      - name: Build website
+        if: steps.affected.outputs.deploy == 'true'
+        run: npx nx build website
 
       - name: Deploy SPA
+        if: steps.affected.outputs.deploy == 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: ./apps/website
-          command: pages deploy ./dist/store/browser --project-name=nicobytes-store-website-spa
+          command: pages deploy dist/apps/website/browser --project-name=nicobytes-store-website-spa

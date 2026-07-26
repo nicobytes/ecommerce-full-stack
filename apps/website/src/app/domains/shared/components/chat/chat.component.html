@@ -138,17 +138,27 @@
       (keydown)="onComposerKeydown($event)"
       aria-label="Message"
     ></textarea>
-    <button
-      type="submit"
-      class="btn btn-secondary btn-sm uppercase tracking-wider"
-      [disabled]="!draft().trim() || chat.isLoading()"
-    >
-      @if (chat.isLoading()) {
-        <span class="loading loading-spinner loading-sm"></span>
-        Sending
-      } @else {
-        Send
-      }
-    </button>
+    @if (chat.isGenerating()) {
+      <button
+        type="button"
+        class="btn btn-outline btn-sm uppercase tracking-wider"
+        (click)="stop()"
+      >
+        Stop
+      </button>
+    } @else {
+      <button
+        type="submit"
+        class="btn btn-secondary btn-sm uppercase tracking-wider"
+        [disabled]="!draft().trim() || chat.isLoading()"
+      >
+        @if (chat.isLoading()) {
+          <span class="loading loading-spinner loading-sm"></span>
+          Sending
+        } @else {
+          Send
+        }
+      </button>
+    }
   </form>
 </div>

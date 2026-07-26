@@ -10,6 +10,7 @@ import { exposeComponent } from '@hashbrownai/angular';
 import { s } from '@hashbrownai/core';
 
 import { ChatDrawerService } from '../../../services/chat-drawer.service';
+import { ChatProductCardFallbackComponent } from './chat-product-card-fallback.component';
 
 @Component({
   selector: 'app-chat-product-card',
@@ -43,6 +44,7 @@ export const AiChatProductCardComponent = exposeComponent(
   {
     description:
       'Compact DaisyUI card for one catalog product — image, title, price, optional category/description, View link when slug exists.',
+    fallback: ChatProductCardFallbackComponent,
     input: {
       title: s.string('Product title from catalog'),
       price: s.number('Unit price number from catalog'),

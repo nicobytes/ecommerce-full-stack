@@ -18,8 +18,8 @@ import {
 import { ChatDrawerService } from '../../services/chat-drawer.service';
 import { NGSTORE_CHAT_SYSTEM_PROMPT } from './prompt';
 import { getProductsTool } from './tools/get_products.tool';
+import { AiMarkdown } from './ui/ai-markdown';
 import { AiChatProductListComponent } from './ui/chat-product-list.component';
-import { AiMarkdownComponent } from './ui/mardown.component';
 
 /** Actual runtime merges structured chat refs; typings omit loading helpers (see `@hashbrownai/angular`). */
 type UiChatRuntimeRef = UiChatResourceRef<Chat.AnyTool> &
@@ -61,7 +61,7 @@ export class ChatComponent {
     model: 'gpt-5.5-2026-04-23',
     system: NGSTORE_CHAT_SYSTEM_PROMPT,
     tools: [getProductsTool],
-    components: [AiChatProductListComponent, AiMarkdownComponent],
+    components: [AiMarkdown, AiChatProductListComponent],
   }) as UiChatRuntimeRef;
 
   close(): void {
@@ -77,10 +77,16 @@ export class ChatComponent {
     this.draft.set('');
   }
 
+  stop(): void {
+    this.chat.stop();
+  }
+
   onComposerKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
-      this.send();
+      if (!this.chat.isLoading()) {
+        this.send();
+      }
     }
   }
 

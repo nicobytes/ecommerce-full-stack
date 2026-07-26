@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { exposeComponent } from '@hashbrownai/angular';
 
 import { AiChatProductCardComponent } from './chat-product-card.component';
+import { ChatProductListFallbackComponent } from './chat-product-list-fallback.component';
 
 @Component({
   selector: 'app-chat-product-list',
@@ -17,6 +18,7 @@ export const AiChatProductListComponent = exposeComponent(
   {
     description:
       'Three-column grid for catalog products after getProducts (vertical scroll when many items). Wrap one or more app-chat-product-card elements as children.',
+    fallback: ChatProductListFallbackComponent,
     input: {},
     children: [AiChatProductCardComponent],
   },
