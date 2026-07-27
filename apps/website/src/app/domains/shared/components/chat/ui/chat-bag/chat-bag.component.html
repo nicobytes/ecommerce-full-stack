@@ -1,7 +1,9 @@
 <div
   class="w-80 max-w-full px-3 py-3.5 rounded-xl border border-base-content/10 bg-base-100"
 >
-  <div class="flex flex-col divide-y divide-base-content/5">
+  <div
+    class="flex max-h-64 flex-col divide-y divide-base-content/5 overflow-y-auto overscroll-contain [scrollbar-width:thin] [scrollbar-color:color-mix(in_oklab,var(--color-base-content)_25%,transparent)_transparent] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-base-content/20 hover:[&::-webkit-scrollbar-thumb]:bg-base-content/35"
+  >
     <ng-content />
   </div>
   <div

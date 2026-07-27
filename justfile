@@ -22,3 +22,6 @@ website-build:
 
 api-serve:
   npx nx serve api
+
+api-seed:
+  curl --location --request POST 'https://api.escuelajs.co/api/v1/seed/'

@@ -20,6 +20,7 @@ import {
 
 import { ChatDrawerService } from '../../services/chat-drawer.service';
 import { NGSTORE_CHAT_SYSTEM_PROMPT } from './prompt';
+import { addToBagTool } from './tools/add_to_bag.tool';
 import { getBagTool } from './tools/get_bag.tool';
 import { getCategoriesTool } from './tools/get_categories.tool';
 import { getProductsTool } from './tools/get_products.tool';
@@ -69,7 +70,7 @@ export class ChatComponent {
   readonly chat = uiChatResource({
     model: 'gpt-5.5-2026-04-23',
     system: NGSTORE_CHAT_SYSTEM_PROMPT,
-    tools: [getProductsTool, getCategoriesTool, getBagTool],
+    tools: [getProductsTool, getCategoriesTool, getBagTool, addToBagTool],
     components: [
       AiMarkdown,
       AiChatProductListComponent,

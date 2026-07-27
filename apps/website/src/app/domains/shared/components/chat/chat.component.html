@@ -28,7 +28,7 @@
 
 <div
   #messages
-  class="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-y-contain p-4 flex flex-col gap-4"
+  class="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-y-contain p-4 flex flex-col gap-4 [scrollbar-width:thin] [scrollbar-color:color-mix(in_oklab,var(--color-base-content)_25%,transparent)_transparent] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-base-content/20 hover:[&::-webkit-scrollbar-thumb]:bg-base-content/35"
 >
   @if (chat.sendingError(); as sendErr) {
     <p class="text-error text-sm rounded-lg bg-error/10 px-3 py-2" role="alert">

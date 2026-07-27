@@ -13,7 +13,7 @@ const app = express();
 
 const allowedOrigins = (
   process.env.CORS_ORIGIN ??
-  'http://localhost:4200,https://curso-angular-avanzado--storeapp-fea1f.us-central1.hosted.app'
+  'http://localhost:4300,https://curso-angular-avanzado--storeapp-fea1f.us-central1.hosted.app'
 )
   .split(',')
   .map((origin) => origin.trim())
@@ -79,7 +79,7 @@ app.post('/api/chat/google', async (req, res) => {
   }
 });
 
-app.post('/api/chat/openai', async (req, res) => {
+app.post('/api/chat', async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: 'Missing OPENAI_API_KEY' });
